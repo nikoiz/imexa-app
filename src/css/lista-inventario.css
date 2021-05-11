@@ -1,0 +1,31 @@
+.lista-inventario {
+  background-color: blueviolet;
+
+  width: 1500px;
+}
+
+.title-lista-inventario {
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.table-listado-columnas {
+  text-align: center;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+.table-listado-items {
+  text-align: center;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.container-lista-inventario {
+  margin-top: 30px;
+  text-align: center;
+  color: white;
+  background-color: blueviolet;
+  width: 1500px;
+  margin-left: 110px;
+}

@@ -1,0 +1,14 @@
+.total-container {
+  background-color: blueviolet;
+  width: fit-content;
+  text-align: right;
+  padding: 5px;
+  margin: 10px;
+
+}
+
+.total-span {
+  color: white;
+  font-size: 30px;
+  padding: 20px;
+}
