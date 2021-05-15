@@ -11,30 +11,30 @@ export const MenuPrincipal = () => {
         <h1 className="title-menu ">Menú Principal</h1>
         <Link to="/inventario">
           <button className="btn-principal btn-primary" type="button">
-            Inventario
+            <span>Inventario</span>
           </button>
         </Link>
         <br />
         <Link to="/agregarProducto">
           <button className="btn-principal btn-primary" type="button">
-            Producto
+            <span>Producto</span>
           </button>
         </Link>
         <br />
         <button className="btn-principal btn-primary" type="button">
-          Clientes
+          <span>Clientes</span>
         </button>
         <br />
         <button className="btn-principal btn-primary" type="button">
-          Finanzas
+          <span>Finanzas</span>
         </button>
         <br />
         <button className="btn-principal btn-primary" type="button">
-          Trabajadores
+          <span>Trabajadores</span>
         </button>
         <br />
         <button className="btn-principal btn-primary" type="button">
-          Proveedor
+          <span>Proveedor</span>
         </button>
         <br />
       </div>

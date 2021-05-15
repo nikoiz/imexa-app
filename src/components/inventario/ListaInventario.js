@@ -15,9 +15,9 @@ export const ListaInventario = () => {
         </thead>
         <tbody>
           <tr className="table-listado-items">
-            <td>Arroz</td>
-            <td>15</td>
-            <td>$45.000</td>
+            <td>estatico</td>
+            <td>estatico</td>
+            <td>$estatico</td>
           </tr>
         </tbody>
       </Table>

@@ -11,11 +11,43 @@
 .btn-principal {
   width: 500px;
   height: 75px;
-  background: darkslateblue;
+  background: rgb(54, 64, 185);
+  background: linear-gradient(
+    90deg,
+    rgba(54, 64, 185, 1) 0%,
+    rgba(29, 43, 189, 1) 100%
+  );
+  /* background-color: #32afa9; */
   font-family: Allerta, sans-serif;
   color: rgb(255, 255, 255);
   font-size: 25px;
-  border-color: rgb(0, 25, 255);
-  box-shadow: 0px 0px 0px;
+  box-shadow: 0px;
   margin-top: 20px;
+  border: 2px solid rgb(86, 97, 89);
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.35s;
+}
+.btn-principal:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #eb8242;
+  transition: all 0.8s;
+}
+
+.btn-principal span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-principal:hover {
+  color: white;
+}
+
+.btn-principal:hover:after {
+  width: 100%;
 }

@@ -1,6 +1,7 @@
 .lista-bodega-title {
   color: white;
   text-align: center;
+  letter-spacing: 2px;
   padding: 10px;
 }
 
@@ -16,9 +17,21 @@
 }
 
 .nav-link-lb {
-  font-weight: bold;
+  font-weight: 500;
   color: white;
-  background-color: blueviolet;
+  background-color: rgba(0, 0, 0, 0.287);
+}
+
+.nav-link-lb:hover {
+  font-weight: 500;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.315);
+}
+
+.nav-link-lb:focus {
+  font-weight: 550;
+  color: #eb8242;
+  background-color: rgba(0, 0, 0, 0.287);
 }
 
 hr {
@@ -28,12 +41,111 @@ hr {
 .btn-eliminar {
   margin-left: 50px;
   font-weight: bold;
-  color: black;
+  color: #000000;
+  background-color: #61dafb;
+  border-radius: 2px;
+  border-color: #00000000;
+  margin-bottom: 5px;
 }
 
-.btn-secondary{
+.btn-eliminar--doar {
+  color: #fff;
+  padding-right: 0;
+  background-color: #32afa9;
+  -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+}
+
+.btn-eliminar--doar:hover {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  background-color: #eb8242;
+
+}
+
+.btn-eliminar--doar:after {
+  content: url(../assets/delete.png);
+  color: #e74c3c;
+  font-family: FontAwesome;
+  display: inline-block;
+  position: relative;
+  right: -55px;
+  top: 3px;
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar--doar:hover:after {
+  margin: -5px 15px;
+  right: 0px;
+}
+
+.btn-secondary {
   margin-left: 10px;
   font-weight: bold;
-  color: black;
+  color: #000000;
+  border-radius: 2px;
+  border-color: #00000000;
+  margin-bottom: 5px;
 }
 
+.btn-secondary--agregar {
+  color: #fff;
+  padding-right: 0;
+  background-color: #32afa9;
+  -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+}
+
+.btn-secondary--agregar:hover {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  background-color: #eb8242;
+
+}
+
+.btn-secondary--agregar:after {
+  content: url(../assets/add.png);
+  color: #e74c3c;
+  font-family: FontAwesome;
+  display: inline-block;
+  position: relative;
+  right: -55px;
+  top: 3px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary--agregar:hover:after {
+  margin: -5px 15px;
+  right: 0px;
+}
+
+.btn-secondary--modificar {
+  color: #fff;
+  padding-right: 0;
+  background-color: #32afa9;
+  -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+}
+
+.btn-secondary--modificar:hover {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  background-color: #eb8242;
+
+}
+
+.btn-secondary--modificar:after {
+  content: url(../assets/edit-button.png);
+  color: #e74c3c;
+  font-family: FontAwesome;
+  display: inline-block;
+  position: relative;
+  right: -55px;
+  top: 3px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary--modificar:hover:after {
+  margin: -5px 15px;
+  right: 0px;
+}

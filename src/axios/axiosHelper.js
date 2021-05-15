@@ -1,18 +1,13 @@
 import axios from "axios";
 
 export const apiLogin = axios.create({
-  baseURL: "http://localhost/backend-php/api/post/read_single.php",
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/Inicio_session.php",
 });
 
-export const apiPost = axios.create({
-  baseURL: "http://localhost/backend-php/create.php",
+export const apiBodega = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/bodega.php",
 });
 
-export const apiReadBodega = axios.create({
-  baseURL: "http://localhost/backend-php/api/post/read.php",
+export const apiProducto = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/producto.php",
 });
-
-export const apiDeleteBodega = axios.create({
-  baseURL: "http://localhost/Proyecto_Titulo/api/post/delete.php",
-});
-

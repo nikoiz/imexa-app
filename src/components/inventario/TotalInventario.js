@@ -3,14 +3,13 @@ import "../../css/total-inventario.css";
 import { FiltroProducto } from "../producto/FiltroProducto";
 
 export const TotalInventario = () => {
-  const value = 1000;
   return (
     <>
       <div className="total-container">
         <FiltroProducto />
         <div className="row">
           <div className="col-md-12">
-            <span className="total-span">Total en la bodega: ${value}</span>
+            <span className="total-span">Total en la bodega: $estatico</span>
           </div>
         </div>
       </div>

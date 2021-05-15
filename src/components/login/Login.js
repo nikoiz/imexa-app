@@ -2,9 +2,7 @@ import "../../css/login.css";
 import React, { useState } from "react";
 import { apiLogin } from "../../axios/axiosHelper";
 
-
 export const Login = ({ history }) => {
-
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,12 +29,14 @@ export const Login = ({ history }) => {
     apiLogin
       .get(`?usuario=${user}&contraseña=${password}`)
       .then(function (response) {
-        if(response.data.message === "usuario encontrado"){
+        if (response.data.message === "usuario encontrado") {
           history.push("/menuPrincipal");
-        }else{
-          alert('Usuario no registrado')
+        } else {
+          setUser("");
+          setPassword("");
+          console.log(response);
+          alert("Usuario no registrado");
         }
-
       })
       .catch(function (error) {
         console.log(error);
@@ -65,11 +65,9 @@ export const Login = ({ history }) => {
           onChange={handlePasswordChange}
         ></input>
         <br />
-        {/* <Link to="/menuPrincipal"> */}
         <button onClick={handleLogin} type="button" className="button-iniciar">
           Ingresar
         </button>
-        {/* </Link> */}
       </form>
     </div>
   );

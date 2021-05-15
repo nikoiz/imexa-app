@@ -1,29 +1,84 @@
 .container {
   width: 500px;
-  background: darkslateblue;
+  background: #046582;
   padding: 30px;
   margin-top: 150px;
   text-align: center;
+  border-radius: 1px;
+  border-color: rgba(2, 2, 2, 0.281);
+  border-style: solid;
+  box-shadow: 5px 5px rgba(255, 255, 255, 0.075);
 }
 
 .title {
   color: white;
+  letter-spacing: 1px;
+  margin: 10px;
 }
 
 .form-group {
   margin-top: 25px;
 }
 .agregarInput {
+  margin: 2px;
   width: 390px;
-  height: 40px;
+  height: 50px;
   font-size: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 10px;
+  border-radius: 1px;
+  border-color: rgba(2, 2, 2, 0.281);
+  border-style: solid;
 }
 
-.dd-mod-bodega{
+.drop-down-bodegas {
+  padding: 10px;
+  margin: 2px;
+  width: 390px;
+  height: 50px;
+  color: white;
+  background-color: #32afa9;
+  font-size: 25px;
+  padding: 5px;
+}
 
-  width:390px;
-  
+.btn-primary--agregar {
+  width: 390px;
+  height: 50px;
+  background-color: #32afa9;
+  font-family: Allerta, sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  box-shadow: 0px;
+  margin-top: 20px;
+  border: 2px solid rgb(86, 97, 89);
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.35s;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
 
+.btn-primary--agregar:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #eb8242;
+  transition: all 0.8s;
+  border-radius: 10px;
+}
+
+.btn-primary--agregar span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-primary--agregar:hover {
+  color: white;
+}
+
+.btn-primary--agregar:hover:after {
+  width: 100%;
 }

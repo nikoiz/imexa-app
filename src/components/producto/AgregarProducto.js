@@ -1,12 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { apiProducto } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
 import MenuNavBar from "../ui/MenuNavBar";
 import { ProductoNavBar } from "./ProductoNavBar";
 
-export const AgregarProducto = () => {
+export const AgregarProducto = ({ history }) => {
+  const [nombreProducto, setNombreProducto] = useState("");
+  // const [cantidadProducto, setCantidadProducto] = useState("");
+  const [precioProducto, setPrecioProducto] = useState("");
+
+  const handleChangeNombre = (e) => {
+    setNombreProducto(e.target.value);
+  };
+
+  // const handleChangeCantidad = (e) => {
+  //   setCantidadProducto(e.target.value);
+  // };
+
+  const handleChangePrecio = (e) => {
+    setPrecioProducto(e.target.value);
+  };
+
+  const producto = {
+    nombre_producto: nombreProducto,
+    valor_producto: precioProducto,
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    apiProducto
+      .post('/', producto)
+        .then( (res)=>{
+          console.log(res.data);
+        })
+        .catch( (err)=> {
+          console.log(err);
+        })
+
+  }
+
   return (
     <>
-    <MenuNavBar />
+      <MenuNavBar />
       <ProductoNavBar />,
       <div className="container">
         <div className="row">
@@ -17,23 +53,29 @@ export const AgregarProducto = () => {
                 className="agregarInput"
                 type="text"
                 placeholder="Nombre del producto"
+                onChange= { handleChangeNombre }
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <input
                 className="agregarInput"
                 type="text"
                 placeholder="Cantidad"
               />
-            </div>
+            </div> */}
             <div className="form-group">
               <input
                 className="agregarInput"
                 type="text"
                 placeholder="Precio"
+                onChange= { handleChangePrecio }
               />
             </div>
-            <button className="btn btn-primary" type="button">
+            <button 
+            className="btn btn-primary" 
+            type="button"
+            onClick={ handleSubmit }
+            >
               Agregar Producto
             </button>
           </div>

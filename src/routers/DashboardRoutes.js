@@ -13,17 +13,15 @@ export const DashboardRoutes = () => {
     <>
       <div>
         <Switch>
-                    <Route exact path="/agregarBodega" component={AgregarBodega} />
+          <Route exact path="/agregarBodega" component={AgregarBodega} />
           <Route exact path="/menuPrincipal" component={MenuPrincipal} />
           <Route exact path="/inventario" component={InventarioDashBoard} />
           <Route exact path="/modificarBodega" component={ModificarBodega} />
           <Route exact path="/modificarProducto" component={ModficarProducto} />
           <Route exact path="/agregarProducto" component={AgregarProducto} />
-          <Redirect to="/login"/>
-
-
+          <Redirect to="/login" />
         </Switch>
-        
+
         {/* <Route exact path = "/menuPrincipal/:userId" component= {MenuPrincipal} />  */}
       </div>
     </>
