@@ -15,7 +15,7 @@ export const MenuPrincipal = () => {
           </button>
         </Link>
         <br />
-        <Link to="/agregarProducto">
+        <Link to="/producto">
           <button className="btn-principal btn-primary" type="button">
             <span>Producto</span>
           </button>

@@ -7,6 +7,7 @@ import { InventarioDashBoard } from "../components/inventario/InventarioDashBoar
 import { MenuPrincipal } from "../components/menu/MenuPrincipal";
 import { AgregarProducto } from "../components/producto/AgregarProducto";
 import { ModficarProducto } from "../components/producto/ModificarProducto";
+import { ProductoDashBoard } from "../components/producto/ProductoDashBoard";
 
 export const DashboardRoutes = () => {
   return (
@@ -19,6 +20,7 @@ export const DashboardRoutes = () => {
           <Route exact path="/modificarBodega" component={ModificarBodega} />
           <Route exact path="/modificarProducto" component={ModficarProducto} />
           <Route exact path="/agregarProducto" component={AgregarProducto} />
+          <Route exact path="/producto" component={ProductoDashBoard} />          
           <Redirect to="/login" />
         </Switch>
 
