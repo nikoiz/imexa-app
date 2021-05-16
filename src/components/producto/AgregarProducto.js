@@ -33,6 +33,7 @@ export const AgregarProducto = ({ history }) => {
       .post('/', producto)
         .then( (res)=>{
           console.log(res.data);
+          history.push('/producto')
         })
         .catch( (err)=> {
           console.log(err);

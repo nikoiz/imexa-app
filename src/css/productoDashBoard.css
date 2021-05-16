@@ -1,0 +1,42 @@
+.title {
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.tb-product {
+  margin-top: 3%;
+  margin-left: 12%;
+  width: 75%;
+}
+
+.accion-del {
+  text-align: center;
+}
+
+.btn-eliminar--item {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: #32afa9;
+  border-radius: 2px;
+  border-color: #00000000;
+  margin-bottom: 5px;
+}
+
+.btn-eliminar--item:hover {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+  background-color: #eb8242;
+}
+
+.btn-eliminar--item::after {
+  content: url(../assets/delete.png);
+  color: #e74c3c;
+  font-family: FontAwesome;
+  display: inline-block;
+  position: relative;
+  right: -5px;
+  top: 2px;
+  transition: all 0.2s ease;
+}

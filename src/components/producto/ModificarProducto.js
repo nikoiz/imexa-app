@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import {  apiProducto } from "../../axios/axiosHelper";
+import { apiProducto } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
 import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownProducto } from "./DropDownProducto";
+import { ProductoNavBar } from "./ProductoNavBar";
 // import { ProductoNavBar } from "./ProductoNavBar";
 
 export const ModficarProducto = ({ history }) => {
@@ -31,19 +32,36 @@ export const ModficarProducto = ({ history }) => {
 
   const handleSubmit = (e) => {
     apiProducto
-      .put("/", producto)
+      .put(
+        `/?id_producto=${idProducto}&nombre_producto=${nombreProducto}&valor_producto=${precioProducto}`,
+        producto
+      )
       .then((res) => {
         console.log(res);
-        history.push("/agregarProducto");
+        console.log(res.data);
+        history.push("/producto");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  // const handleSubmit = (e) => {
+  //   apiProducto
+  //     .put("/", producto)
+  //     .then((res) => {
+  //       console.log(res);
+  //       history.push("/inventario");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
   return (
     <>
       <MenuNavBar />
+      <ProductoNavBar />
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -67,10 +85,10 @@ export const ModficarProducto = ({ history }) => {
                 onChange={handleChangePrecio}
               />
             </div>
-            <button 
-            className="btn btn-primary" 
-            type="button"
-            onClick={handleSubmit}
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleSubmit}
             >
               Modficar Producto
             </button>

@@ -8,19 +8,15 @@ export const ProductoNavBar = () => {
     <>
       <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
         <Link to="/agregarProducto">
-          <Button className="btn-eliminar" variant="danger">
+          <Button className="btn-secondary btn-secondary--agregar">
             Agregar Producto
           </Button>
         </Link>
-
         <Link to="/modificarProducto">
-          <Button className="btn-secondary" variant="success">
-            Modficar Producto
+          <Button className="btn-secondary btn-secondary--modificar">
+            Modificar Producto
           </Button>
         </Link>
-        <Button className="btn-secondary" variant="warning">
-          Eliminar Producto
-        </Button>
       </Nav>
     </>
   );
