@@ -11,3 +11,11 @@ export const apiBodega = axios.create({
 export const apiProducto = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/producto.php",
 });
+
+export const apiProveedor = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/proveedor.php",
+});
+
+export const apiGastos = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/gasto.php",
+});

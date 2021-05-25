@@ -41,6 +41,10 @@
   padding: 5px;
 }
 
+.btn{
+  margin-top: 20px;
+}
+
 .btn-primary--agregar {
   width: 390px;
   height: 50px;

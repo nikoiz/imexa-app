@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import MenuNavBar from "../ui/MenuNavBar";
-import "../../css/productoDashBoard.css";
-import { ProductoNavBar } from "./ProductoNavBar";
+import { useEffect, useState } from "react";
+import React from "react-bootstrap";
 import { Button, Table } from "react-bootstrap";
-import { apiProducto } from "../../axios/axiosHelper";
+import { apiGastos } from "../../axios/axiosHelper";
+import MenuNavBar from "../ui/MenuNavBar";
+import { GastosNavBar } from "./GastosNavBar";
 
-export const ProductoDashBoard = () => {
-  const [productos, setProductos] = useState([]);
+export const GastosDashBoard = () => {
+  const [gastos, setGastos] = useState([]);
 
   useEffect(() => {
     let isSuscribed = true;
-    apiProducto
+    apiGastos
       .get("/")
       .then((res) => {
         if (isSuscribed) {
-          setProductos(res.data.data);
+          setGastos(res.data.data);
         }
       })
       .catch((err) => {
@@ -23,11 +23,11 @@ export const ProductoDashBoard = () => {
     return () => {
       isSuscribed = false;
     };
-  }, [productos]);
+  }, [gastos]);
 
-  const handleEliminarProducto = (id) => {
-    apiProducto
-      .delete(`?id_producto=${id}`)
+  const handleEliminarGasto = (id) => {
+    apiGastos
+      .delete(`?id_gastos=${id}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -39,9 +39,10 @@ export const ProductoDashBoard = () => {
   return (
     <>
       <MenuNavBar />
-      <h1 className="title">Producto Dashboard</h1>
+      <h1 className="title">Gastos DashBoard</h1>
       <hr />
-      <ProductoNavBar />
+      <GastosNavBar />
+
       <Table
         responsive
         striped
@@ -53,31 +54,31 @@ export const ProductoDashBoard = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Nombre</th>
+            <th>Descripcion Gasto</th>
             <th>Valor</th>
-            <th>Cantidad</th>
-            <th>Valor total</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Bodega</th>
             <th className="accion-del">Accion</th>
           </tr>
         </thead>
 
         <tbody>
-          {productos != null && productos.length > 0 ? (
-            productos.map((producto, i) => (
-              <tr
-                id={producto.id_producto}
-                value={producto.id_producto}
-                key={i}
-              >
+          {gastos != null && gastos.length > 0 ? (
+            gastos.map((gasto, i) => (
+              <tr id={gasto.id_gastos} value={gasto.id_gastos} key={i}>
                 <td>{i + 1}</td>
-                <td>{producto.nombre_producto}</td>
-                <td>${producto.valor_producto}</td>
-                <td>{producto.cantidad_total}</td>
-                <td>$ {producto.cantidad_total * producto.valor_producto}</td>
+                <td>{gasto.descripcion_gastos}</td>
+                <td>$ {gasto.valor_gastos}</td>
+                <td>{gasto.estado}</td>
+                <td>{gasto.fecha}</td>
+                <td>{gasto.nombre_bodega}</td>
                 <td className="accion-del">
                   <Button
+                    onClick={() => {
+                      handleEliminarGasto(gasto.id_gastos);
+                    }}
                     className="btn-eliminar--item"
-                    onClick={() => handleEliminarProducto(producto.id_producto)}
                   >
                     Eliminar Producto
                   </Button>
@@ -86,6 +87,7 @@ export const ProductoDashBoard = () => {
             ))
           ) : (
             <tr id="empty" value="empty">
+              <td>--</td>
               <td>--</td>
               <td>--</td>
               <td>--</td>

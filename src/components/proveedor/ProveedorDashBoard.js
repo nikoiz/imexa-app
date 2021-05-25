@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import MenuNavBar from "../ui/MenuNavBar";
-import "../../css/productoDashBoard.css";
-import { ProductoNavBar } from "./ProductoNavBar";
 import { Button, Table } from "react-bootstrap";
-import { apiProducto } from "../../axios/axiosHelper";
+import { apiProveedor } from "../../axios/axiosHelper";
+import MenuNavBar from "../ui/MenuNavBar";
+import { ProveedorNavBar } from "./ProveedorNavBar";
 
-export const ProductoDashBoard = () => {
-  const [productos, setProductos] = useState([]);
+export const ProveedorDashBoard = () => {
+  const [proveedores, setProveedores] = useState([]);
 
   useEffect(() => {
     let isSuscribed = true;
-    apiProducto
+    apiProveedor
       .get("/")
       .then((res) => {
         if (isSuscribed) {
-          setProductos(res.data.data);
+          setProveedores(res.data.data);
         }
       })
       .catch((err) => {
@@ -23,25 +22,26 @@ export const ProductoDashBoard = () => {
     return () => {
       isSuscribed = false;
     };
-  }, [productos]);
+  }, [proveedores]);
 
-  const handleEliminarProducto = (id) => {
-    apiProducto
-      .delete(`?id_producto=${id}`)
-      .then((res) => {
+  const handleEliminar = (id) =>{
+    apiProveedor
+      .delete(`?rut_proveedor=${id}`)
+      .then((res)=>{
         console.log(res.data);
       })
-      .catch((err) => {
+      .catch((err)=>{
         console.log(err);
-      });
-  };
+      })
+  }
 
   return (
-    <>
+    <div>
       <MenuNavBar />
-      <h1 className="title">Producto Dashboard</h1>
+      <h1 className="title">Proveedor DashBoard</h1>
       <hr />
-      <ProductoNavBar />
+      <ProveedorNavBar />
+
       <Table
         responsive
         striped
@@ -54,30 +54,28 @@ export const ProductoDashBoard = () => {
           <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Valor</th>
-            <th>Cantidad</th>
-            <th>Valor total</th>
+            <th>RUT</th>
+            <th>Contacto</th>
             <th className="accion-del">Accion</th>
           </tr>
         </thead>
 
         <tbody>
-          {productos != null && productos.length > 0 ? (
-            productos.map((producto, i) => (
+          {proveedores != null && proveedores.length > 0 ? (
+            proveedores.map((proveedor, i) => (
               <tr
-                id={producto.id_producto}
-                value={producto.id_producto}
+                id={proveedor.rut_proveedor}
+                value={proveedor.rut_proveedor}
                 key={i}
               >
                 <td>{i + 1}</td>
-                <td>{producto.nombre_producto}</td>
-                <td>${producto.valor_producto}</td>
-                <td>{producto.cantidad_total}</td>
-                <td>$ {producto.cantidad_total * producto.valor_producto}</td>
+                <td>{proveedor.nombre_proveedor}</td>
+                <td>{proveedor.rut_proveedor}</td>
+                <td>{proveedor.contacto}</td>
                 <td className="accion-del">
                   <Button
                     className="btn-eliminar--item"
-                    onClick={() => handleEliminarProducto(producto.id_producto)}
+                    onClick={() => handleEliminar(proveedor.rut_proveedor)}
                   >
                     Eliminar Producto
                   </Button>
@@ -90,12 +88,11 @@ export const ProductoDashBoard = () => {
               <td>--</td>
               <td>--</td>
               <td>--</td>
-              <td>--</td>
               <td className="accion-del">--</td>
             </tr>
           )}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };

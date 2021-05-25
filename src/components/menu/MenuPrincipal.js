@@ -21,20 +21,25 @@ export const MenuPrincipal = () => {
           </button>
         </Link>
         <br />
+        <Link to="/proveedor">
+          <button className="btn-principal btn-primary" type="button">
+            <span>Proveedor</span>
+          </button>
+        </Link>
+        <br />
+        <Link to="/finanzas">
+          <button className="btn-principal btn-primary" type="button">
+            <span>Finanzas</span>
+          </button>
+        </Link>
+
+        <br />
         <button className="btn-principal btn-primary" type="button">
           <span>Clientes</span>
         </button>
         <br />
         <button className="btn-principal btn-primary" type="button">
-          <span>Finanzas</span>
-        </button>
-        <br />
-        <button className="btn-principal btn-primary" type="button">
           <span>Trabajadores</span>
-        </button>
-        <br />
-        <button className="btn-principal btn-primary" type="button">
-          <span>Proveedor</span>
         </button>
         <br />
       </div>

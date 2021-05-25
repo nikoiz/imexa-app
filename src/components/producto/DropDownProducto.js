@@ -38,7 +38,7 @@ export const DropDownProducto = ({ setIdProducto }) => {
             </option>
           ))
         ) : (
-          <option hidden="true" value="default" id="default">
+          <option hidden={true} value="default" id="default">
             Seleccionar
           </option>
         )}

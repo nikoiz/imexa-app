@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { apiProducto } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
+import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownProducto } from "./DropDownProducto";
 import { ProductoNavBar } from "./ProductoNavBar";
-// import { ProductoNavBar } from "./ProductoNavBar";
 
 export const ModficarProducto = ({ history }) => {
   const [idProducto, setidProducto] = useState("default");
   const [nombreProducto, setNombreProducto] = useState("");
-  // const [cantidadProducto, setCantidadProducto] = useState("");
+  const [cantidadProducto, setCantidadProducto] = useState("");
   const [precioProducto, setPrecioProducto] = useState("");
+  const [bodega, setBodega] = useState("default");
 
   const handleChangeNombre = (e) => {
     setNombreProducto(e.target.value);
   };
 
-  // const handleChangeCantidad = (e) => {
-  //   setCantidadProducto(e.target.value);
-  // };
+  const handleChangeCantidad = (e) => {
+    setCantidadProducto(e.target.value);
+  };
 
   const handleChangePrecio = (e) => {
     setPrecioProducto(e.target.value);
@@ -28,12 +29,14 @@ export const ModficarProducto = ({ history }) => {
     id_producto: idProducto,
     nombre_producto: nombreProducto,
     valor_producto: precioProducto,
+    cantidad_total: cantidadProducto,
+    id_bodega: bodega,
   };
 
   const handleSubmit = (e) => {
     apiProducto
       .put(
-        `/?id_producto=${idProducto}&nombre_producto=${nombreProducto}&valor_producto=${precioProducto}`,
+        `/?id_producto=${idProducto}&nombre_producto=${nombreProducto}&valor_producto=${precioProducto}&cantidad_total=${cantidadProducto}&id_bodega=${bodega}`,
         producto
       )
       .then((res) => {
@@ -45,18 +48,6 @@ export const ModficarProducto = ({ history }) => {
         console.log(err);
       });
   };
-
-  // const handleSubmit = (e) => {
-  //   apiProducto
-  //     .put("/", producto)
-  //     .then((res) => {
-  //       console.log(res);
-  //       history.push("/inventario");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   return (
     <>
@@ -81,12 +72,23 @@ export const ModficarProducto = ({ history }) => {
               <input
                 className="agregarInput"
                 type="text"
+                placeholder="Cantidad"
+                onChange={handleChangeCantidad}
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                className="agregarInput"
+                type="text"
                 placeholder="Precio"
                 onChange={handleChangePrecio}
               />
             </div>
+            <DropDownBodegas setIdBodega={setBodega} />
+
             <button
-              className="btn btn-primary"
+              className="btn btn-primary--agregar"
               type="button"
               onClick={handleSubmit}
             >
