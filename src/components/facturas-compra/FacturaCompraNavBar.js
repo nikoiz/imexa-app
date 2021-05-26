@@ -1,25 +1,24 @@
-import { Button } from "react-bootstrap";
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Button, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const FinanzasNavBar = () => {
+export const FacturaCompraNavBar = () => {
   return (
     <>
       <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
-        <Link to="/gastos">
-          <Button className="btn-secondary btn-secondary--agregar">
-            Gastos
-          </Button>
-        </Link>
         <Link to="/facturaCompraDashBoard">
-          <Button className="btn-secondary btn-secondary--modificar">
-            Facturas Compra
+          <Button className="btn-secondary btn-secondary--agregar">
+            DashBoard Facturas Compra
           </Button>
         </Link>
-        <Link to="/facturasVenta">
+        <Link to="/facturaCompraDetalle">
+          <Button className="btn-secondary btn-secondary--agregar">
+            Agregar Factura Compra
+          </Button>
+        </Link>
+        <Link to="/facturaCompraModificar">
           <Button className="btn-secondary btn-secondary--modificar">
-            Facturas Venta
+            Modificar Factura Compra
           </Button>
         </Link>
       </Nav>

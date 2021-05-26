@@ -42,6 +42,7 @@ export const ProductoDashBoard = () => {
       <h1 className="title">Producto Dashboard</h1>
       <hr />
       <ProductoNavBar />
+
       <Table
         responsive
         striped

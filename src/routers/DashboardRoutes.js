@@ -2,6 +2,9 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import { AgregarBodega } from "../components/bodega/AgregarBodega";
 import { ModificarBodega } from "../components/bodega/ModificarBodega";
+import { FacturaCompraDashBoard } from "../components/facturas-compra/FacturaCompraDashBoard";
+import { FacturaCompraDetalle } from "../components/facturas-compra/FacturaCompraDetalle";
+import { FacturaCompraModificar } from "../components/facturas-compra/FacturaCompraModificar";
 import { FinanzasDashBoard } from "../components/finanzas/FinanzasDashBoard";
 import { AgregarGastos } from "../components/gastos/AgregarGastos";
 import { GastosDashBoard } from "../components/gastos/GastosDashBoard";
@@ -34,6 +37,9 @@ export const DashboardRoutes = () => {
           <Route exact path="/gastos" component={GastosDashBoard} />          
           <Route exact path="/agregarGastos" component={AgregarGastos} />          
           <Route exact path="/modificarGasto" component={ModificarGastos} />          
+          <Route exact path="/facturaCompraDetalle" component={FacturaCompraDetalle} />          
+          <Route exact path="/facturaCompraDashBoard" component={FacturaCompraDashBoard} />          
+          <Route exact path="/facturaCompraModificar" component={FacturaCompraModificar} />          
           <Redirect to="/login" />
         </Switch>
       </div>
