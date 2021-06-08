@@ -1,8 +1,23 @@
 .factura-detalle {
   width: max-content;
   height: max-content;
-  margin-top: 10px;
-  text-align: center;  
+  margin-top: 2%;
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+.container-radio {
+  width: 100%;
+  margin-left: 10%;
+  margin-bottom: 10%;
+}
+
+.title-facturas {
+  color: white;
+  text-align: left;
+  margin-top: 15px;
+  margin-left: 2%;
+  margin-bottom: 30px;
 }
 
 .txt-area {
@@ -11,18 +26,72 @@
 }
 
 .span-facturas {
-  width: 250px;
+  width: 50%;
   color: white;
   font-size: 20px;
   margin: 10px;
   text-align: left;
 }
 
-.input-facturas{
-    width: 230px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 1px;
-    border-color: rgba(2, 2, 2, 0.281);
-    border-style: solid;
+.table-title {
+  width: 50%;
+  color: white;
+  font-size: 20px;
+  margin: 10px;
+  text-align: center;
 }
+
+.row-facturas{
+  margin-top: 2%;
+}
+
+.input-facturas {
+  width: 230px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 1px;
+  border-color: rgba(2, 2, 2, 0.281);
+  border-style: solid;
+}
+
+/* .drop-down-proveedor{
+  padding: 10px;
+  margin: 2px;
+  width: 230px;
+  height: 100%;
+  color: white;
+  background-color: #32afa9;
+  font-size: auto;
+  padding: 5px;
+} */
+
+.hr-factura {
+  background-color: #ef6c57;
+}
+
+.vl {
+  border-left: 2px solid #ef6c57;
+  height: 100%;
+}
+.input-detalle {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 1px;
+  border-color: rgba(2, 2, 2, 0.281);
+  border-style: solid;
+}
+.btn-primary--addLine {
+  width: 40px;
+  height: 40px;
+  background-color: #ef6c57;
+}
+
+.btn-primary--addLine:hover {
+  background-color: green;
+}
+
+.btn-primary--addLine:focus {
+  background-color: green;
+}
+

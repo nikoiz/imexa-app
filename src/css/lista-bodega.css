@@ -14,10 +14,11 @@
   color: black;
   padding: 5px;
   margin-left: 5px;
+  margin-top: 15px;
 }
 
 .nav-link-lb {
-  font-weight: 500;
+  font-weight: 500; 
   color: white;
   background-color: rgba(0, 0, 0, 0.287);
 }

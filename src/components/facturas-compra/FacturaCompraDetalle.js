@@ -1,101 +1,87 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import MenuNavBar from "../ui/MenuNavBar";
+import React, { useEffect, useState } from "react";
+import { Col, FormControl, Row } from "react-bootstrap";
 import "../../css/factura.css";
-import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
+import { DropDownBodegas } from "../bodega/DropDownBodegas";
 
-export const FacturaCompraDetalle = () => {
+export const FacturaCompraDetalle = (props) => {
+  const [idBodega, setIdBodega] = useState("default");
+  const [productoState, setProductoState] = useState("");
+  const [valorUnitarioState, setValorUnitarioState] = useState("");
+  const [cantidadState, setCantidadState] = useState("");
+  const [valorTotalState, setValorTotalState] = useState("");
+
+  // const detalleCompra = props.detalleCompra;
+
+  const handleChangeProducto = (e) => {
+    setProductoState(e.target.value);
+  };
+  const handleChangeValorUni = (e) => {
+    setValorUnitarioState(e.target.value);
+  };
+  const handleChangeCantidad = (e) => {
+    setCantidadState(e.target.value);
+  };
+
+  const producto = {
+    nombre_producto: productoState,
+    valor_producto: valorUnitarioState,
+    cantidad_total: cantidadState,
+    valorTotal: valorTotalState,
+    id_bodega: idBodega,
+  };
+
+  useEffect(() => {
+    let number = cantidadState * valorUnitarioState;
+
+    setValorTotalState(number.toString());
+    props.detalleCompra(() => producto);
+    
+  }, [cantidadState, valorUnitarioState, idBodega]);
+
+
+  useEffect(() => {
+    
+    console.log("Bodega cambio");
+
+  }, [idBodega]);
+
+
   return (
     <>
-      <MenuNavBar />
-      <h1 className="title">Detalle Factura de Compra</h1>
-      <hr />
-      <FacturaCompraNavBar />
+      <Row>
+        <Col>
+          <FormControl
+            onChange={handleChangeProducto}
+            placeholder="Producto"
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            onChange={handleChangeValorUni}
+            placeholder="Valor unitario"
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            onChange={handleChangeCantidad}
+            placeholder="Cantidad"
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            readOnly="readonly"
+            name="vTotal"
+            id={props.id || "0"}
+            value={valorUnitarioState * cantidadState}
+          ></FormControl>
+        </Col>
+        <Col>
+          <DropDownBodegas 
+          setIdBodega={setIdBodega} />
+        </Col>
+      </Row>
 
-      <div className="container factura-detalle">
-        <h1 className="title">Factura Compra</h1>
-        <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Folio de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Folio de compra"
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Estado:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Pagada">Pagada</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Fecha de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Folio de compra"
-                type="date"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Proveedor:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Valor de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Valor de compra"
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Metodo de compra:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta">Tarjeta</option>
-                <option value="Cheque">Cheque</option>
-                <option value="No pagado">No pagado</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <label className="span-facturas">Descripcion de facutra:</label>
-            <textarea
-              className="txt-area"
-              name="descripcion"
-              id="descripcion"
-              cols="130"
-              rows="5"
-            ></textarea>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <Button className="btn btn-primary--agregar">
-              <span>Agregar factura</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      <hr className="hr-factura" />
     </>
   );
 };

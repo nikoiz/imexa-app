@@ -19,3 +19,7 @@ export const apiProveedor = axios.create({
 export const apiGastos = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/gasto.php",
 });
+
+export const apiFacturaCompra = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/factura_compra.php",
+});

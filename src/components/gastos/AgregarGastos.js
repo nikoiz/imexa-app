@@ -4,6 +4,7 @@ import MenuNavBar from "../ui/MenuNavBar";
 import "../../css/gastos.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import { apiGastos } from "../../axios/axiosHelper";
+import { GastosNavBar } from "./GastosNavBar";
 
 export const AgregarGastos = ({ history }) => {
   const [idBodegas, setIdBodegas] = useState("");
@@ -51,6 +52,7 @@ export const AgregarGastos = ({ history }) => {
   return (
     <>
       <MenuNavBar />,
+      <GastosNavBar/>
       <div className="container">
         <div className="row">
           <div className="col-md-12">

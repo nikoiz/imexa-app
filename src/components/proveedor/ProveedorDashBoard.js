@@ -77,7 +77,7 @@ export const ProveedorDashBoard = () => {
                     className="btn-eliminar--item"
                     onClick={() => handleEliminar(proveedor.rut_proveedor)}
                   >
-                    Eliminar Producto
+                    Eliminar Proveedor
                   </Button>
                 </td>
               </tr>

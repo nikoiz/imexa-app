@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiProveedor } from "../../axios/axiosHelper";
 
-export const DropDownProveedor = ({ setIdProveedor }) => {
+export const ProveedorFactura = ({ setIdProveedor }) => {
   const [proveedores, setProveedores] = useState([]);
 
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export const DropDownProveedor = ({ setIdProveedor }) => {
     <div>
       <select
         name="proveedores"
-        className="drop-down-proveedor"
+        className="input-facturas"
         onChange={handleChange}
       >
         <option value="default" id="default">

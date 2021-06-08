@@ -80,7 +80,7 @@ export const GastosDashBoard = () => {
                     }}
                     className="btn-eliminar--item"
                   >
-                    Eliminar Producto
+                    Eliminar Gasto
                   </Button>
                 </td>
               </tr>

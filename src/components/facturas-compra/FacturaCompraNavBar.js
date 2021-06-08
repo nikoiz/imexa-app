@@ -11,7 +11,7 @@ export const FacturaCompraNavBar = () => {
             DashBoard Facturas Compra
           </Button>
         </Link>
-        <Link to="/facturaCompraDetalle">
+        <Link to="/facturaCompra">
           <Button className="btn-secondary btn-secondary--agregar">
             Agregar Factura Compra
           </Button>

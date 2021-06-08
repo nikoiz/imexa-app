@@ -39,6 +39,7 @@ export const ModificarBodega = ({ history }) => {
   return (
     <>
       <MenuNavBar />,
+
       <div className="container">
         <div className="row">
           <div className="col-md-12">

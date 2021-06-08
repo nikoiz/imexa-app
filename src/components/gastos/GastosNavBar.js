@@ -7,6 +7,11 @@ export const GastosNavBar = () => {
   return (
     <>
       <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
+      <Link to="/gastos">
+          <Button className="btn-secondary btn-secondary--agregar">
+            Gastos DashBoard
+          </Button>
+        </Link>
         <Link to="/agregarGastos">
           <Button className="btn-secondary btn-secondary--agregar">
             Agregar Gastos
