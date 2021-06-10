@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import MenuNavBar from "../ui/MenuNavBar";
 import "../../css/factura.css";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
-import { apiFacturaCompra } from "../../axios/axiosHelper";
+// import { apiFacturaCompra } from "../../axios/axiosHelper";
 
 export const FacturaCompra = ({ history }) => {
   const [showComponent, setShowComponent] = useState([0]);
@@ -18,7 +18,8 @@ export const FacturaCompra = ({ history }) => {
   const [proveedor, setProveedor] = useState("");
   const [metodoPago, setMetodoPago] = useState("");
 
-  const [detalleCompra, setDetalleCompra] = useState([{}]);
+  const [thisArrayState, setThisArrayState] = useState([]);
+  const [detalleCompraJSON, setDetalleCompraJSON] = useState([]);
 
   const handleTipoFactura = (e) => {
     setTipoFactura(e.target.value);
@@ -43,6 +44,15 @@ export const FacturaCompra = ({ history }) => {
     setShowComponent([...showComponent, showComponent.length]);
   };
 
+  useEffect(() => {
+    thisArrayState.id_compra = folioCompra;
+    setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);   
+  }, [thisArrayState])
+
+  useEffect(() => {
+    console.log(showComponent);
+  }, [showComponent]);
+
   let today = new Date();
   let time =
     " " +
@@ -65,7 +75,7 @@ export const FacturaCompra = ({ history }) => {
   const handleSubmitAddFactura = (e) => {
     e.preventDefault();
 
-    console.log(detalleCompra);
+    console.log(detalleCompraJSON);
 
     // apiFacturaCompra
     //   .post("/", factura)
@@ -198,10 +208,15 @@ export const FacturaCompra = ({ history }) => {
               <Col className="table-title vl">Cantidad</Col>
               <Col className="table-title vl">Valor total</Col>
               <Col className="table-title vl">Bodega</Col>
+              <Col className="table-title vl-last">Agregar</Col>
             </Row>
             <hr className="hr-factura" />
             {showComponent.map((id) => (
-              <FacturaCompraDetalle key={id} id={id} detalleCompra={setDetalleCompra} />
+              <FacturaCompraDetalle
+                key={id}
+                id={id}
+                detalleCompra={setThisArrayState}
+              />
             ))}
             <Button
               className="btn btn-primary--addLine"

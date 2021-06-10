@@ -4,13 +4,15 @@ import "../../css/factura.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 
 export const FacturaCompraDetalle = (props) => {
+  const { detalleCompra, id } = props;
+
   const [idBodega, setIdBodega] = useState("default");
   const [productoState, setProductoState] = useState("");
   const [valorUnitarioState, setValorUnitarioState] = useState("");
   const [cantidadState, setCantidadState] = useState("");
   const [valorTotalState, setValorTotalState] = useState("");
 
-  // const detalleCompra = props.detalleCompra;
+  const [checkState, setCheckState] = useState(false);
 
   const handleChangeProducto = (e) => {
     setProductoState(e.target.value);
@@ -22,29 +24,30 @@ export const FacturaCompraDetalle = (props) => {
     setCantidadState(e.target.value);
   };
 
-  const producto = {
-    nombre_producto: productoState,
-    valor_producto: valorUnitarioState,
-    cantidad_total: cantidadState,
-    valorTotal: valorTotalState,
-    id_bodega: idBodega,
+  const handleToggleCheckBox = (e) => {
+    if (checkState === false) {
+      setCheckState(true);
+      detalleCompra(()=>producto)
+
+    }else{
+      setCheckState(false)
+    }
   };
+
+  const producto = 
+    {
+      nombre_producto: productoState,
+      valor_producto: valorUnitarioState,
+      cantidad_total: cantidadState,
+      valorTotal: valorTotalState,
+      id_bodega: idBodega,
+    }
+
 
   useEffect(() => {
     let number = cantidadState * valorUnitarioState;
-
     setValorTotalState(number.toString());
-    props.detalleCompra(() => producto);
-    
-  }, [cantidadState, valorUnitarioState, idBodega]);
-
-
-  useEffect(() => {
-    
-    console.log("Bodega cambio");
-
-  }, [idBodega]);
-
+  }, [cantidadState, valorUnitarioState]);
 
   return (
     <>
@@ -71,16 +74,21 @@ export const FacturaCompraDetalle = (props) => {
           <FormControl
             readOnly="readonly"
             name="vTotal"
-            id={props.id || "0"}
+            id={id || "0"}
             value={valorUnitarioState * cantidadState}
           ></FormControl>
         </Col>
         <Col>
-          <DropDownBodegas 
-          setIdBodega={setIdBodega} />
+          <DropDownBodegas setIdBodega={setIdBodega} />
+        </Col>
+        <Col>
+          <input
+            type="checkbox"
+            value={checkState}
+            onClick={handleToggleCheckBox}
+          ></input>
         </Col>
       </Row>
-
       <hr className="hr-factura" />
     </>
   );

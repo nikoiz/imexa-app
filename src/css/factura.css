@@ -41,7 +41,7 @@
   text-align: center;
 }
 
-.row-facturas{
+.row-facturas {
   margin-top: 2%;
 }
 
@@ -54,16 +54,11 @@
   border-style: solid;
 }
 
-/* .drop-down-proveedor{
-  padding: 10px;
-  margin: 2px;
-  width: 230px;
-  height: 100%;
-  color: white;
-  background-color: #32afa9;
-  font-size: auto;
-  padding: 5px;
-} */
+input[type=checkbox] {
+  transform: scale(2.5);
+  margin-top: 10%;
+}
+
 
 .hr-factura {
   background-color: #ef6c57;
@@ -71,6 +66,12 @@
 
 .vl {
   border-left: 2px solid #ef6c57;
+  height: 100%;
+}
+
+.vl-last {
+  border-left: 2px solid #ef6c57;
+  border-right: 2px solid #ef6c57;
   height: 100%;
 }
 .input-detalle {
@@ -94,4 +95,3 @@
 .btn-primary--addLine:focus {
   background-color: green;
 }
-
