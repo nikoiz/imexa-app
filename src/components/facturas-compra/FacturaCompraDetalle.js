@@ -34,15 +34,17 @@ export const FacturaCompraDetalle = (props) => {
     }
   };
 
-  const producto = 
-    {
-      nombre_producto: productoState,
-      valor_producto: valorUnitarioState,
-      cantidad_total: cantidadState,
-      valorTotal: valorTotalState,
-      id_bodega: idBodega,
-    }
 
+  const producto = {
+
+    nombre_producto: productoState,
+    valor_producto: valorUnitarioState,
+    descripcion_compra_producto: productoState,
+    cantidad_compra_producto: cantidadState,
+    id_bodega: idBodega,
+    cantidad_total: cantidadState,
+    valor: valorTotalState,
+  }
 
   useEffect(() => {
     let number = cantidadState * valorUnitarioState;

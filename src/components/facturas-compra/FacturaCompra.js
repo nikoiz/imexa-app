@@ -5,6 +5,7 @@ import "../../css/factura.css";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
+import { apiFacturaCompra, apiDetalleCompra } from "../../axios/axiosHelper";
 // import { apiFacturaCompra } from "../../axios/axiosHelper";
 
 export const FacturaCompra = ({ history }) => {
@@ -18,7 +19,7 @@ export const FacturaCompra = ({ history }) => {
   const [proveedor, setProveedor] = useState("");
   const [metodoPago, setMetodoPago] = useState("");
 
-  const [thisArrayState, setThisArrayState] = useState([]);
+  const [thisArrayState, setThisArrayState] = useState({});
   const [detalleCompraJSON, setDetalleCompraJSON] = useState([]);
 
   const handleTipoFactura = (e) => {
@@ -46,8 +47,8 @@ export const FacturaCompra = ({ history }) => {
 
   useEffect(() => {
     thisArrayState.id_compra = folioCompra;
-    setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);   
-  }, [thisArrayState])
+    setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);
+  }, [thisArrayState]);
 
   useEffect(() => {
     console.log(showComponent);
@@ -75,17 +76,31 @@ export const FacturaCompra = ({ history }) => {
   const handleSubmitAddFactura = (e) => {
     e.preventDefault();
 
-    console.log(detalleCompraJSON);
+    console.warn("Creacion Factura");
 
-    // apiFacturaCompra
-    //   .post("/", factura)
-    //   .then((res) => {
-    //     console.log(res);
-    //     history.push("/facturaCompraDashBoard");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    apiFacturaCompra
+      .post("/", factura)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.warn("Creacion Producto / detalle / bodega_has_producto");
+
+    detalleCompraJSON.forEach((element) => {
+      setTimeout(() => {
+        apiDetalleCompra
+          .post("/", element)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, 3000);
+    });
   };
 
   return (
