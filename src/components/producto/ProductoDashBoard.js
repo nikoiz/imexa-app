@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MenuNavBar from "../ui/MenuNavBar";
 import "../../css/productoDashBoard.css";
 import { ProductoNavBar } from "./ProductoNavBar";
 import { Button, Table } from "react-bootstrap";

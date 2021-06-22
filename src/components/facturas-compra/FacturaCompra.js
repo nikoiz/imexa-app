@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
-import MenuNavBar from "../ui/MenuNavBar";
 import "../../css/factura.css";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import { FacturaCompraDetalle } from "./FacturaCompraDetalle";

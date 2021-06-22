@@ -3,7 +3,6 @@ import { apiProducto } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownProducto } from "./DropDownProducto";
 import { ProductoNavBar } from "./ProductoNavBar";
 

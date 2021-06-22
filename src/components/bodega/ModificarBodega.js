@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { apiBodega } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownBodegas } from "./DropDownBodegas";
 
 export const ModificarBodega = ({ history }) => {

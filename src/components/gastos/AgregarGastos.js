@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import MenuNavBar from "../ui/MenuNavBar";
 import "../../css/gastos.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import { apiGastos } from "../../axios/axiosHelper";

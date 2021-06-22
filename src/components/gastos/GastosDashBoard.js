@@ -3,7 +3,6 @@ import React from "react-bootstrap";
 import { Button, Table } from "react-bootstrap";
 import { apiGastos } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import MenuNavBar from "../ui/MenuNavBar";
 import { GastosNavBar } from "./GastosNavBar";
 
 export const GastosDashBoard = () => {
