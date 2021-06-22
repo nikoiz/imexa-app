@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { apiProveedor } from "../../axios/axiosHelper";
-import MenuNavBar from "../ui/MenuNavBar";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import { ProveedorNavBar } from "./ProveedorNavBar";
 
 export const ProveedorDashBoard = () => {
@@ -37,13 +37,13 @@ export const ProveedorDashBoard = () => {
 
   return (
     <div>
-      <MenuNavBar />
+      <SideBarImexa />
       <h1 className="title">Proveedor DashBoard</h1>
       <hr />
       <ProveedorNavBar />
 
       <Table
-        responsive
+        
         striped
         bordered
         hover="true"

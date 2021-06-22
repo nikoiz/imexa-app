@@ -1,5 +1,5 @@
 .container {
-  width: 500px;
+  width: 30%;
   background: #046582;
   padding: 30px;
   margin-top: 5%;
@@ -13,14 +13,15 @@
 .title {
   color: white;
   letter-spacing: 1px;
-  margin: 10px;
+  margin-left: 0%;
 }
 
 .form-group {
-  margin-top: 25px;
+  margin-top: 8%;
 }
+
 .agregarInput {
-  margin: 2px;
+  margin: 1%;
   width: 90%;
   height: 50px;
   font-size: 20px;
@@ -41,7 +42,7 @@
   padding: 5px;
 }
 
-.drop-down-proveedor{
+.drop-down-proveedor {
   padding: 10px;
   margin: 2px;
   width: 90%;
@@ -52,12 +53,12 @@
   padding: 5px;
 }
 
-.btn {
+/* .btn {
   margin-top: 20px;
-}
+} */
 
 .btn-primary--agregar {
-  width: 390px;
+  width: 90%;
   height: 50px;
   background-color: #32afa9;
   font-family: Allerta, sans-serif;
@@ -86,6 +87,7 @@
 }
 
 .btn-primary--agregar span {
+  font-size: 100%;
   position: relative;
   z-index: 2;
 }

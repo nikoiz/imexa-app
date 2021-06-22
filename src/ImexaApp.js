@@ -4,8 +4,8 @@ import { AppRouter } from "./routers/AppRouter";
 
 export const ImexaApp = () => {
   return (
-    <AppRouter />
-  )
-  
-
+    <>
+      <AppRouter />
+    </>
+  );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { apiBodega } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
-import MenuNavBar from "../ui/MenuNavBar";
+import { SideBarImexa } from "../menu/SideBarImexa";
 
 export const AgregarBodega = ({ history }) => {
   const [nombreBodega, setNombreBodega] = useState("");
@@ -37,7 +37,7 @@ export const AgregarBodega = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />,
+      <SideBarImexa />,
       <div className="container">
         <div className="row">
           <div className="col-md-12">

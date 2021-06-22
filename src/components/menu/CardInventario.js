@@ -13,7 +13,7 @@ export const CardInventario = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Gastos</Card.Header>
+        <Card.Header>Inventario</Card.Header>
         <Row>
           <Col style={{ margin: "1%" }}>
             <Card.Body>

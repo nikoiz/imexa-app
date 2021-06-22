@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { apiProducto } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownProducto } from "./DropDownProducto";
 import { ProductoNavBar } from "./ProductoNavBar";
@@ -51,7 +52,7 @@ export const ModficarProducto = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />
+      <SideBarImexa />
       <ProductoNavBar />
       <div className="container">
         <div className="row">

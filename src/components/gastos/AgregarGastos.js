@@ -5,6 +5,7 @@ import "../../css/gastos.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import { apiGastos } from "../../axios/axiosHelper";
 import { GastosNavBar } from "./GastosNavBar";
+import { SideBarImexa } from "../menu/SideBarImexa";
 
 export const AgregarGastos = ({ history }) => {
   const [idBodegas, setIdBodegas] = useState("");
@@ -51,8 +52,8 @@ export const AgregarGastos = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />,
-      <GastosNavBar/>
+      <SideBarImexa />,
+      <GastosNavBar />
       <div className="container">
         <div className="row">
           <div className="col-md-12">

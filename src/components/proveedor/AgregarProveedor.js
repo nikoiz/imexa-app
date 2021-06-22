@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { apiProveedor } from "../../axios/axiosHelper";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import MenuNavBar from "../ui/MenuNavBar";
 import { ProveedorNavBar } from "./ProveedorNavBar";
 
@@ -42,7 +43,7 @@ export const AgregarProveedor = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />
+      <SideBarImexa />
       <ProveedorNavBar />
       <div className="container">
         <div className="row">

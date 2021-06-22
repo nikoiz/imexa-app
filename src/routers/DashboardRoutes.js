@@ -21,7 +21,7 @@ import { ProveedorDashBoard } from "../components/proveedor/ProveedorDashBoard";
 export const DashboardRoutes = () => {
   return (
     <>
-      <div>
+      <div className= "routes">
         <Switch>
           <Route exact path="/agregarBodega" component={AgregarBodega} />
           <Route exact path="/menuPrincipal" component={MenuPrincipal} />

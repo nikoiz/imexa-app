@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { apiGastos } from "../../axios/axiosHelper";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownGastos } from "./DropDownGastos";
 import { GastosNavBar } from "./GastosNavBar";
@@ -52,7 +53,7 @@ export const ModificarGastos = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />
+      <SideBarImexa/>
       <GastosNavBar />
       <div className="container">
         <div className="row">

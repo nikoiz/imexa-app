@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { apiBodega } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import MenuNavBar from "../ui/MenuNavBar";
 import { DropDownBodegas } from "./DropDownBodegas";
 
@@ -38,7 +39,7 @@ export const ModificarBodega = ({ history }) => {
 
   return (
     <>
-      <MenuNavBar />,
+      <SideBarImexa />,
 
       <div className="container">
         <div className="row">
@@ -66,10 +67,10 @@ export const ModificarBodega = ({ history }) => {
             </div>
             <button
               onClick={handleSubmit}
-              className="btn btn-primary"
+              className="btn-primary--agregar"
               type="button"
             >
-              Modifcar Bodega
+              <span>Modifcar Bodega</span>
             </button>
           </div>
         </div>

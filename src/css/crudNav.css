@@ -1,0 +1,116 @@
+.btn-eliminar {
+    font-weight: bold;
+    height: 50px;
+    width: fit-content;
+    color: #000000;
+    background-color: #32afa9;
+    border-radius: 2px;
+    border-color: #00000000;
+    margin-bottom: 5px;
+  }
+  
+  .btn-eliminar--doar {
+    color: #fff;
+    padding-right: 0;
+    background-color: #32afa9;
+    -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+  }
+  
+  .btn-eliminar--doar:hover {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+    background-color: #eb8242;
+  }
+  
+  .btn-eliminar--doar:after {
+    content: url(../assets/delete.png);
+    color: #e74c3c;
+    font-family: FontAwesome;
+    display: inline-block;
+    position: relative;
+    right: -55px;
+    top: 3px;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-eliminar--doar:hover:after {
+    margin: -5px 15px;
+    right: 0px;
+  }
+  
+  .btn-secondary {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #000000;
+    border-radius: 2px;
+    border-color: #00000000;
+    margin-bottom: 5px;
+    height: 50px;
+    width: fit-content;
+  }
+  
+  .btn-secondary--agregar {
+    color: #fff;
+    padding-right: 0;
+    background-color: #32afa9;
+    -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+  }
+  
+  .btn-secondary--agregar:hover {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+    background-color: #eb8242;
+  }
+  
+  .btn-secondary--agregar:after {
+    content: url(../assets/add.png);
+    color: #e74c3c;
+    font-family: FontAwesome;
+    display: inline-block;
+    position: relative;
+    right: -55px;
+    top: 3px;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary--agregar:hover:after {
+    margin: -5px 15px;
+    right: 0px;
+  }
+  
+  .btn-secondary--modificar {
+    color: #fff;
+    padding-right: 0;
+    background-color: #32afa9;
+    -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 100%, 0 100%);
+  }
+  
+  .btn-secondary--modificar:hover {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+    background-color: #eb8242;
+  }
+  
+  .btn-secondary--modificar:after {
+    content: url(../assets/edit-button.png);
+    color: #e74c3c;
+    font-family: FontAwesome;
+    display: inline-block;
+    position: relative;
+    right: -55px;
+    top: 3px;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary--modificar:hover:after {
+    margin: -5px 15px;
+    right: 0px;
+  }
+  
+  .container-crud{
+    width: 100%;
+    text-align: center;
+  }

@@ -1,89 +1,87 @@
 import React from "react";
-import {
-  CDBSidebar,
-  CDBSidebarContent,
-  CDBSidebarFooter,
-  CDBSidebarHeader,
-  CDBSidebarMenu,
-  CDBSidebarMenuItem,
-} from "cdbreact";
+import MenuIcon from "@material-ui/icons/Menu";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import DescriptionIcon from "@material-ui/icons/Description";
+import { FaWarehouse, FaFileInvoiceDollar, FaAppleAlt } from "react-icons/fa";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HomeIcon from "@material-ui/icons/Home";
 
-import { NavLink } from "react-router-dom";
+import "../../css/sidebar.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const SideBarImexa = () => {
+  const sideBarCollapsed = localStorage.getItem("Sidebar-collapsed");
+  const [collapsedState, setCollapsedState] = useState(
+    sideBarCollapsed ? false : true
+  );
+
+  const handleSubmit = () => {
+    if (collapsedState) {
+      setCollapsedState(false);
+      localStorage.setItem("Sidebar-collapsed", true);
+      return;
+    }
+    setCollapsedState(true);
+    localStorage.removeItem("Sidebar-collapsed");
+  };
+
   return (
     <>
-      <div
-        // style={{ display: 'flex', height: '100vh', position:"relative"}}
-        style={{ display:"flex", margin: "0px auto", position: "relative", height: "100vh", float:"left" , marginRight:"1%", overflow: 'scroll initial' }}
-      >
-        <CDBSidebar textColor="#fff" backgroundColor="#333">
-          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-            <a
-              href="/"
-              className="text-decoration-none"
-              style={{ color: "inherit", margin: "0px" }}
-            >
-              Menu ImexaApp
-            </a>
-          </CDBSidebarHeader>
+      <div className={collapsedState ? "SideBar" : "SideBar collapsed"}>
+        <div className="SideBar-header">
+          <MenuIcon onClick={handleSubmit} className="SideBar-icon" />
+          <h1 className="SideBar-logo">IMEXA EIRL</h1>
+        </div>
+        <div className="SideBar-items">
+          <div className="item">
+            <Link exact to="/menuPrincipal">
+              <HomeIcon className="SideBar-icon" />
+              <span className="SideBar-text">Inicio</span>
+            </Link>
+          </div>
+          <div className="item">
+            <Link exact to="/inventario">
+              <ListAltIcon className="SideBar-icon" />
+              <span className="SideBar-text">Inventario</span>
+            </Link>
+          </div>
+          <div className="item">
+            <Link exact to="/facturaCompraDashBoard">
+              <DescriptionIcon className="SideBar-icon" />
+              <span className="SideBar-text">Factura compra</span>
+            </Link>
+          </div>
+          <div className="item">
+            <Link exact to="/agregarBodega">
+              <FaWarehouse className="SideBar-icon" />
+              <span className="SideBar-text">Bodega</span>
+            </Link>
+          </div>
+          <div className="item">
+            <Link exact to="/gastos">
+              <AccountBalanceIcon className="SideBar-icon" />
+              <span className="SideBar-text">Gastos</span>
+            </Link>
+          </div>
+          <div className="item">
+            <Link exact to="/producto">
+              <FaAppleAlt className="SideBar-icon" />
+              <span className="SideBar-text">Producto</span>
+            </Link>
+          </div>
+        </div>
 
-          <CDBSidebarContent className="sidebar-content">
-            <CDBSidebarMenu>
-              <NavLink exact to="/inventario" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="truck-loading">
-                  Inventario
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/facturaCompraDashBoard" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="file-invoice">
-                  Factura Compra
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/facturaCompraDashBoard" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="file-invoice-dollar">
-                  Factura Venta
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/proveedor" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="hand-holding">
-                  Proveedor
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/">
-                <CDBSidebarMenuItem icon="people-carry">
-                  Trabajador
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/gastos">
-                <CDBSidebarMenuItem icon="hand-holding-usd">
-                  Gastos
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/">
-                <CDBSidebarMenuItem icon="users">Clientes</CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/producto">
-                <CDBSidebarMenuItem icon="apple-alt">
-                  Producto
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/inventario">
-                <CDBSidebarMenuItem icon="warehouse">Bodega</CDBSidebarMenuItem>
-              </NavLink>
-            </CDBSidebarMenu>
-          </CDBSidebarContent>
-          <CDBSidebarFooter style={{ textAlign: "center" }}>
-            <div
-              style={{
-                padding: "20px 5px",
-              }}
-            >
-              Salir
-            </div>
-          </CDBSidebarFooter>
-        </CDBSidebar>
+        <div className="SideBar-footer">
+          <Link exact to="/">
+            <ExitToAppIcon onClick={handleSubmit} className="SideBar-icon" />
+            <span className="SideBar-text">Salir</span>
+          </Link>
+        </div>
       </div>
     </>
   );
 };
+{
+}

@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { Nav } from "react-bootstrap";
 import "../../css/lista-bodega.css";
+import "../../css/crudNav.css";
 import { apiBodega } from "../../axios/axiosHelper";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -55,8 +56,6 @@ export const ListaBodega = () => {
 
   return (
     <>
-      <h1 className="lista-bodega-title">Inventario</h1>
-      <hr />
       <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
         {bodegas.map((bodega, i) => (
           <Nav.Item className="nav-item" key={i}>
@@ -73,24 +72,26 @@ export const ListaBodega = () => {
             </Nav.Link>
           </Nav.Item>
         ))}
-        <Button
-          className="btn-eliminar btn-eliminar--doar"
-          onClick={handleEliminarBodega}
-        >
-          Eliminar Bodega
-        </Button>
-        <Button
-          onClick={handleSubmitAgregar}
-          className="btn-secondary btn-secondary--agregar"
-        >
-          Agregar Bodega
-        </Button>
-        <Button
-          className="btn-secondary btn-secondary--modificar"
-          onClick={handleModificarBodega}
-        >
-          Modificar Bodega
-        </Button>
+        <div className="container-list">
+          <Button
+            className="btn-eliminar btn-eliminar--doar"
+            onClick={handleEliminarBodega}
+          >
+            Eliminar Bodega
+          </Button>
+          <Button
+            onClick={handleSubmitAgregar}
+            className="btn-secondary btn-secondary--agregar"
+          >
+            Agregar Bodega
+          </Button>
+          <Button
+            className="btn-secondary btn-secondary--modificar"
+            onClick={handleModificarBodega}
+          >
+            Modificar Bodega
+          </Button>
+        </div>
       </Nav>
     </>
   );

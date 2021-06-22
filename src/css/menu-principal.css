@@ -3,11 +3,6 @@
   color: rgb(255, 255, 255);
 }
 
-.container-menu {
-  margin-top: 75px;
-  text-align: center;
-}
-
 .btn-principal {
   width: 500px;
   height: 75px;
@@ -17,7 +12,6 @@
     rgba(54, 64, 185, 1) 0%,
     rgba(29, 43, 189, 1) 100%
   );
-  /* background-color: #32afa9; */
   font-family: Allerta, sans-serif;
   color: rgb(255, 255, 255);
   font-size: 25px;

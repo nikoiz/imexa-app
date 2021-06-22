@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import React from "react";
+import "../../css/crudNav.css";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
