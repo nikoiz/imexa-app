@@ -6,23 +6,14 @@ import { apiBodega } from "../../axios/axiosHelper";
 export const CardBodegas = () => {
   const [bodegas, setBodegas] = useState([]);
 
-  useEffect(() => {
-    let isSuscribed = true;
-
-    apiBodega
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setBodegas(res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    return () => {
-      isSuscribed = false;
-    };
-  }, [bodegas]);
+  apiBodega
+    .get("/")
+    .then((res) => {
+      setBodegas(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   return (
     <>
@@ -39,11 +30,17 @@ export const CardBodegas = () => {
           <Row>
             <Col>
               <Card.Body>
-                <Card.Title id={bodega.id}> {bodega.nombre_bodega} </Card.Title>
+                <Card.Title key={i} id={bodega.id}>
+                  {" "}
+                  {bodega.nombre_bodega}{" "}
+                </Card.Title>
               </Card.Body>
             </Col>
             <Col style={{ marginRight: "5%" }}>
-              <Button style={{ width: "100%" }} variant="success">
+              <Button
+                style={{ width: "100%", marginTop: "15px" }}
+                variant="success"
+              >
                 Detalles
               </Button>
             </Col>

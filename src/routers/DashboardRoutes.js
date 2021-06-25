@@ -4,7 +4,6 @@ import { AgregarBodega } from "../components/bodega/AgregarBodega";
 import { ModificarBodega } from "../components/bodega/ModificarBodega";
 import { FacturaCompra } from "../components/facturas-compra/FacturaCompra";
 import { FacturaCompraDashBoard } from "../components/facturas-compra/FacturaCompraDashBoard";
-import { FacturaCompraModificar } from "../components/facturas-compra/FacturaCompraModificar";
 import { FinanzasDashBoard } from "../components/finanzas/FinanzasDashBoard";
 import { AgregarGastos } from "../components/gastos/AgregarGastos";
 import { GastosDashBoard } from "../components/gastos/GastosDashBoard";
@@ -17,6 +16,7 @@ import { ProductoDashBoard } from "../components/producto/ProductoDashBoard";
 import { AgregarProveedor } from "../components/proveedor/AgregarProveedor";
 import { ModifcarProveedor } from "../components/proveedor/ModifcarProveedor";
 import { ProveedorDashBoard } from "../components/proveedor/ProveedorDashBoard";
+import { TrabajadorDashBoard } from "../components/trabajador/TrabajadorDashBoard";
 
 export const DashboardRoutes = () => {
   return (
@@ -38,9 +38,9 @@ export const DashboardRoutes = () => {
           <Route exact path="/agregarGastos" component={AgregarGastos} />          
           <Route exact path="/modificarGasto" component={ModificarGastos} />          
           <Route exact path="/facturaCompra" component={FacturaCompra} />          
-          <Route exact path="/facturaCompraDashBoard" component={FacturaCompraDashBoard} />          
-          <Route exact path="/facturaCompraModificar" component={FacturaCompraModificar} />          
-          <Redirect to="/login" />
+          <Route exact path="/facturaCompraDashBoard" component={FacturaCompraDashBoard} />     
+          <Route exact path="/trabajadorDashBoard" component={TrabajadorDashBoard} />     
+                         <Redirect to="/login" />
         </Switch>
       </div>
     </>

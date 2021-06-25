@@ -44,32 +44,38 @@ export const Login = ({ history }) => {
   };
 
   return (
-    <div className="Login">
-      <form className="form">
-        <h1>Inicio Sesion</h1>
-        <input
-          className="input-text"
-          type="text"
-          name="user"
-          placeholder="Usuario"
-          value={user}
-          onChange={handleUserChange}
-        ></input>
-        <br />
-        <input
-          className="input-text passw"
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={handlePasswordChange}
-        ></input>
-        <br />
-        <button onClick={handleLogin} type="button" className="button-iniciar">
-          Ingresar
-        </button>
-      </form>
-    </div>
+    <>
+      <div className="Login">
+        <form className="form">
+          <h1>Inicio Sesion</h1>
+          <input
+            className="input-text"
+            type="text"
+            name="user"
+            placeholder="Usuario"
+            value={user}
+            onChange={handleUserChange}
+          ></input>
+          <br />
+          <input
+            className="input-text passw"
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={handlePasswordChange}
+          ></input>
+          <br />
+          <button
+            onClick={handleLogin}
+            type="button"
+            className="button-iniciar"
+          >
+            Ingresar
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

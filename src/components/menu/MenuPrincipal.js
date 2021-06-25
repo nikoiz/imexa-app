@@ -18,8 +18,8 @@ export const MenuPrincipal = () => {
       <h1
         style={{
           textAlign: "center",
-          color: "#fff",
-          paddingTop: "50px",
+          color: "#ffffff",
+          // paddingTop: "50px",
           paddingBottom: "50px",
           marginLeft: "60px",
         }}

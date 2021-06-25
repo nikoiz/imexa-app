@@ -12,11 +12,6 @@ export const FacturaCompraNavBar = () => {
             Agregar Factura Compra
           </Button>
         </Link>
-        <Link to="/facturaCompraModificar">
-          <Button className="btn-secondary btn-secondary--modificar">
-            Modificar Factura Compra
-          </Button>
-        </Link>
       </Nav>
     </>
   );

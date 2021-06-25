@@ -6,6 +6,7 @@ import { FaWarehouse, FaAppleAlt } from "react-icons/fa";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
+import WorkIcon from '@material-ui/icons/Work';
 
 import "../../css/sidebar.css";
 import { useState } from "react";
@@ -71,10 +72,16 @@ export const SideBarImexa = () => {
               <span className="SideBar-text">Producto</span>
             </Link>
           </div>
+          <div className="item">
+            <Link exact to="/trabajadorDashBoard">
+              <WorkIcon className="SideBar-icon" />
+              <span className="SideBar-text">Trabajadores</span>
+            </Link>
+          </div>
         </div>
 
         <div className="SideBar-footer">
-          <Link exact to="/">
+          <Link exact to="/login">
             <ExitToAppIcon onClick={handleSubmit} className="SideBar-icon" />
             <span className="SideBar-text">Salir</span>
           </Link>

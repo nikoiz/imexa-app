@@ -4,12 +4,16 @@ import { ListaBodega } from "../bodega/ListaBodega";
 import { SideBarImexa } from "../menu/SideBarImexa";
 
 export const InventarioDashBoard = () => {
+
+
+  
   return (
     <>
-      <h1 style={{paddingTop:"15px"}} className="title">Inventario</h1>
+      <h1 style={{ paddingTop: "0px" }} className="title">
+        Inventario
+      </h1>
       <hr />
       <div className="container-content">
-        
         <ListaBodega />
         <SideBarImexa />
 

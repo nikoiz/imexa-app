@@ -1,13 +1,21 @@
 body {
   margin: 0;
+  padding: 50px;
+
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #55244d;
+  /* background-image: '../../assets/pexels-pineapple-supply-co-139259.jpg'; */
+  /* background: #55244d;
   background: -webkit-linear-gradient(to right, #55244d, #141e30);
-  background: linear-gradient(to right, #243b55, #141e30);
+  background: linear-gradient(to right, #243b55, #141e30); */
+
+  background: #000428;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .container-content {
   margin-left: 7%;
@@ -19,9 +27,10 @@ body {
   padding-top: 20px;
 }
 
-body, html, #root, .routes{
-  min-height: 100%;
-  height: 100%;}
+
+body{
+}
+  
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

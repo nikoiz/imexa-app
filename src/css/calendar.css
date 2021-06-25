@@ -1,0 +1,60 @@
+.week-day {
+  text-align: center;
+  width: 100px;
+}
+
+.weeks-calendar {
+  height: 120px;
+}
+
+.days-calendar {
+  text-align: left;
+  cursor: pointer;
+}
+
+.days-calendar:hover {
+  background-color: rgb(182, 101, 101);
+  opacity: 0.5;
+}
+
+.selected {
+  background-color: rgb(143, 73, 149);
+}
+
+.month-year-container {
+  margin: 0 auto;
+  width: 75%;
+  background-color: #2e4566;
+  text-align: center;
+}
+
+.previous {
+  float: left;
+  width: 100px;
+  color: #ffff;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.next {
+  float: right;
+  width: 100px;
+  color: #ffff;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.current {
+  margin: 0 auto;
+  width: fit-content;
+  color: #ffff;
+  font-size: 35px;
+}
+
+.previous:hover{
+  color: rgb(255, 0, 0)
+}
+
+.next:hover{
+  color: rgb(255, 0, 0)
+}

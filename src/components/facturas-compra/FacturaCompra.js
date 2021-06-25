@@ -6,7 +6,6 @@ import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
 import { apiFacturaCompra, apiDetalleCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-// import { apiFacturaCompra } from "../../axios/axiosHelper";
 
 export const FacturaCompra = ({ history }) => {
   const [showComponent, setShowComponent] = useState([0]);

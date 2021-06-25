@@ -27,3 +27,7 @@ export const apiFacturaCompra = axios.create({
 export const apiDetalleCompra = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/producto_factura.php",
 });
+
+export const apiTrabajador = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/trabajador.php",
+});

@@ -1,10 +1,11 @@
+import { Icon } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { apiFacturaCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
-
+import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 export const FacturaCompraDashBoard = () => {
   const [facturaCompra, setFacturaCompra] = useState([]);
 
@@ -24,6 +25,13 @@ export const FacturaCompraDashBoard = () => {
       isSuscribed = false;
     };
   }, [facturaCompra]);
+
+
+  const onButton = (props) => {
+    console.log(props);
+  }
+
+
 
   return (
     <>
@@ -70,9 +78,14 @@ export const FacturaCompraDashBoard = () => {
                   <td>{facturaCompra.rut_proveedor}</td>
                   <td>{facturaCompra.id_tipo_f_compra}</td>
                   <td className="accion-del">
-                    <Button className="btn-eliminar--item">
-                      Eliminar Producto
-                    </Button>
+                    {facturaCompra.estado === "Pendiente" ? (
+                      <Button onClick={() => onButton(facturaCompra.id_compra)} className="btn-pagar">
+                        Pagar
+                        <LocalAtmIcon style={{marginLeft:"10%"}}/>
+                      </Button>
+                    ) : (
+                      <p>Factura Pagada</p>
+                    )}
                   </td>
                 </tr>
               ))
