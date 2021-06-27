@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import moment from "moment";
-import { Button, Table } from "react-bootstrap";
+import { Col, Row, Table } from "react-bootstrap";
 import "../../css/calendar.css";
 import { useState } from "react";
 import buildCalendar from "../calendar/BuildCalendar";
@@ -30,57 +30,60 @@ export const TrabajadorDashBoard = () => {
     setCalendar(buildCalendar(value));
   }, [value]);
 
-
   const handleTest = (e) => {
-    console.log(value.format('DD/MM/YYYY'));
-  } 
+    console.log(value.format("DD/MM/YYYY" + " " + "HH:MM:SS"));
+  };
 
   return (
     <>
       <div className="container-content">
+        <h1 style={{ color: "#ffff" }}>Asistencia</h1>
+        <Row>
+          <Col xs={9}>
+            <Header value={value} setValue={setValue} />
+            <Table
+              striped
+              responsive
+              bordered
+              variant="dark"
+              className="calendar-table"
+            >
+              <thead>
+                <tr>
+                  {dayShort.map((day, i) => (
+                    <th key={i} className="week-day">
+                      {day}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
 
-        <Header value={ value } setValue={setValue} />
-
-        <Table
-          striped
-          responsive
-          bordered
-          variant="dark"
-          className="tb-product"
-        >
-          <thead>
-            <tr>
-              {dayShort.map((day, i) => (
-                <th key={i} className="week-day">
-                  {day}
-                </th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {calendar.map((week, i) => (
-              <tr key={i} className="weeks-calendar">
-                {week.map((day, h) => (
-                  <td
-                    key={h}
-                    onClick={() => setValue(day)}
-                    className="days-calendar"
-                    className={
-                      value.isSame(day, "day") ? "selected" : "days-calendar"
-                    }
-                  >
-                    {day.format("D").toString()}
-                  </td>
+              <tbody>
+                {calendar.map((week, i) => (
+                  <tr key={i} className="weeks-calendar">
+                    {week.map((day, h) => (
+                      <td
+                        key={h}
+                        onClick={() => setValue(day)}
+                        className={
+                          value.isSame(day, "day")
+                            ? "selected"
+                            : "days-calendar"
+                        }
+                      >
+                        {day.format("DD").toString()}
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        
-        <ListaTrabajador/>
-        
-        <Button onClick={handleTest}>Click</Button>
+              </tbody>
+            </Table>
+          </Col>
+          <Col>
+            <ListaTrabajador />
+          </Col>
+        </Row>
+        {/* <SideBarImexa /> */}
       </div>
     </>
   );

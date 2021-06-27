@@ -22,8 +22,8 @@
 }
 
 .month-year-container {
-  margin: 0 auto;
-  width: 75%;
+  /* margin: 0 auto; */
+  width: 100%;
   background-color: #2e4566;
   text-align: center;
 }
@@ -57,4 +57,10 @@
 
 .next:hover{
   color: rgb(255, 0, 0)
+}
+
+.calendar-table {
+  margin: 0 auto;
+  width: 100%;
+  background-color: #2e4566;
 }

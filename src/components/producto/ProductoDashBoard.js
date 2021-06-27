@@ -4,6 +4,7 @@ import { ProductoNavBar } from "./ProductoNavBar";
 import { Button, Table } from "react-bootstrap";
 import { apiProducto } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import formatCurrency from "../helpers/CurrencyFormatter";
 
 export const ProductoDashBoard = () => {
   const [productos, setProductos] = useState([]);
@@ -29,7 +30,7 @@ export const ProductoDashBoard = () => {
     apiProducto
       .delete(`?id_producto=${id}`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -38,11 +39,13 @@ export const ProductoDashBoard = () => {
 
   return (
     <>
-        <h1 style={{paddingTop:"15px"}}className="title">Producto Dashboard</h1>
-        <hr />
+      <h1 style={{ paddingTop: "15px" }} className="title">
+        Producto Dashboard
+      </h1>
+      <hr />
       <div className="container-content">
-      <ProductoNavBar />
-      <SideBarImexa />
+        <ProductoNavBar />
+        <SideBarImexa />
 
         <Table
           striped
@@ -56,8 +59,6 @@ export const ProductoDashBoard = () => {
               <th>#</th>
               <th>Nombre</th>
               <th>Valor</th>
-              <th>Cantidad</th>
-              <th>Valor total</th>
               <th className="accion-del">Accion</th>
             </tr>
           </thead>
@@ -72,9 +73,7 @@ export const ProductoDashBoard = () => {
                 >
                   <td>{i + 1}</td>
                   <td>{producto.nombre_producto}</td>
-                  <td>${producto.valor_producto}</td>
-                  <td>{producto.cantidad_total}</td>
-                  <td>$ {producto.cantidad_total * producto.valor_producto}</td>
+                  <td>{formatCurrency(producto.valor_producto)}</td>
                   <td className="accion-del">
                     <Button
                       className="btn-eliminar--item"
