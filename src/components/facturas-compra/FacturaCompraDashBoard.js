@@ -6,6 +6,7 @@ import { apiFacturaCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
+import formatCurrency from "../helpers/CurrencyFormatter";
 export const FacturaCompraDashBoard = () => {
   const [facturaCompra, setFacturaCompra] = useState([]);
 
@@ -73,7 +74,7 @@ export const FacturaCompraDashBoard = () => {
                 >
                   <td>{facturaCompra.id_compra}</td>
                   <td>{facturaCompra.fecha_compra}</td>
-                  <td>{facturaCompra.valor_compra}</td>
+                  <td>{formatCurrency(facturaCompra.valor_compra)}</td>
                   <td>{facturaCompra.estado}</td>
                   <td>{facturaCompra.rut_proveedor}</td>
                   <td>{facturaCompra.id_tipo_f_compra}</td>

@@ -27,14 +27,18 @@ export const ProductoDashBoard = () => {
   }, [productos]);
 
   const handleEliminarProducto = (id) => {
-    apiProducto
-      .delete(`?id_producto=${id}`)
-      .then((res) => {
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    
+    apiProducto.delete(`?id_producto=${id}`).then((res) => {console.log(res.data.data)}).catch((err)=> {console.log(err);})
+
+    
+    // apiProducto
+    //   .delete(`?id_producto=${id}`)
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (

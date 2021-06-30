@@ -9,6 +9,7 @@ export const ListaTrabajador = () => {
   const [rutTrabajador, setRutTrabajador] = useState("");
 
 
+
   apiTrabajador
     .get("/")
     .then(async (res) => {
