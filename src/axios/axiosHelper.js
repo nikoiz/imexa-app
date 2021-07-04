@@ -31,3 +31,9 @@ export const apiDetalleCompra = axios.create({
 export const apiTrabajador = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/trabajador.php",
 });
+
+export const apiDetalleInventario = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/detalle_inventario.php",
+});
+
+

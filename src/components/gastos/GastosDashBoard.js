@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import React from "react-bootstrap";
 import { Button, Table } from "react-bootstrap";
 import { apiGastos } from "../../axios/axiosHelper";
+import { formatCurrency, formatDate } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { GastosNavBar } from "./GastosNavBar";
+import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 
 export const GastosDashBoard = () => {
   const [gastos, setGastos] = useState([]);
@@ -25,9 +27,9 @@ export const GastosDashBoard = () => {
     };
   }, [gastos]);
 
-  const handleEliminarGasto = (id) => {
+  const handlePagarGasto = (id) => {
     apiGastos
-      .delete(`?id_gastos=${id}`)
+      .put(`?id_gastos=${id}`, {estado:'1'})
       .then((res) => {
         console.log(res.data);
       })
@@ -38,14 +40,14 @@ export const GastosDashBoard = () => {
 
   return (
     <>
-      
-      <h1 style={{paddingTop:"15px"}} className="title">Gastos DashBoard</h1>
+      <h1 style={{ paddingTop: "15px" }} className="title">
+        Gastos DashBoard
+      </h1>
       <hr />
 
       <div className="container-content">
         <GastosNavBar />
         <SideBarImexa />
-
 
         <Table
           striped
@@ -72,19 +74,25 @@ export const GastosDashBoard = () => {
                 <tr id={gasto.id_gastos} value={gasto.id_gastos} key={i}>
                   <td>{i + 1}</td>
                   <td>{gasto.descripcion_gastos}</td>
-                  <td>$ {gasto.valor_gastos}</td>
-                  <td>{gasto.estado}</td>
-                  <td>{gasto.fecha}</td>
+                  <td>{formatCurrency(gasto.valor_gastos)}</td>
+                  <td>{gasto.estado === "1" ? "Pagado" : "Pendiente"}</td>
+                  {/* <td>{gasto.estado}</td> */}
+                  <td>{formatDate(gasto.fecha)}</td>
                   <td>{gasto.nombre_bodega}</td>
                   <td className="accion-del">
-                    <Button
-                      onClick={() => {
-                        handleEliminarGasto(gasto.id_gastos);
-                      }}
-                      className="btn-eliminar--item"
-                    >
-                      Eliminar Gasto
-                    </Button>
+                    {gasto.estado != "1" ? (
+                      <Button
+                        onClick={() => {
+                          handlePagarGasto(gasto.id_gastos);
+                        }}
+                        className="btn-pagar"
+                      >
+                        Pagar Gasto
+                        <LocalAtmIcon style={{ marginLeft: "10%" }} />
+                      </Button>
+                    ) : (
+                      <p>Gasto pagado</p>
+                    )}
                   </td>
                 </tr>
               ))

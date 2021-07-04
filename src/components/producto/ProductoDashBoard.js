@@ -4,7 +4,7 @@ import { ProductoNavBar } from "./ProductoNavBar";
 import { Button, Table } from "react-bootstrap";
 import { apiProducto } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import formatCurrency from "../helpers/CurrencyFormatter";
+import {formatCurrency} from "../helpers/Formatter";
 
 export const ProductoDashBoard = () => {
   const [productos, setProductos] = useState([]);
@@ -27,10 +27,15 @@ export const ProductoDashBoard = () => {
   }, [productos]);
 
   const handleEliminarProducto = (id) => {
-    
-    apiProducto.delete(`?id_producto=${id}`).then((res) => {console.log(res.data.data)}).catch((err)=> {console.log(err);})
+    apiProducto
+      .delete(`?id_producto=${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    
     // apiProducto
     //   .delete(`?id_producto=${id}`)
     //   .then((res) => {

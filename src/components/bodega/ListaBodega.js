@@ -6,7 +6,10 @@ import { apiBodega } from "../../axios/axiosHelper";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export const ListaBodega = () => {
+export const ListaBodega = ( props ) => {
+
+  const { idBodega } = props
+
   const history = useHistory();
 
   const [bodegas, setBodegas] = useState([]);
@@ -20,6 +23,7 @@ export const ListaBodega = () => {
       .then((res) => {
         if (isSuscribed) {
           setBodegas(res.data.data);
+          idBodega(()=> idState)
         }
       })
       .catch((err) => {

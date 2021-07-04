@@ -65,7 +65,6 @@ export const FacturaCompra = ({ history }) => {
 
     return " " + hours + ":" + minutes + ":" + seconds;
   }
-
   const factura = {
     id_compra: folioCompra,
     fecha_compra: fechaCompra + getDateTime(),

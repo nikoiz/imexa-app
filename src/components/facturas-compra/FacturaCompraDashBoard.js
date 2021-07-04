@@ -1,4 +1,3 @@
-import { Icon } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -6,7 +5,7 @@ import { apiFacturaCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
-import formatCurrency from "../helpers/CurrencyFormatter";
+import {formatCurrency, formatDate} from "../helpers/Formatter";
 export const FacturaCompraDashBoard = () => {
   const [facturaCompra, setFacturaCompra] = useState([]);
 
@@ -27,11 +26,9 @@ export const FacturaCompraDashBoard = () => {
     };
   }, [facturaCompra]);
 
-
   const onButton = (props) => {
     console.log(props);
-  }
-
+  };
 
 
   return (
@@ -73,16 +70,23 @@ export const FacturaCompraDashBoard = () => {
                   key={i}
                 >
                   <td>{facturaCompra.id_compra}</td>
-                  <td>{facturaCompra.fecha_compra}</td>
+                  <td>{formatDate(facturaCompra.fecha_compra)}</td>
                   <td>{formatCurrency(facturaCompra.valor_compra)}</td>
                   <td>{facturaCompra.estado}</td>
                   <td>{facturaCompra.rut_proveedor}</td>
-                  <td>{facturaCompra.id_tipo_f_compra}</td>
+                  <td>
+                    {facturaCompra.id_tipo_f_compra === "1"
+                      ? "Factura"
+                      : "Nota de credito"}
+                  </td>
                   <td className="accion-del">
                     {facturaCompra.estado === "Pendiente" ? (
-                      <Button onClick={() => onButton(facturaCompra.id_compra)} className="btn-pagar">
+                      <Button
+                        onClick={() => onButton(facturaCompra.id_compra)}
+                        className="btn-pagar"
+                      >
                         Pagar
-                        <LocalAtmIcon style={{marginLeft:"10%"}}/>
+                        <LocalAtmIcon style={{ marginLeft: "10%" }} />
                       </Button>
                     ) : (
                       <p>Factura Pagada</p>

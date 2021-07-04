@@ -39,7 +39,7 @@ export const AgregarGastos = ({ history }) => {
 
   const handleSubmit = () => {
     apiGastos
-      .post(`/`, gasto)
+      .post('/', gasto)
       .then((res) => {
         console.log(res);
         history.push("/gastos");
@@ -87,7 +87,7 @@ export const AgregarGastos = ({ history }) => {
             <div className="form-group radio-btn ">
               <Form.Check
                 className="radio-button"
-                value="Pagado"
+                value="1"
                 inline
                 label="Pagado"
                 name="group1"
@@ -96,7 +96,7 @@ export const AgregarGastos = ({ history }) => {
               />
               <Form.Check
                 className="radio-button"
-                value="Pendiente"
+                value="2"
                 inline
                 label="Pendiente"
                 name="group1"
