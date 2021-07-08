@@ -3,6 +3,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { apiGastos } from "../../axios/axiosHelper";
 import { useEffect } from "react";
+import { formatCurrency } from "../helpers/Formatter";
 
 export const CardGastos = () => {
   const [gastos, setGastos] = useState([]);
@@ -47,7 +48,7 @@ export const CardGastos = () => {
                 </Card.Body>
               </Col>
               <Col style={{ margin: "1%" }}>
-                <Card.Title style={{ marginTop: "10%" }}>{`$ ${gastos.valor_gastos}`}</Card.Title>
+                <Card.Title style={{ marginTop: "10%" }}>{`${formatCurrency(gastos.valor_gastos)}`}</Card.Title>
               </Col>
             </Row>
           ))

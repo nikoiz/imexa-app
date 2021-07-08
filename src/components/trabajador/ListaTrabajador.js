@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { apiTrabajador } from "../../axios/axiosHelper";
 import "../../css/trabajador.css";
 
@@ -8,12 +9,10 @@ export const ListaTrabajador = () => {
   const [trabajadores, setTrabajadores] = useState([]);
   const [rutTrabajador, setRutTrabajador] = useState("");
 
-
-
   apiTrabajador
     .get("/")
-    .then(async (res) => {
-      await setTrabajadores(res.data.data);
+    .then((res) => {
+      setTrabajadores(res.data.data);
     })
     .catch((err) => {
       console.log(err);
@@ -58,13 +57,26 @@ export const ListaTrabajador = () => {
           ) : (
             <p>No existen trabajadores aun</p>
           )}
-          
-          <Button
-            className="btn-eliminar--item trabajador-btn"
-            style={{ marginTop: "100%",  }}
-          >
-            Agregar Trabajador
-          </Button>
+          <Row style={{ marginTop: "10%", marginLeft: "15%" }}>
+            <Link to="/agregarTrabajador">
+              <Button
+                style={{ width: "200px" }}
+                className="btn-eliminar--item trabajador-btn"
+              >
+                Agregar Trabajador
+              </Button>
+            </Link>
+          </Row>
+          <Row style={{ marginTop: "5%", marginLeft: "15%" }}>
+            <Link to="/modificarTrabajador">
+              <Button
+                style={{ width: "200px" }}
+                className="btn-eliminar--item trabajador-btn"
+              >
+                Modificar Trabajador
+              </Button>
+            </Link>
+          </Row>
         </div>
       </div>
     </>

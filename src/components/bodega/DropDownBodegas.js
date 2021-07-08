@@ -19,7 +19,7 @@ export const DropDownBodegas = ({ setIdBodega }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [bodegas]);
 
   return (
     <div>

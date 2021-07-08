@@ -30,10 +30,6 @@ export const TrabajadorDashBoard = () => {
     setCalendar(buildCalendar(value));
   }, [value]);
 
-  const handleTest = (e) => {
-    console.log(value.format("DD/MM/YYYY" + " " + "HH:MM:SS"));
-  };
-
   return (
     <>
       <div className="container-content">
@@ -83,7 +79,7 @@ export const TrabajadorDashBoard = () => {
             <ListaTrabajador />
           </Col>
         </Row>
-        {/* <SideBarImexa /> */}
+        <SideBarImexa />
       </div>
     </>
   );

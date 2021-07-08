@@ -78,12 +78,6 @@ export const FacturaCompra = ({ history }) => {
   const handleSubmitAddFactura = (e) => {
     e.preventDefault();
 
-    const crypto = require("crypto");
-
-    const id = crypto.randomBytes(16).toString("hex");
-
-    console.log(id);
-
     console.warn("Creacion Factura");
 
     apiFacturaCompra
@@ -95,7 +89,6 @@ export const FacturaCompra = ({ history }) => {
         console.log(err);
       });
 
-    console.warn("Creacion Producto / detalle / bodega_has_producto");
 
     detalleCompraJSON.forEach((element) => {
       console.log("creacion detalle");
@@ -111,7 +104,7 @@ export const FacturaCompra = ({ history }) => {
       });
     }, 2000);
 
-    history.push("/facturaCompra");
+    history.push("/facturaCompraDashBoard");
   };
 
   return (

@@ -6,7 +6,10 @@ import { SideBarImexa } from "../menu/SideBarImexa";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import {formatCurrency, formatDate} from "../helpers/Formatter";
+
+
 export const FacturaCompraDashBoard = () => {
+
   const [facturaCompra, setFacturaCompra] = useState([]);
 
   useEffect(() => {
@@ -75,7 +78,7 @@ export const FacturaCompraDashBoard = () => {
                   <td>{facturaCompra.estado}</td>
                   <td>{facturaCompra.rut_proveedor}</td>
                   <td>
-                    {facturaCompra.id_tipo_f_compra === "1"
+                    {facturaCompra.id_tipo_f_compra === "2"
                       ? "Factura"
                       : "Nota de credito"}
                   </td>

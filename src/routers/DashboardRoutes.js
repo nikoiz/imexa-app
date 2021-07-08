@@ -16,6 +16,8 @@ import { ProductoDashBoard } from "../components/producto/ProductoDashBoard";
 import { AgregarProveedor } from "../components/proveedor/AgregarProveedor";
 import { ModifcarProveedor } from "../components/proveedor/ModifcarProveedor";
 import { ProveedorDashBoard } from "../components/proveedor/ProveedorDashBoard";
+import { AgregarTrabajador } from "../components/trabajador/AgregarTrabajador";
+import { ModifcarTrabajador } from "../components/trabajador/ModifcarTrabajador";
 import { TrabajadorDashBoard } from "../components/trabajador/TrabajadorDashBoard";
 
 export const DashboardRoutes = () => {
@@ -40,7 +42,10 @@ export const DashboardRoutes = () => {
           <Route exact path="/facturaCompra" component={FacturaCompra} />          
           <Route exact path="/facturaCompraDashBoard" component={FacturaCompraDashBoard} />     
           <Route exact path="/trabajadorDashBoard" component={TrabajadorDashBoard} />     
-                         <Redirect to="/login" />
+          <Route exact path="/agregarTrabajador" component={AgregarTrabajador} />     
+          <Route exact path="/modificarTrabajador" component={ModifcarTrabajador} />     
+          
+          <Redirect to="/login" />
         </Switch>
       </div>
     </>

@@ -6,9 +6,8 @@ import { apiBodega } from "../../axios/axiosHelper";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export const ListaBodega = ( props ) => {
-
-  const { idBodega } = props
+export const ListaBodega = (props) => {
+  const { idBodega } = props;
 
   const history = useHistory();
 
@@ -23,7 +22,7 @@ export const ListaBodega = ( props ) => {
       .then((res) => {
         if (isSuscribed) {
           setBodegas(res.data.data);
-          idBodega(()=> idState)
+          idBodega(() => idState);
         }
       })
       .catch((err) => {
@@ -46,8 +45,7 @@ export const ListaBodega = ( props ) => {
       .delete(`?id_bodega=${idState}`)
       .then((res) => {
         history.push("/inventario");
-
-        console.log(res.data);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -61,21 +59,27 @@ export const ListaBodega = ( props ) => {
   return (
     <>
       <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
-        {bodegas.map((bodega, i) => (
-          <Nav.Item className="nav-item" key={i}>
-            <Nav.Link
-              className="nav-link-lb"
-              eventKey={bodega.id}
-              id={bodega.id}
-              onClick={() => {
-                setIdState(bodega.id_bodega);
-              }}
-              key={i}
-            >
-              {bodega.nombre_bodega}
-            </Nav.Link>
+        {bodegas != null && bodegas.length > 0 ? (
+          bodegas.map((bodega, i) => (
+            <Nav.Item className="nav-item" key={i}>
+              <Nav.Link
+                className="nav-link-lb"
+                eventKey={bodega.id}
+                id={bodega.id}
+                onClick={() => {
+                  setIdState(bodega.id_bodega);
+                }}
+                key={i}
+              >
+                {bodega.nombre_bodega}
+              </Nav.Link>
+            </Nav.Item>
+          ))
+        ) : (
+          <Nav.Item className="nav-item" style={{color:'white', fontSize:'20px'}}>
+            No existen bodegas
           </Nav.Item>
-        ))}
+        )}
         <div className="container-list">
           <Button
             className="btn-eliminar btn-eliminar--doar"
