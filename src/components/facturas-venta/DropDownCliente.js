@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { apiProveedor } from "../../axios/axiosHelper";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { apiCliente } from "../../axios/axiosHelper";
 
-export const ProveedorFactura = ({ setIdProveedor }) => {
-  const [proveedores, setProveedores] = useState([]);
+export const DropDownCliente = (props) => {
+  const { rutCliente } = props;
+  const [clientes, setClientes] = useState([]);
 
   const handleChange = (e) => {
-    const idProveedor = e.target.value;
-    console.log(idProveedor);
-    setIdProveedor(() => idProveedor);
+    const rutValue = e.target.value;
+    rutCliente(() => rutValue);
   };
 
   useEffect(() => {
     let isSuscribed = true;
-    apiProveedor
+    apiCliente
       .get("/")
       .then((res) => {
         if (isSuscribed) {
-          setProveedores(res.data.data);
+          setClientes(res.data.data);
         }
       })
       .catch((err) => {
@@ -25,22 +27,22 @@ export const ProveedorFactura = ({ setIdProveedor }) => {
     return () => {
       isSuscribed = false;
     };
-  }, [proveedores]);
+  }, [clientes]);
 
   return (
     <div>
       <select
-        name="proveedores"
+        name="clientes"
         className="input-facturas"
         onChange={handleChange}
       >
         <option value="default" id="default">
           Seleccionar
         </option>
-        {proveedores != null && proveedores.length > 0 ? (
-          proveedores.map((proveedor, i) => (
-            <option value={proveedor.rut_proveedor} key={i}>
-              {proveedor.nombre_proveedor}
+        {clientes != null && clientes.length > 0 ? (
+          clientes.map((cliente, i) => (
+            <option value={cliente.rut_cliente} key={i}>
+              {cliente.nombre_cliente}
             </option>
           ))
         ) : (

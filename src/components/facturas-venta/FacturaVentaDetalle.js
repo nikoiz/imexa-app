@@ -1,93 +1,90 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { Col, FormControl, Row } from "react-bootstrap";
 import "../../css/factura.css";
+import { DropDownBodegas } from "../bodega/DropDownBodegas";
+import { DropDownProducto } from "./DropDownProducto";
 
-export const FacturaVentaDetalle = () => {
+export const FacturaVentaDetalle = (props) => {
+  const { detalleVenta, id } = props;
+
+  const [idBodega, setIdBodega] = useState("default");
+  const [producto, setProducto] = useState("");
+  const [valorUnitario, setValorUnitario] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [valorTotal, setValorTotal] = useState("");
+  const [checkState, setCheckState] = useState(false);
+
+  const handleChangeValorUnitario = (e) => {
+    setValorUnitario(e.target.value);
+  };
+
+  const handleChangeCantidad = (e) => {
+    setCantidad(e.target.value);
+  };
+
+  useEffect(() => {
+    let number = cantidad * valorUnitario;
+    setValorTotal(number.toString());
+  }, [cantidad, valorUnitario]);
+
+  const detalleFactura = {
+    nombre_producto: producto,
+    valor_producto: valorUnitario,
+    descripcion_producto: producto,
+    cantidad_producto: cantidad,
+    valor: valorTotal,
+    id_bodega: idBodega,
+    cantidad_total: cantidad,
+  };
+
+  const handleToggleCheckBox = (e) => {
+    if (checkState === false) {
+      setCheckState(true);
+      detalleVenta(() => detalleFactura);
+    } else {
+      setCheckState(false);
+    }
+  };
+
   return (
     <>
-      <div className="container factura-detalle">
-        <h1 className="title">Factura Venta</h1>
-        <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Folio de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Folio de compra"
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Estado:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Pagada">Pagada</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Fecha de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Folio de compra"
-                type="date"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Proveedor:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Valor de compra:</label>
-              <input
-                className="input-facturas"
-                placeholder="Valor de compra"
-                type="text"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group">
-              <label className="span-facturas">Metodo de compra:</label>
-              <select className="input-facturas">
-                <option value="default">Seleccionar</option>
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta">Tarjeta</option>
-                <option value="Cheque">Cheque</option>
-                <option value="No pagado">No pagado</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <label className="span-facturas">Descripcion de facutra:</label>
-            <textarea
-              className="txt-area"
-              name="descripcion"
-              id="descripcion"
-              cols="130"
-              rows="5"
-            ></textarea>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <Button className="btn btn-primary--agregar">
-              <span>Agregar factura</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Col>
+          <DropDownProducto setNombreProducto={setProducto} />
+        </Col>
+        <Col>
+          <FormControl
+            placeholder="Valor unitario"
+            onChange={handleChangeValorUnitario}
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            placeholder="Cantidad"
+            onChange={handleChangeCantidad}
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            readOnly="readonly"
+            name="vTotal"
+            id={id || "0"}
+            value={valorUnitario * cantidad}
+          ></FormControl>
+        </Col>
+        <Col>
+          <DropDownBodegas setIdBodega={setIdBodega} />
+        </Col>
+        <Col>
+          <input
+            type="checkbox"
+            value={checkState}
+            onClick={handleToggleCheckBox}
+          ></input>
+        </Col>
+      </Row>
+      <hr className="hr-factura" />
     </>
   );
 };

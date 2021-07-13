@@ -36,5 +36,20 @@ export const apiDetalleInventario = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/detalle_inventario.php",
 });
 
+export const apiCliente = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/cliente.php",
+});
+
+export const apiFacturaVenta = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/factura_venta.php",
+});
+
+export const apiDetalleVenta = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/producto_venta.php",
+});
+
+
+
+
 
 

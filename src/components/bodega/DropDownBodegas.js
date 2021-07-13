@@ -11,14 +11,20 @@ export const DropDownBodegas = ({ setIdBodega }) => {
   };
 
   useEffect(() => {
+    let isSuscribed = true;
     apiBodega
       .get("/")
       .then((res) => {
-        setBodegas(res.data.data);
+        if (isSuscribed) {
+          setBodegas(res.data.data);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      isSuscribed = false;
+    };
   }, [bodegas]);
 
   return (

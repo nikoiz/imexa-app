@@ -80,7 +80,7 @@ export const GastosDashBoard = () => {
                   <td>{formatDate(gasto.fecha)}</td>
                   <td>{gasto.nombre_bodega}</td>
                   <td className="accion-del">
-                    {gasto.estado != "1" ? (
+                    {gasto.estado !== "1" ? (
                       <Button
                         onClick={() => {
                           handlePagarGasto(gasto.id_gastos);

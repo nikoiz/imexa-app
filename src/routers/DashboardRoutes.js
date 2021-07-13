@@ -4,6 +4,8 @@ import { AgregarBodega } from "../components/bodega/AgregarBodega";
 import { ModificarBodega } from "../components/bodega/ModificarBodega";
 import { FacturaCompra } from "../components/facturas-compra/FacturaCompra";
 import { FacturaCompraDashBoard } from "../components/facturas-compra/FacturaCompraDashBoard";
+import { FacturaVenta } from "../components/facturas-venta/FacturaVenta";
+import { FacturaVentaDashBoard } from "../components/facturas-venta/FacturaVentaDashBoard";
 import { FinanzasDashBoard } from "../components/finanzas/FinanzasDashBoard";
 import { AgregarGastos } from "../components/gastos/AgregarGastos";
 import { GastosDashBoard } from "../components/gastos/GastosDashBoard";
@@ -44,7 +46,9 @@ export const DashboardRoutes = () => {
           <Route exact path="/trabajadorDashBoard" component={TrabajadorDashBoard} />     
           <Route exact path="/agregarTrabajador" component={AgregarTrabajador} />     
           <Route exact path="/modificarTrabajador" component={ModifcarTrabajador} />     
-          
+          <Route exact path="/facturaVenta" component={FacturaVenta} />     
+          <Route exact path="/facturaVentaDashBoard" component={FacturaVentaDashBoard} />     
+
           <Redirect to="/login" />
         </Switch>
       </div>

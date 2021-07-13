@@ -1,38 +1,32 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { apiFacturaCompra } from "../../axios/axiosHelper";
+import { apiFacturaCompra, apiFacturaVenta } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
-import {formatCurrency, formatDate} from "../helpers/Formatter";
+import { formatCurrency, formatDate } from "../helpers/Formatter";
+import { FacturaCompraNavBar } from "../facturas-compra/FacturaCompraNavBar";
 
-
-export const FacturaCompraDashBoard = () => {
-
-  const [facturaCompra, setFacturaCompra] = useState([]);
+export const FacturaVentaDashBoard = () => {
+  const [facturaVenta, setFacturaVenta] = useState([]);
 
   useEffect(() => {
     let isSuscribed = true;
-    apiFacturaCompra
+    apiFacturaVenta
       .get("/")
       .then((res) => {
         if (isSuscribed) {
-          setFacturaCompra(res.data.data);
+          setFacturaVenta(res.data.data);
         }
       })
       .catch((err) => {
         console.log(err);
       });
+
     return () => {
       isSuscribed = false;
     };
-  }, [facturaCompra]);
-
-  const onButton = (e) => {
-    console.log(e.target.value);
-  };
-
+  }, [facturaVenta]);
 
   return (
     <>
@@ -65,27 +59,27 @@ export const FacturaCompraDashBoard = () => {
           </thead>
 
           <tbody>
-            {facturaCompra != null && facturaCompra.length > 0 ? (
-              facturaCompra.map((facturaCompra, i) => (
+            {facturaVenta != null && facturaVenta.length > 0 ? (
+              facturaVenta.map((facturaVenta, i) => (
                 <tr
-                  id={facturaCompra.id_compra}
-                  value={facturaCompra.id_compra}
+                  id={facturaVenta.id_venta}
+                  value={facturaVenta.id_venta}
                   key={i}
                 >
-                  <td>{facturaCompra.id_compra}</td>
-                  <td>{formatDate(facturaCompra.fecha_compra)}</td>
-                  <td>{formatCurrency(facturaCompra.valor_compra)}</td>
-                  <td>{facturaCompra.estado}</td>
-                  <td>{facturaCompra.rut_proveedor}</td>
+                  <td>{facturaVenta.id_venta}</td>
+                  {/* <td>{formatDate(facturaVenta.fecha_venta)}</td> */}
+                  <td>{facturaVenta.fecha_venta}</td>
+                  <td>{formatCurrency(facturaVenta.valor_venta)}</td>
+                  <td>{facturaVenta.estado}</td>
+                  <td>{facturaVenta.rut_cliente}</td>
                   <td>
-                    {facturaCompra.id_tipo_f_compra === "2"
+                    {facturaVenta.id_tipo_f_venta === "2"
                       ? "Factura"
                       : "Nota de credito"}
                   </td>
                   <td className="accion-del">
-                    {facturaCompra.estado === "Pendiente" ? (
+                    {facturaVenta.estado === "Pendiente" ? (
                       <Button
-                        onClick={() => onButton(facturaCompra.id_compra)}
                         className="btn-pagar"
                       >
                         Pagar

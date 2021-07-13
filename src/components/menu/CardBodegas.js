@@ -6,14 +6,22 @@ import { apiBodega } from "../../axios/axiosHelper";
 export const CardBodegas = () => {
   const [bodegas, setBodegas] = useState([]);
 
-  apiBodega
-    .get("/")
-    .then((res) => {
-      setBodegas(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  useEffect(() => {
+    let isSucribed = true;
+    apiBodega
+      .get("/")
+      .then((res) => {
+        if (isSucribed) {
+          setBodegas(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return () => {
+      isSucribed = false;
+    };
+  }, [bodegas]);
 
   return (
     <>
@@ -26,26 +34,34 @@ export const CardBodegas = () => {
         }}
       >
         <Card.Header>Bodegas Activas</Card.Header>
-        {bodegas.map((bodega, i) => (
+        {bodegas != null && bodegas.length > 0 ? (
+          bodegas.map((bodega, i) => (
+            <Row>
+              <Col>
+                <Card.Body>
+                  <Card.Title key={i} id={bodega.id}>
+                    {" "}
+                    {bodega.nombre_bodega}{" "}
+                  </Card.Title>
+                </Card.Body>
+              </Col>
+              <Col style={{ marginRight: "5%" }}>
+                <Button
+                  style={{ width: "100%", marginTop: "15px" }}
+                  variant="success"
+                >
+                  Detalles
+                </Button>
+              </Col>
+            </Row>
+          ))
+        ) : (
           <Row>
             <Col>
-              <Card.Body>
-                <Card.Title key={i} id={bodega.id}>
-                  {" "}
-                  {bodega.nombre_bodega}{" "}
-                </Card.Title>
-              </Card.Body>
-            </Col>
-            <Col style={{ marginRight: "5%" }}>
-              <Button
-                style={{ width: "100%", marginTop: "15px" }}
-                variant="success"
-              >
-                Detalles
-              </Button>
+              <p>No se han registrado Bodegas</p>
             </Col>
           </Row>
-        ))}
+        )}
       </Card>
     </>
   );
