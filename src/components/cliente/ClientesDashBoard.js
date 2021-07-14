@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "../../css/productoDashBoard.css";
-import { ProductoNavBar } from "./ProductoNavBar";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { apiProducto } from "../../axios/axiosHelper";
+import { apiCliente } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import {formatCurrency} from "../helpers/Formatter";
+import { ClienteNavBar } from "./ClienteNavBar";
 
-export const ProductoDashBoard = () => {
-  const [productos, setProductos] = useState([]);
+export const ClientesDashBoard = () => {
+  const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
     let isSuscribed = true;
-    apiProducto
+    apiCliente
       .get("/")
       .then((res) => {
         if (isSuscribed) {
-          setProductos(res.data.data);
+          setClientes(res.data.data);
         }
       })
       .catch((err) => {
@@ -24,13 +24,13 @@ export const ProductoDashBoard = () => {
     return () => {
       isSuscribed = false;
     };
-  }, [productos]);
+  }, [clientes]);
 
-  const handleEliminarProducto = (id) => {
-    apiProducto
-      .delete(`?id_producto=${id}`)
+  const handleEliminarCliente = (id) => {
+    apiCliente
+      .delete(`?rut_cliente=${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -39,12 +39,10 @@ export const ProductoDashBoard = () => {
 
   return (
     <>
-      <h1 style={{ paddingTop: "15px" }} className="title">
-        Producto Dashboard
-      </h1>
-      <hr />
       <div className="container-content">
-        <ProductoNavBar />
+        <h1 className="title">Cliente DashBoard</h1>
+        <hr />
+        <ClienteNavBar />
         <SideBarImexa />
 
         <Table
@@ -57,39 +55,35 @@ export const ProductoDashBoard = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Nombre</th>
-              <th>Valor</th>
+              <th>Nombre Cliente</th>
+              <th>RUT Cliente</th>
               <th className="accion-del">Accion</th>
             </tr>
           </thead>
 
           <tbody>
-            {productos != null && productos.length > 0 ? (
-              productos.map((producto, i) => (
+            {clientes != null && clientes.length > 0 ? (
+              clientes.map((cliente, i) => (
                 <tr
-                  id={producto.id_producto}
-                  value={producto.id_producto}
+                  id={cliente.rut_cliente}
+                  value={cliente.rut_cliente}
                   key={i}
                 >
                   <td>{i + 1}</td>
-                  <td>{producto.nombre_producto}</td>
-                  <td>{formatCurrency(producto.valor_producto)}</td>
+                  <td>{cliente.nombre_cliente}</td>
+                  <td>{cliente.rut_cliente}</td>
                   <td className="accion-del">
                     <Button
+                      onClick={() => handleEliminarCliente(cliente.rut_cliente)}
                       className="btn-eliminar--item"
-                      onClick={() =>
-                        handleEliminarProducto(producto.id_producto)
-                      }
                     >
-                      Eliminar Producto
+                      Eliminar Cliente
                     </Button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr id="empty" value="empty">
-                <td>--</td>
-                <td>--</td>
                 <td>--</td>
                 <td>--</td>
                 <td>--</td>

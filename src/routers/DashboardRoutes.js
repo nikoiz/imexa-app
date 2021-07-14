@@ -2,11 +2,13 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import { AgregarBodega } from "../components/bodega/AgregarBodega";
 import { ModificarBodega } from "../components/bodega/ModificarBodega";
+import { AgregarCliente } from "../components/cliente/AgregarCliente";
+import { ClientesDashBoard } from "../components/cliente/ClientesDashBoard";
+import { ModificarCliente } from "../components/cliente/ModificarCliente";
 import { FacturaCompra } from "../components/facturas-compra/FacturaCompra";
 import { FacturaCompraDashBoard } from "../components/facturas-compra/FacturaCompraDashBoard";
 import { FacturaVenta } from "../components/facturas-venta/FacturaVenta";
 import { FacturaVentaDashBoard } from "../components/facturas-venta/FacturaVentaDashBoard";
-import { FinanzasDashBoard } from "../components/finanzas/FinanzasDashBoard";
 import { AgregarGastos } from "../components/gastos/AgregarGastos";
 import { GastosDashBoard } from "../components/gastos/GastosDashBoard";
 import { ModificarGastos } from "../components/gastos/ModificarGastos";
@@ -37,7 +39,6 @@ export const DashboardRoutes = () => {
           <Route exact path="/proveedor" component={ProveedorDashBoard} />          
           <Route exact path="/agregarProveedor" component={AgregarProveedor} />          
           <Route exact path="/modificarProveedor" component={ModifcarProveedor} />          
-          <Route exact path="/finanzas" component={FinanzasDashBoard} />          
           <Route exact path="/gastos" component={GastosDashBoard} />          
           <Route exact path="/agregarGastos" component={AgregarGastos} />          
           <Route exact path="/modificarGasto" component={ModificarGastos} />          
@@ -48,6 +49,9 @@ export const DashboardRoutes = () => {
           <Route exact path="/modificarTrabajador" component={ModifcarTrabajador} />     
           <Route exact path="/facturaVenta" component={FacturaVenta} />     
           <Route exact path="/facturaVentaDashBoard" component={FacturaVentaDashBoard} />     
+          <Route exact path="/clienteDashBoard" component={ClientesDashBoard} />     
+          <Route exact path="/agregarCliente" component={AgregarCliente} />     
+          <Route exact path="/modificarCliente" component={ModificarCliente} />     
 
           <Redirect to="/login" />
         </Switch>

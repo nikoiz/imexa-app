@@ -6,8 +6,10 @@ import { FaWarehouse, FaAppleAlt } from "react-icons/fa";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
-import WorkIcon from '@material-ui/icons/Work';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import WorkIcon from "@material-ui/icons/Work";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import ContactsIcon from "@material-ui/icons/Contacts";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 
 import "../../css/sidebar.css";
 import { useState } from "react";
@@ -61,12 +63,6 @@ export const SideBarImexa = () => {
               <span className="SideBar-text">Factura Venta</span>
             </Link>
           </div>
-          <div className="item" title="Agregar Bodega">
-            <Link exact to="/agregarBodega">
-              <FaWarehouse className="SideBar-icon" />
-              <span className="SideBar-text">Bodega</span>
-            </Link>
-          </div>
           <div className="item" title="Gastos">
             <Link exact to="/gastos">
               <AccountBalanceIcon className="SideBar-icon" />
@@ -85,6 +81,18 @@ export const SideBarImexa = () => {
               <span className="SideBar-text">Trabajadores</span>
             </Link>
           </div>
+          <div className="item" title="Proveedores">
+            <Link exact to="/proveedor">
+              <ContactsIcon className="SideBar-icon" />
+              <span className="SideBar-text">Proveedores</span>
+            </Link>
+          </div>
+          <div className="item" title="Clientes">
+            <Link exact to="/clienteDashBoard">
+              <PeopleAltIcon className="SideBar-icon" />
+              <span className="SideBar-text">Clientes</span>
+            </Link>
+          </div>
         </div>
 
         <div className="SideBar-footer" title="Salir">
@@ -97,4 +105,3 @@ export const SideBarImexa = () => {
     </>
   );
 };
-

@@ -37,11 +37,17 @@ export const DropDownBodegas = ({ setIdBodega }) => {
         <option value="default" name="default ">
           Seleccionar
         </option>
-        {bodegas.map((bodega, i) => (
-          <option value={bodega.id_bodega} key={i}>
-            {bodega.nombre_bodega}
+        {bodegas != null && bodegas.length > 0 ? (
+          bodegas.map((bodega, i) => (
+            <option value={bodega.id_bodega} key={i}>
+              {bodega.nombre_bodega}
+            </option>
+          ))
+        ) : (
+          <option value="default" key="default">
+            Seleccionar
           </option>
-        ))}
+        )}
       </select>
     </div>
   );

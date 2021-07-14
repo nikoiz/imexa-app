@@ -42,43 +42,45 @@ export const AgregarProveedor = ({ history }) => {
 
   return (
     <>
-      <SideBarImexa />
-      <ProveedorNavBar />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h1 className="title">Agregar Proveedor</h1>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="Nombre Proveedor"
-                onChange={handleNameChange}
-              />
+      <div className="container-content">
+        <ProveedorNavBar />
+        <SideBarImexa />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1 className="title">Agregar Proveedor</h1>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="Nombre Proveedor"
+                  onChange={handleNameChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="RUT"
+                  onChange={handleRutChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="Contacto"
+                  onChange={handleContactoChange}
+                />
+              </div>
+              <button
+                className="btn btn-primary--agregar"
+                type="button"
+                onClick={handleSubmit}
+              >
+                Agregar Proveedor
+              </button>
             </div>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="RUT"
-                onChange={handleRutChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="Contacto"
-                onChange={handleContactoChange}
-              />
-            </div>
-            <button
-              className="btn btn-primary--agregar"
-              type="button"
-              onClick={handleSubmit}
-            >
-              Agregar Proveedor
-            </button>
           </div>
         </div>
       </div>

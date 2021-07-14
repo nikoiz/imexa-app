@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import "../../css/factura.css";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
@@ -13,13 +13,15 @@ export const FacturaCompra = ({ history }) => {
   const [tipoFactura, setTipoFactura] = useState("");
   const [folioCompra, setFolioCompra] = useState("");
   const [fechaCompra, setFechaCompra] = useState("");
-  const [valorFactura, setValorFactura] = useState("");
   const [estado, setEstado] = useState("");
   const [proveedor, setProveedor] = useState("");
   const [metodoPago, setMetodoPago] = useState("");
+  const [valorFactura, setValorFactura] = useState("");
 
   const [thisArrayState, setThisArrayState] = useState({});
   const [detalleCompraJSON, setDetalleCompraJSON] = useState([]);
+
+  const inputValor = useRef(valorFactura);
 
   const handleTipoFactura = (e) => {
     setTipoFactura(e.target.value);
@@ -30,9 +32,9 @@ export const FacturaCompra = ({ history }) => {
   const handleFechaCompra = (e) => {
     setFechaCompra(e.target.value);
   };
-  const handlevalorFactura = (e) => {
-    setValorFactura(e.target.value);
-  };
+  // const handlevalorFactura = (e) => {
+  //   setValorFactura(e.target.value);
+  // };
   const handleEstado = (e) => {
     setEstado(e.target.value);
   };
@@ -45,13 +47,21 @@ export const FacturaCompra = ({ history }) => {
   };
 
   useEffect(() => {
-    thisArrayState.id_compra = folioCompra;
-    setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);
+    if (Object.entries(thisArrayState).length > 0 && folioCompra != "") {
+      thisArrayState.id_compra = folioCompra;
+      setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);
+    }
   }, [thisArrayState]);
 
   useEffect(() => {
-    console.log(showComponent);
-  }, [showComponent]);
+    if (Object.entries(detalleCompraJSON).length > 0) {
+      const totalSum = detalleCompraJSON.reduce((totalFactura, detalleValue) => totalFactura + parseInt(detalleValue.valor),0);
+      setValorFactura(totalSum);
+      // document.getElementById("valorTotalFactura").value = valorFactura;
+
+    }
+  }, [detalleCompraJSON]);
+
 
   function checkTime(i) {
     return i < 10 ? "0" + i : i;
@@ -88,7 +98,6 @@ export const FacturaCompra = ({ history }) => {
       .catch((err) => {
         console.log(err);
       });
-
 
     detalleCompraJSON.forEach((element) => {
       console.log("creacion detalle");
@@ -198,10 +207,11 @@ export const FacturaCompra = ({ history }) => {
                   Valor de compra:
                 </Form.Label>
                 <Form.Control
+                  id='valorTotalFactura'
                   className="input-facturas"
                   type="text"
                   placeholder="Valor de compra"
-                  onChange={handlevalorFactura}
+                  // readOnly
                 ></Form.Control>
               </InputGroup>
             </Col>

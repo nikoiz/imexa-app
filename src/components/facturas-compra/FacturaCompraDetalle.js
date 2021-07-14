@@ -28,7 +28,6 @@ export const FacturaCompraDetalle = (props) => {
     if (checkState === false) {
       setCheckState(true);
       detalleCompra(()=>producto)
-
     }else{
       setCheckState(false)
     }
@@ -46,10 +45,10 @@ export const FacturaCompraDetalle = (props) => {
     valor: valorTotalState,
   }
 
-  useEffect(() => {
-    let number = cantidadState * valorUnitarioState;
-    setValorTotalState(number.toString());
-  }, [cantidadState, valorUnitarioState]);
+  // useEffect(() => {
+  //   let number = cantidadState * valorUnitarioState;
+  //   setValorTotalState(number.toString());
+  // }, [cantidadState, valorUnitarioState]);
 
   return (
     <>

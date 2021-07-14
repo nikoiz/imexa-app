@@ -37,7 +37,6 @@ export const ModifcarProveedor = ({ history }) => {
 
         if (res.data === "Error numero mal ingrasdo") {
           alert("Ingrese contacto formato 9 xxxx xxxx");
-
         } else {
           history.push("/proveedor");
         }
@@ -49,46 +48,48 @@ export const ModifcarProveedor = ({ history }) => {
 
   return (
     <>
-      <SideBarImexa />
-      <ProveedorNavBar />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h1 className="title">Modificar Proveedor</h1>
-            <div className="form-group">
-              <DropDownProveedor setIdProveedor={setIdState} />
+      <div className="container-content">
+        <ProveedorNavBar />
+        <SideBarImexa />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1 className="title">Modificar Proveedor</h1>
+              <div className="form-group">
+                <DropDownProveedor setIdProveedor={setIdState} />
+              </div>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="Nombre Proveedor"
+                  onChange={handleChangeName}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="RUT"
+                  onChange={handleChangeRut}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="agregarInput"
+                  type="text"
+                  placeholder="Contacto"
+                  onChange={handleChangeContacto}
+                />
+              </div>
+              <button
+                className="btn btn-primary--agregar"
+                type="button"
+                onClick={handleSubmit}
+              >
+                <span>Modficar Proveedor</span>
+              </button>
             </div>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="Nombre Proveedor"
-                onChange={handleChangeName}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="RUT"
-                onChange={handleChangeRut}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="agregarInput"
-                type="text"
-                placeholder="Contacto"
-                onChange={handleChangeContacto}
-              />
-            </div>
-            <button
-              className="btn btn-primary--agregar"
-              type="button"
-              onClick={handleSubmit}
-            >
-              <span>Modficar Proveedor</span>
-            </button>
           </div>
         </div>
       </div>

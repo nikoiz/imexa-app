@@ -24,75 +24,76 @@ export const ProveedorDashBoard = () => {
     };
   }, [proveedores]);
 
-  const handleEliminar = (id) =>{
+  const handleEliminar = (id) => {
     apiProveedor
       .delete(`?rut_proveedor=${id}`)
-      .then((res)=>{
+      .then((res) => {
         console.log(res.data);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
-    <div>
-      <SideBarImexa />
-      <h1 className="title">Proveedor DashBoard</h1>
-      <hr />
-      <ProveedorNavBar />
+    <>
+      <div className="container-content">
+        <h1 className="title">Proveedor DashBoard</h1>
+        <hr />
+        <ProveedorNavBar />
+        <SideBarImexa />
 
-      <Table
-        
-        striped
-        bordered
-        hover="true"
-        variant="dark"
-        className="tb-product"
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>RUT</th>
-            <th>Contacto</th>
-            <th className="accion-del">Accion</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {proveedores != null && proveedores.length > 0 ? (
-            proveedores.map((proveedor, i) => (
-              <tr
-                id={proveedor.rut_proveedor}
-                value={proveedor.rut_proveedor}
-                key={i}
-              >
-                <td>{i + 1}</td>
-                <td>{proveedor.nombre_proveedor}</td>
-                <td>{proveedor.rut_proveedor}</td>
-                <td>{proveedor.contacto}</td>
-                <td className="accion-del">
-                  <Button
-                    className="btn-eliminar--item"
-                    onClick={() => handleEliminar(proveedor.rut_proveedor)}
-                  >
-                    Eliminar Proveedor
-                  </Button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr id="empty" value="empty">
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td className="accion-del">--</td>
+        <Table
+          striped
+          bordered
+          hover="true"
+          variant="dark"
+          className="tb-product"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>RUT</th>
+              <th>Contacto</th>
+              <th className="accion-del">Accion</th>
             </tr>
-          )}
-        </tbody>
-      </Table>
-    </div>
+          </thead>
+
+          <tbody>
+            {proveedores != null && proveedores.length > 0 ? (
+              proveedores.map((proveedor, i) => (
+                <tr
+                  id={proveedor.rut_proveedor}
+                  value={proveedor.rut_proveedor}
+                  key={i}
+                >
+                  <td>{i + 1}</td>
+                  <td>{proveedor.nombre_proveedor}</td>
+                  <td>{proveedor.rut_proveedor}</td>
+                  <td>{proveedor.contacto}</td>
+                  <td className="accion-del">
+                    <Button
+                      className="btn-eliminar--item"
+                      onClick={() => handleEliminar(proveedor.rut_proveedor)}
+                    >
+                      Eliminar Proveedor
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr id="empty" value="empty">
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td className="accion-del">--</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
+    </>
   );
 };
