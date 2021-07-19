@@ -45,10 +45,10 @@ export const FacturaCompraDetalle = (props) => {
     valor: valorTotalState,
   }
 
-  // useEffect(() => {
-  //   let number = cantidadState * valorUnitarioState;
-  //   setValorTotalState(number.toString());
-  // }, [cantidadState, valorUnitarioState]);
+  useEffect(() => {
+    let number = cantidadState * valorUnitarioState;
+    setValorTotalState(number.toString());
+  }, [cantidadState, valorUnitarioState]);
 
   return (
     <>

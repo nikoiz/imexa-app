@@ -8,7 +8,8 @@ export const CardBodegas = () => {
 
   useEffect(() => {
     let isSucribed = true;
-    apiBodega
+    setInterval(() => {
+      apiBodega
       .get("/")
       .then((res) => {
         if (isSucribed) {
@@ -18,6 +19,8 @@ export const CardBodegas = () => {
       .catch((err) => {
         console.log(err);
       });
+    }, 1000);
+   
     return () => {
       isSucribed = false;
     };
@@ -57,8 +60,10 @@ export const CardBodegas = () => {
           ))
         ) : (
           <Row>
-            <Col>
-              <p>No se han registrado Bodegas</p>
+            <Col style={{ marginTop: "3%", marginLeft: "10%" }}>
+              <Card.Body>
+                <Card.Title>No existen Bodegas para mostrar</Card.Title>
+              </Card.Body>
             </Col>
           </Row>
         )}

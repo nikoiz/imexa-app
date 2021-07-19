@@ -16,23 +16,24 @@ export const ListaBodega = (props) => {
 
   useEffect(() => {
     let isSuscribed = true;
-
-    apiBodega
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setBodegas(res.data.data);
-          idBodega(() => idState);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setInterval(() => {
+      apiBodega
+        .get("/")
+        .then((res) => {
+          if (isSuscribed) {
+            setBodegas(res.data.data);
+            idBodega(() => idState);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 1000);
 
     return () => {
       isSuscribed = false;
     };
-  }, [bodegas]);
+  }, [bodegas, idState, idBodega]);
 
   const handleSubmitAgregar = (event) => {
     history.push("/agregarBodega");
@@ -44,8 +45,12 @@ export const ListaBodega = (props) => {
     apiBodega
       .delete(`?id_bodega=${idState}`)
       .then((res) => {
-        history.push("/inventario");
-        console.log(res);
+        if (
+          res.data.message ===
+          "no se puede eliminar esta bodega ya que tiene producto"
+        ) {
+          alert("No se puede eliminar, ya que hay productos asociados");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +81,10 @@ export const ListaBodega = (props) => {
             </Nav.Item>
           ))
         ) : (
-          <Nav.Item className="nav-item" style={{color:'white', fontSize:'20px'}}>
+          <Nav.Item
+            className="nav-item"
+            style={{ color: "white", fontSize: "20px" }}
+          >
             No existen bodegas
           </Nav.Item>
         )}

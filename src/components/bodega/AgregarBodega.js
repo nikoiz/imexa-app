@@ -24,15 +24,19 @@ export const AgregarBodega = ({ history }) => {
     event.preventDefault();
     console.log(bodega);
 
-    apiBodega
-      .post("/", bodega)
-      .then((res) => {
-        console.log(res);
-        history.push("/inventario");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (nombreBodega !== "" && numeroBodega !== "") {
+      apiBodega
+        .post("/", bodega)
+        .then((res) => {
+          console.log(res);
+          history.push("/inventario");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }else{
+      alert('Se deben llenar todos los campos')
+    }
   };
 
   return (

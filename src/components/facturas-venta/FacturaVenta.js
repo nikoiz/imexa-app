@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Col, Form, InputGroup, Row, Button } from "react-bootstrap";
 import { apiDetalleVenta, apiFacturaVenta } from "../../axios/axiosHelper";
+import { formatQuantity } from "../helpers/Formatter";
+import { SideBarImexa } from "../menu/SideBarImexa";
 import { DropDownCliente } from "./DropDownCliente";
 import { FacturaVentaDetalle } from "./FacturaVentaDetalle";
 
@@ -18,6 +20,8 @@ export const FacturaVenta = ({ history }) => {
   const [thisArrayState, setThisArrayState] = useState([]);
   const [detalleVentaJSON, setDetalleVentaJSON] = useState([]);
 
+  const inputValor = useRef(valorFactura);
+
   const handleTipoFacutra = (e) => {
     setTipoFactura(e.target.value);
   };
@@ -28,10 +32,6 @@ export const FacturaVenta = ({ history }) => {
 
   const handleFechaVenta = (e) => {
     setFechaVenta(e.target.value);
-  };
-
-  const handleChangeValorFactura = (e) => {
-    setValorFactura(e.target.value);
   };
 
   const handleChangeEstado = (e) => {
@@ -47,9 +47,23 @@ export const FacturaVenta = ({ history }) => {
   };
 
   useEffect(() => {
-    thisArrayState.id_venta = folioVenta;
-    setDetalleVentaJSON([...detalleVentaJSON, thisArrayState]);
-  }, [thisArrayState]);
+    if (Object.entries(thisArrayState).length > 0 && folioVenta !== "") {
+      thisArrayState.id_venta = folioVenta;
+      setDetalleVentaJSON([...detalleVentaJSON, thisArrayState]);
+    }
+  }, [thisArrayState, detalleVentaJSON, folioVenta]);
+
+  useEffect(() => {
+    if (Object.entries(detalleVentaJSON).length > 0) {
+      const totalSum = detalleVentaJSON.reduce(
+        (totalFactura, detalleValue) =>
+          totalFactura + parseInt(detalleValue.valor),
+        0
+      );
+      setValorFactura(totalSum);
+      inputValor.current.value = `$ ${formatQuantity(totalSum)}`;
+    }
+  }, [detalleVentaJSON]);
 
   function checkTime(i) {
     return i < 10 ? "0" + i : i;
@@ -103,6 +117,7 @@ export const FacturaVenta = ({ history }) => {
 
   return (
     <>
+    <SideBarImexa/>
       <div className="container-content">
         <div className="container factura-detalle">
           <Row>
@@ -190,10 +205,11 @@ export const FacturaVenta = ({ history }) => {
                   Valor de venta:
                 </Form.Label>
                 <Form.Control
-                  onChange={handleChangeValorFactura}
                   className="input-facturas"
+                  ref={inputValor}
                   type="text"
                   placeholder="Valor de compra"
+                  readOnly
                 ></Form.Control>
               </InputGroup>
             </Col>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -9,14 +10,24 @@ export const ListaTrabajador = () => {
   const [trabajadores, setTrabajadores] = useState([]);
   const [rutTrabajador, setRutTrabajador] = useState("");
 
-  apiTrabajador
-    .get("/")
-    .then((res) => {
-      setTrabajadores(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  useEffect(() => {
+    let isSuscribed = true;
+    setInterval(() => {
+      apiTrabajador
+        .get("/")
+        .then((res) => {
+          if (isSuscribed) {
+            setTrabajadores(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 1000);
+    return () => {
+      isSuscribed = false;
+    };
+  }, [trabajadores]);
 
   function getInitialsName(name) {
     let nombreApellido = name.split(" ");
@@ -25,6 +36,9 @@ export const ListaTrabajador = () => {
 
     return initials;
   }
+
+  console.log(rutTrabajador);
+
   return (
     <>
       <div className="container-content">
@@ -74,6 +88,16 @@ export const ListaTrabajador = () => {
                 className="btn-eliminar--item trabajador-btn"
               >
                 Modificar Trabajador
+              </Button>
+            </Link>
+          </Row>
+          <Row style={{ marginTop: "5%", marginLeft: "15%" }}>
+            <Link to="/agregarInasistencia">
+              <Button
+                style={{ width: "200px" }}
+                className="btn-eliminar--item trabajador-btn"
+              >
+                Agregar inasistencia
               </Button>
             </Link>
           </Row>

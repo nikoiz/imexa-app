@@ -12,16 +12,19 @@ export const DropDownBodegas = ({ setIdBodega }) => {
 
   useEffect(() => {
     let isSuscribed = true;
-    apiBodega
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setBodegas(res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setInterval(() => {
+      apiBodega
+        .get("/")
+        .then((res) => {
+          if (isSuscribed) {
+            setBodegas(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 1000);
+
     return () => {
       isSuscribed = false;
     };

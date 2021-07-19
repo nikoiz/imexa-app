@@ -11,16 +11,19 @@ export const CardGastos = () => {
   useEffect(() => {
     let isSuscribed = true;
 
-    apiGastos
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setGastos(res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setInterval(() => {
+      apiGastos
+        .get("/")
+        .then((res) => {
+          if (isSuscribed) {
+            setGastos(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 1000);
+
     return () => {
       isSuscribed = false;
     };
@@ -48,13 +51,15 @@ export const CardGastos = () => {
                 </Card.Body>
               </Col>
               <Col style={{ margin: "1%" }}>
-                <Card.Title style={{ marginTop: "10%" }}>{`${formatCurrency(gastos.valor_gastos)}`}</Card.Title>
+                <Card.Title style={{ marginTop: "10%" }}>{`${formatCurrency(
+                  gastos.valor_gastos
+                )}`}</Card.Title>
               </Col>
             </Row>
           ))
         ) : (
           <Row>
-            <Col style={{ marginTop: "8%", marginLeft:"12%" }}>
+            <Col style={{ marginTop: "3%", marginLeft: "11%" }}>
               <Card.Body>
                 <Card.Title>No existen gastos para mostrar</Card.Title>
               </Card.Body>

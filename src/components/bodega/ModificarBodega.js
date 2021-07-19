@@ -25,7 +25,8 @@ export const ModificarBodega = ({ history }) => {
   };
 
   const handleSubmit = (e) => {
-    apiBodega
+    if (nombreBodega !== '' && numeroBodega !== '') {
+      apiBodega
       .put("/", bodega)
       .then((res) => {
         console.log(res);
@@ -34,6 +35,10 @@ export const ModificarBodega = ({ history }) => {
       .catch((err) => {
         console.log(err);
       });
+    }else{
+      alert('Por favor, debe llenar todos los campos')
+    }
+    
   };
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DescriptionIcon from "@material-ui/icons/Description";
-import { FaWarehouse, FaAppleAlt } from "react-icons/fa";
+import { FaAppleAlt } from "react-icons/fa";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";

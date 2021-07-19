@@ -20,6 +20,7 @@ import { ProductoDashBoard } from "../components/producto/ProductoDashBoard";
 import { AgregarProveedor } from "../components/proveedor/AgregarProveedor";
 import { ModifcarProveedor } from "../components/proveedor/ModifcarProveedor";
 import { ProveedorDashBoard } from "../components/proveedor/ProveedorDashBoard";
+import { AgregarInasistencia } from "../components/trabajador/AgregarInasistencia";
 import { AgregarTrabajador } from "../components/trabajador/AgregarTrabajador";
 import { ModifcarTrabajador } from "../components/trabajador/ModifcarTrabajador";
 import { TrabajadorDashBoard } from "../components/trabajador/TrabajadorDashBoard";
@@ -52,6 +53,8 @@ export const DashboardRoutes = () => {
           <Route exact path="/clienteDashBoard" component={ClientesDashBoard} />     
           <Route exact path="/agregarCliente" component={AgregarCliente} />     
           <Route exact path="/modificarCliente" component={ModificarCliente} />     
+          <Route exact path="/agregarInasistencia" component={AgregarInasistencia} />     
+          
 
           <Redirect to="/login" />
         </Switch>

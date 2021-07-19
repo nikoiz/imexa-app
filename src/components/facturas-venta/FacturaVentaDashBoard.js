@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { apiFacturaCompra, apiFacturaVenta } from "../../axios/axiosHelper";
+import { apiFacturaVenta } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
-import { formatCurrency, formatDate } from "../helpers/Formatter";
-import { FacturaCompraNavBar } from "../facturas-compra/FacturaCompraNavBar";
+import { formatCurrency } from "../helpers/Formatter";
+import { FacturaVentaNavBar } from "./FacturaVentaNavBar";
 
 export const FacturaVentaDashBoard = () => {
   const [facturaVenta, setFacturaVenta] = useState([]);
@@ -36,7 +36,7 @@ export const FacturaVentaDashBoard = () => {
       <hr />
 
       <div className="container-content">
-        <FacturaCompraNavBar />
+        <FacturaVentaNavBar />
         <SideBarImexa />
 
         <Table
@@ -79,9 +79,7 @@ export const FacturaVentaDashBoard = () => {
                   </td>
                   <td className="accion-del">
                     {facturaVenta.estado === "Pendiente" ? (
-                      <Button
-                        className="btn-pagar"
-                      >
+                      <Button className="btn-pagar">
                         Pagar
                         <LocalAtmIcon style={{ marginLeft: "10%" }} />
                       </Button>

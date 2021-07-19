@@ -6,6 +6,7 @@ import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
 import { apiFacturaCompra, apiDetalleCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { formatQuantity } from "../helpers/Formatter";
 
 export const FacturaCompra = ({ history }) => {
   const [showComponent, setShowComponent] = useState([0]);
@@ -32,9 +33,7 @@ export const FacturaCompra = ({ history }) => {
   const handleFechaCompra = (e) => {
     setFechaCompra(e.target.value);
   };
-  // const handlevalorFactura = (e) => {
-  //   setValorFactura(e.target.value);
-  // };
+
   const handleEstado = (e) => {
     setEstado(e.target.value);
   };
@@ -47,21 +46,23 @@ export const FacturaCompra = ({ history }) => {
   };
 
   useEffect(() => {
-    if (Object.entries(thisArrayState).length > 0 && folioCompra != "") {
+    if (Object.entries(thisArrayState).length > 0 && folioCompra !== "") {
       thisArrayState.id_compra = folioCompra;
       setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);
     }
-  }, [thisArrayState]);
+  }, [thisArrayState, folioCompra, detalleCompraJSON]);
 
   useEffect(() => {
     if (Object.entries(detalleCompraJSON).length > 0) {
-      const totalSum = detalleCompraJSON.reduce((totalFactura, detalleValue) => totalFactura + parseInt(detalleValue.valor),0);
+      const totalSum = detalleCompraJSON.reduce(
+        (totalFactura, detalleValue) =>
+          totalFactura + parseInt(detalleValue.valor),
+        0
+      );
       setValorFactura(totalSum);
-      // document.getElementById("valorTotalFactura").value = valorFactura;
-
+      inputValor.current.value = `$ ${formatQuantity(totalSum)}`;
     }
   }, [detalleCompraJSON]);
-
 
   function checkTime(i) {
     return i < 10 ? "0" + i : i;
@@ -207,11 +208,12 @@ export const FacturaCompra = ({ history }) => {
                   Valor de compra:
                 </Form.Label>
                 <Form.Control
-                  id='valorTotalFactura'
+                  id="valorTotalFactura"
+                  ref={inputValor}
                   className="input-facturas"
                   type="text"
                   placeholder="Valor de compra"
-                  // readOnly
+                  readOnly
                 ></Form.Control>
               </InputGroup>
             </Col>

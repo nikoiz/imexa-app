@@ -11,16 +11,18 @@ export const ClientesDashBoard = () => {
 
   useEffect(() => {
     let isSuscribed = true;
-    apiCliente
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setClientes(res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setInterval(() => {
+      apiCliente
+        .get("/")
+        .then((res) => {
+          if (isSuscribed) {
+            setClientes(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 1000);
     return () => {
       isSuscribed = false;
     };
@@ -34,6 +36,7 @@ export const ClientesDashBoard = () => {
       })
       .catch((err) => {
         console.log(err);
+        alert('No se puede Eliminar cliente')
       });
   };
 
