@@ -1,8 +1,7 @@
-import { Col, Row } from "react-bootstrap";
-import React from "react";
+import { Col, Row, Table } from "react-bootstrap";
+import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useState } from "react";
-import { useEffect } from "react";
 import { apiProveedor } from "../../axios/axiosHelper";
 
 export const CardProveedores = () => {
@@ -11,6 +10,7 @@ export const CardProveedores = () => {
   useEffect(() => {
     let isSuscribed = true;
 
+    // setInterval(async () => {
     apiProveedor
       .get("/")
       .then((res) => {
@@ -21,11 +21,12 @@ export const CardProveedores = () => {
       .catch((err) => {
         console.log(err);
       });
+    // }, 500);
 
-    return () => {
-      isSuscribed = false;
-    };
-  }, [proveedores]);
+    //   return () => {
+    //     isSuscribed = false;
+    //   };
+  }, []);
 
   return (
     <>
@@ -38,34 +39,51 @@ export const CardProveedores = () => {
         }}
       >
         <Card.Header>Proveedores</Card.Header>
-        {proveedores != null && proveedores.length > 0 ? (
-          proveedores.map((proveedor, i) => (
-            <Row>
-              <Col style={{ margin: "1%" }}>
-                <Card.Body>
-                  <Card.Title key={i} id={proveedor.rut_proveedor}>
-                    {proveedor.nombre_proveedor}
-                  </Card.Title>
-                </Card.Body>
-              </Col>
-              <Col style={{ margin: "1%" }}>
-                <Card.Body>
-                  <Card.Title key={i} id={proveedor.rut_proveedor}>
-                    {proveedor.contacto}
-                  </Card.Title>
-                </Card.Body>
-              </Col>
-            </Row>
-          ))
-        ) : (
-          <Row>
-            <Col style={{ margin: "1%" }}>
-              <Card.Body>
-                <Card.Title>No existen proveedores registrados</Card.Title>
-              </Card.Body>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col>
+            <Card.Body>
+              <Card.Title
+                style={{
+                  fontSize: "18px",
+                  height: "202px",
+                  overflowX: "hidden",
+                  overflowY: "auto",
+                }}
+              >
+                <Table striped bordered hover="true" variant="light" responsive>
+                  <thead>
+                    <tr>
+                      {/* <th>#</th> */}
+                      <th>Nombre Proveedor</th>
+                      <th>Contacto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {proveedores != null && proveedores.length > 0 ? (
+                      proveedores.map((proveedor, i) => (
+                        <tr
+                          id={proveedor.rut_proveedor}
+                          value={proveedor.rut_proveedor}
+                          key={i}
+                        >
+                          {/* <td>{i + 1}</td> */}
+                          <td>{proveedor.nombre_proveedor}</td>
+                          <td>{proveedor.contacto}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr id="empty" value="empty">
+                        <th>--</th>
+                        <th>--</th>
+                        <th>--</th>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </Card.Title>
+            </Card.Body>
+          </Col>
+        </Row>
       </Card>
     </>
   );

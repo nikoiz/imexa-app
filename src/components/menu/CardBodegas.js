@@ -1,15 +1,16 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { apiBodega } from "../../axios/axiosHelper";
+import { Link } from "react-router-dom";
 
-export const CardBodegas = () => {
+export const CardBodegas = ({ history }) => {
   const [bodegas, setBodegas] = useState([]);
 
   useEffect(() => {
     let isSucribed = true;
-    setInterval(() => {
-      apiBodega
+    //  setInterval(async () => {
+    apiBodega
       .get("/")
       .then((res) => {
         if (isSucribed) {
@@ -19,12 +20,12 @@ export const CardBodegas = () => {
       .catch((err) => {
         console.log(err);
       });
-    }, 1000);
-   
-    return () => {
-      isSucribed = false;
-    };
-  }, [bodegas]);
+    // }, 500);
+
+    //   return () => {
+    //     isSucribed = false;
+    //   };
+  }, []);
 
   return (
     <>
@@ -36,37 +37,61 @@ export const CardBodegas = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Bodegas Activas</Card.Header>
-        {bodegas != null && bodegas.length > 0 ? (
-          bodegas.map((bodega, i) => (
-            <Row>
-              <Col>
-                <Card.Body>
-                  <Card.Title key={i} id={bodega.id}>
-                    {" "}
-                    {bodega.nombre_bodega}{" "}
-                  </Card.Title>
-                </Card.Body>
-              </Col>
-              <Col style={{ marginRight: "5%" }}>
-                <Button
-                  style={{ width: "100%", marginTop: "15px" }}
-                  variant="success"
-                >
-                  Detalles
-                </Button>
-              </Col>
-            </Row>
-          ))
-        ) : (
-          <Row>
-            <Col style={{ marginTop: "3%", marginLeft: "10%" }}>
-              <Card.Body>
-                <Card.Title>No existen Bodegas para mostrar</Card.Title>
-              </Card.Body>
-            </Col>
-          </Row>
-        )}
+        <Card.Header>Bodegas activas</Card.Header>
+        <Row>
+          <Col>
+            <Card.Body>
+              <Card.Title
+                style={{
+                  fontSize: "18px",
+                  height: "202px",
+                  overflowX: "hidden",
+                  overflowY: "auto",
+                }}
+              >
+                <Table striped bordered hover="true" variant="light" responsive>
+                  <thead>
+                    <tr>
+                      <th>Nombre Bodega</th>
+                      <th>Accion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bodegas != null && bodegas.length > 0 ? (
+                      bodegas.map((bodega, i) => (
+                        <tr
+                          id={bodega.id_bodega}
+                          value={bodega.id_bodega}
+                          key={i}
+                        >
+                          <td
+                            style={{
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            {bodega.nombre_bodega}
+                          </td>
+                          <td>
+                            <Link to='/inventario'>
+                              <Button style={{ width: "100%" }} variant="info">
+                                Detalles
+                              </Button>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr id="empty" value="empty">
+                        <th>--</th>
+                        <th>--</th>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </Card.Title>
+            </Card.Body>
+          </Col>
+        </Row>
       </Card>
     </>
   );

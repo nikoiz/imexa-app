@@ -1,9 +1,9 @@
-import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card, Col, Row, Table } from "react-bootstrap";
 import { useState } from "react";
 import { apiGastos } from "../../axios/axiosHelper";
-import { useEffect } from "react";
 import { formatCurrency } from "../helpers/Formatter";
+// import { ListaBodega } from "../bodega/ListaBodega";
 
 export const CardGastos = () => {
   const [gastos, setGastos] = useState([]);
@@ -11,23 +11,23 @@ export const CardGastos = () => {
   useEffect(() => {
     let isSuscribed = true;
 
-    setInterval(() => {
-      apiGastos
-        .get("/")
-        .then((res) => {
-          if (isSuscribed) {
-            setGastos(res.data.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, 1000);
+    // setInterval( async () => {
+    apiGastos
+      .get("/")
+      .then((res) => {
+        if (isSuscribed) {
+          setGastos(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }, 500);
 
-    return () => {
-      isSuscribed = false;
-    };
-  }, [gastos]);
+    //   return () => {
+    //     isSuscribed = false;
+    //   };
+  }, []);
 
   return (
     <>
@@ -40,32 +40,52 @@ export const CardGastos = () => {
         }}
       >
         <Card.Header>Gastos</Card.Header>
-        {gastos != null && gastos.length > 0 ? (
-          gastos.map((gastos, i) => (
-            <Row>
-              <Col style={{ margin: "1%" }}>
-                <Card.Body>
-                  <Card.Title key={i} id={gastos.id_gastos}>
-                    {gastos.descripcion_gastos}
-                  </Card.Title>
-                </Card.Body>
-              </Col>
-              <Col style={{ margin: "1%" }}>
-                <Card.Title style={{ marginTop: "10%" }}>{`${formatCurrency(
-                  gastos.valor_gastos
-                )}`}</Card.Title>
-              </Col>
-            </Row>
-          ))
-        ) : (
-          <Row>
-            <Col style={{ marginTop: "3%", marginLeft: "11%" }}>
-              <Card.Body>
-                <Card.Title>No existen gastos para mostrar</Card.Title>
-              </Card.Body>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col>
+            <Card.Body>
+              <Card.Title
+                style={{
+                  fontSize: "18px",
+                  height: "202px",
+                  overflowX: "hidden",
+                  overflowY: "auto",
+                }}
+              >
+                {/* <ListaBodega/> */}
+                <Table striped bordered hover="true" variant="light" responsive>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Gasto</th>
+                      <th>Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {gastos != null && gastos.length > 0 ? (
+                      gastos.map((gasto, i) => (
+                        <tr
+                          id={gasto.id_gastos}
+                          value={gasto.id_gastos}
+                          key={i}
+                        >
+                          <td>{i + 1}</td>
+                          <td>{gasto.descripcion_gastos}</td>
+                          <td>{formatCurrency(gasto.valor_gastos)}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr id="empty" value="empty">
+                        <th>--</th>
+                        <th>--</th>
+                        <th>--</th>
+                      </tr>
+                    )}
+                  </tbody>
+                </Table>
+              </Card.Title>
+            </Card.Body>
+          </Col>
+        </Row>
       </Card>
     </>
   );

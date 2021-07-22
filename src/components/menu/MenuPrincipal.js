@@ -9,7 +9,7 @@ import { CardInventario } from "./CardInventario";
 import { CardTrabajadores } from "./CardTrabajadores";
 import { CardClientes } from "./CardClientes";
 import { CardProveedores } from "./CardProveedores";
-import { CardEquiposInventario } from "./CardEquiposInventario";
+// import { CardEquiposInventario } from "./CardEquiposInventario";
 
 export const MenuPrincipal = () => {
   return (
@@ -49,11 +49,11 @@ export const MenuPrincipal = () => {
             <CardProveedores />
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col>
             <CardEquiposInventario />
           </Col>
-        </Row>
+        </Row> */}
         <SideBarImexa />
 
       </div>
