@@ -2,10 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { apiCliente } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 
 export const AgregarCliente = ({ history }) => {
   const [rutCliente, setRutCliente] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const handleChangeRut = (e) => {
     setRutCliente(e.target.value);
@@ -23,19 +30,35 @@ export const AgregarCliente = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    apiCliente
-      .post("/", cliente)
-      .then((res) => {
-        console.log(res);
-        history.push("/clienteDashBoard");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (rutCliente === "" || nombreCliente === "") {
+      setModalShow(true);
+      setAlertHeader("Agregar Cliente");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
+    } else {
+      apiCliente
+        .post("/", cliente)
+        .then((res) => {
+          console.log(res);
+          history.push("/clienteDashBoard");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <>
+    <AlertDialog
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          header={alertHeader}
+          title={alertTitle}
+          body={alertBody}
+          button={alertButton}
+        />
       <div className="container-content">
         <SideBarImexa />,
         <div className="container">

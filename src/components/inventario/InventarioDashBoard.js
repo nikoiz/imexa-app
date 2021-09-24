@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Table } from "react-bootstrap";
 import { apiDetalleInventario } from "../../axios/axiosHelper";
 import { ListaBodega } from "../bodega/ListaBodega";
-import {formatCurrency , formatQuantity} from "../helpers/Formatter";
+import { formatCurrency, formatQuantity } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
 
 export const InventarioDashBoard = () => {
@@ -44,11 +44,11 @@ export const InventarioDashBoard = () => {
 
   return (
     <>
-      <h1 style={{ paddingTop: "0px" }} className="title">
-        Inventario
-      </h1>
-      <hr />
       <div className="container-content">
+        <h1 style={{ paddingTop: "0px" }} className="title">
+          Resumen Inventario
+        </h1>
+        <hr />
         <ListaBodega idBodega={setIdBodegaState} />
         <SideBarImexa />
 
@@ -67,12 +67,12 @@ export const InventarioDashBoard = () => {
                 <th>Cantidad</th>
                 <th>Valor unitario</th>
                 <th>Valor Total</th>
-                <th className="accion-del">Accion</th>
               </tr>
             </thead>
 
             <tbody>
-              {detalleInventarioState != null && detalleInventarioState.length > 0 ? (
+              {detalleInventarioState != null &&
+              detalleInventarioState.length > 0 ? (
                 detalleInventarioState.map((producto, i) => (
                   <tr
                     id={producto.id_detalle_inventario}
@@ -88,7 +88,6 @@ export const InventarioDashBoard = () => {
                         producto.cantidad_producto * producto.valor
                       )}
                     </td>
-                    <td>Borrar</td>
                   </tr>
                 ))
               ) : (

@@ -5,12 +5,12 @@ import { apiFacturaCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
-import {formatCurrency, formatDate} from "../helpers/Formatter";
-
+import { formatCurrency, formatDate } from "../helpers/Formatter";
 
 export const FacturaCompraDashBoard = () => {
-
   const [facturaCompra, setFacturaCompra] = useState([]);
+
+  const [folioFactura, setFolioFactura] = useState("");
 
   useEffect(() => {
     let isSuscribed = true;
@@ -29,19 +29,30 @@ export const FacturaCompraDashBoard = () => {
     };
   }, [facturaCompra]);
 
-  const onButton = (e) => {
-    console.log(e.target.value);
+  const pagadoJSON = {
+    id_compra: folioFactura,
+    estado: "Pagado",
   };
 
+  const onButton = (idFactura) => {
+    apiFacturaCompra
+      .put(`?id_compra=${idFactura}`, { estado: "Pagado" })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
-      <h1 style={{ paddingTop: "15px" }} className="title">
-        Facturas Dashboard
-      </h1>
-      <hr />
-
       <div className="container-content">
+        <h1 style={{ paddingTop: "15px" }} className="title">
+          Resumen Facturas Compra
+        </h1>
+        <hr />
+
         <FacturaCompraNavBar />
         <SideBarImexa />
 

@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { apiBodega } from "../../axios/axiosHelper";
 import "../../css/bodega.css";
+import { blockNegatives } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 
 export const AgregarBodega = ({ history }) => {
   const [nombreBodega, setNombreBodega] = useState("");
   const [numeroBodega, setNumeroBodega] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const handleNameChange = (e) => {
     setNombreBodega(e.target.value);
@@ -22,7 +30,6 @@ export const AgregarBodega = ({ history }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(bodega);
 
     if (nombreBodega !== "" && numeroBodega !== "") {
       apiBodega
@@ -34,13 +41,27 @@ export const AgregarBodega = ({ history }) => {
         .catch((err) => {
           console.log(err);
         });
-    }else{
-      alert('Se deben llenar todos los campos')
+    } else {
+      if (nombreBodega === "" || numeroBodega === "") {
+        setModalShow(true);
+        setAlertHeader("Agregar Bodega");
+        setAlertTitle("Datos Erroneos");
+        setAlertBody("Por favor, completar todos los datos del formulario.");
+        setAlertButton("Volver a intentarlo");
+      }
     }
   };
 
   return (
     <>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
       <SideBarImexa />,
       <div className="container">
         <div className="row">
@@ -49,6 +70,7 @@ export const AgregarBodega = ({ history }) => {
             <div className="form-group">
               <input
                 className="agregarInput"
+                id="nombreBodega"
                 type="text"
                 name="nombreBodega"
                 value={nombreBodega}
@@ -59,8 +81,10 @@ export const AgregarBodega = ({ history }) => {
             <div className="form-group">
               <input
                 className="agregarInput"
-                type="text"
+                id="numeroBodega"
+                type="number"
                 name="numeroBodega"
+                onKeyDown={blockNegatives}
                 value={numeroBodega}
                 onChange={handleNumberChange}
                 placeholder="Numero de Bodega"

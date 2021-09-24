@@ -28,14 +28,23 @@ export const FacturaVentaDashBoard = () => {
     };
   }, [facturaVenta]);
 
+  const handlePagarFacturaVenta = (idVenta) => {
+    apiFacturaVenta
+      .put(`?id_venta=${idVenta}`, { estado: "Pagado" })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <h1 style={{ paddingTop: "15px" }} className="title">
-        Facturas Dashboard
-      </h1>
-      <hr />
-
       <div className="container-content">
+        <h1 style={{ paddingTop: "15px" }} className="title">
+          Resumen Facturas Venta
+        </h1>
+        <hr />
+
         <FacturaVentaNavBar />
         <SideBarImexa />
 
@@ -79,7 +88,12 @@ export const FacturaVentaDashBoard = () => {
                   </td>
                   <td className="accion-del">
                     {facturaVenta.estado === "Pendiente" ? (
-                      <Button className="btn-pagar">
+                      <Button
+                        className="btn-pagar"
+                        onClick={() => {
+                          handlePagarFacturaVenta(facturaVenta.id_venta);
+                        }}
+                      >
                         Pagar
                         <LocalAtmIcon style={{ marginLeft: "10%" }} />
                       </Button>

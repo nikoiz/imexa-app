@@ -6,10 +6,13 @@ import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
 import { apiFacturaCompra, apiDetalleCompra } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
-import { formatQuantity } from "../helpers/Formatter";
+import { blockNegatives, formatQuantity } from "../helpers/Formatter";
+import { AlertDialog } from "../ui/AlertDialog";
 
 export const FacturaCompra = ({ history }) => {
-  const [showComponent, setShowComponent] = useState([0]);
+  const [showComponent, setShowComponent] = useState([]);
+
+  const [hasFolio, setHasFolio] = useState(true);
 
   const [tipoFactura, setTipoFactura] = useState("");
   const [folioCompra, setFolioCompra] = useState("");
@@ -22,14 +25,22 @@ export const FacturaCompra = ({ history }) => {
   const [thisArrayState, setThisArrayState] = useState({});
   const [detalleCompraJSON, setDetalleCompraJSON] = useState([]);
 
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
+
   const inputValor = useRef(valorFactura);
 
   const handleTipoFactura = (e) => {
     setTipoFactura(e.target.value);
   };
+
   const handleChangeFolio = (e) => {
     setFolioCompra(e.target.value);
   };
+
   const handleFechaCompra = (e) => {
     setFechaCompra(e.target.value);
   };
@@ -46,11 +57,24 @@ export const FacturaCompra = ({ history }) => {
   };
 
   useEffect(() => {
+    if (folioCompra === "") {
+      setHasFolio(true);
+      showComponent.splice(0, showComponent.length);
+      detalleCompraJSON.splice(0, detalleCompraJSON.length);
+      setValorFactura("0");
+      inputValor.current.value = `0`;
+      setThisArrayState({});
+    } else {
+      setHasFolio(false);
+    }
+  }, [folioCompra]);
+
+  useEffect(() => {
     if (Object.entries(thisArrayState).length > 0 && folioCompra !== "") {
       thisArrayState.id_compra = folioCompra;
       setDetalleCompraJSON([...detalleCompraJSON, thisArrayState]);
     }
-  }, [thisArrayState, folioCompra, detalleCompraJSON]);
+  }, [thisArrayState]);
 
   useEffect(() => {
     if (Object.entries(detalleCompraJSON).length > 0) {
@@ -76,6 +100,7 @@ export const FacturaCompra = ({ history }) => {
 
     return " " + hours + ":" + minutes + ":" + seconds;
   }
+
   const factura = {
     id_compra: folioCompra,
     fecha_compra: fechaCompra + getDateTime(),
@@ -88,39 +113,57 @@ export const FacturaCompra = ({ history }) => {
 
   const handleSubmitAddFactura = (e) => {
     e.preventDefault();
+    if (
+      tipoFactura === "" ||
+      folioCompra === "" ||
+      fechaCompra === "" ||
+      estado === "" ||
+      proveedor === "" ||
+      metodoPago === "" ||
+      valorFactura === ""
+    ) {
+      setModalShow(true);
+      setAlertHeader("Agregar Factura");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
+    } else {
+      apiFacturaCompra
+        .post("/", factura)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-    console.warn("Creacion Factura");
-
-    apiFacturaCompra
-      .post("/", factura)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    detalleCompraJSON.forEach((element) => {
-      console.log("creacion detalle");
-      setTimeout(() => {
-        apiDetalleCompra
-          .post("/", element)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-    }, 2000);
-
-    history.push("/facturaCompraDashBoard");
+      detalleCompraJSON.forEach((element) => {
+        setTimeout(() => {
+          apiDetalleCompra
+            .post("/", element)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      }, 2000);
+      history.push("/facturaCompraDashBoard");
+    }
   };
 
   return (
     <>
       <div className="container-content">
-        <FacturaCompraNavBar />
+        <AlertDialog
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          header={alertHeader}
+          title={alertTitle}
+          body={alertBody}
+          button={alertButton}
+        />
         <SideBarImexa />
 
         <div className="container factura-detalle">
@@ -163,7 +206,9 @@ export const FacturaCompra = ({ history }) => {
                 <Form.Control
                   className="input-facturas"
                   placeholder="Folio de compra"
-                  type="text"
+                  onKeyDown={blockNegatives}
+                  min="0"
+                  type="number"
                   onChange={handleChangeFolio}
                 ></Form.Control>
               </InputGroup>
@@ -235,12 +280,30 @@ export const FacturaCompra = ({ history }) => {
               <hr />
               <h1 className="title-facturas">Detalle Factura:</h1>
               <Row>
-                <Col className="table-title vl">Producto</Col>
-                <Col className="table-title vl">Valor unitario</Col>
-                <Col className="table-title vl">Cantidad</Col>
-                <Col className="table-title vl">Valor total</Col>
-                <Col className="table-title vl">Bodega</Col>
-                <Col className="table-title vl-last">Agregar</Col>
+                <Col className="table-title vl" style={{ fontSize: "15px" }}>
+                  Selec. Producto
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                  Producto
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                  Valor unitario
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                  Cantidad
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                  Valor total
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                  Bodega
+                </Col>
+                <Col
+                  className="table-title vl-last"
+                  style={{ fontSize: "17px" }}
+                >
+                  Agregar
+                </Col>
               </Row>
               <hr className="hr-factura" />
               {showComponent.map((id) => (
@@ -248,11 +311,13 @@ export const FacturaCompra = ({ history }) => {
                   key={id}
                   id={id}
                   detalleCompra={setThisArrayState}
+                  readOnlyCheckBox={hasFolio}
                 />
               ))}
               <Button
                 className="btn btn-primary--addLine"
                 onClick={handleAddDetail}
+                disabled={hasFolio}
               >
                 <span>+</span>
               </Button>

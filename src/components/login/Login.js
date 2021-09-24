@@ -1,10 +1,17 @@
 import "../../css/login.css";
 import React, { useState } from "react";
 import { apiLogin } from "../../axios/axiosHelper";
+import { AlertDialog } from "../ui/AlertDialog";
 
 export const Login = ({ history }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const handleUserChange = (e) => {
     setUser(e.target.value);
@@ -16,13 +23,17 @@ export const Login = ({ history }) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    console.log(loginData);
-    login();
-  };
-
-  const loginData = {
-    user: user,
-    password: password,
+    if (user === "" && password === "") {
+      setModalShow(true);
+      setAlertHeader("Inicio Sesion");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody(
+        "Por favor, verificar si los datos ingresados son correctos."
+      );
+      setAlertButton("Volver a intentarlo");
+    } else {
+      login();
+    }
   };
 
   const login = () => {
@@ -34,8 +45,14 @@ export const Login = ({ history }) => {
         } else {
           setUser("");
           setPassword("");
-          console.log(response);
-          alert("Usuario no registrado");
+          setModalShow(true);
+          setAlertHeader("Inicio Sesion");
+          setAlertTitle("Usuario no encontrado");
+          setAlertBody(
+            "Por favor, verificar si los datos ingresados son correctos."
+          );
+          setAlertButton("Volver a intentarlo");
+          
         }
       })
       .catch(function (error) {
@@ -45,6 +62,14 @@ export const Login = ({ history }) => {
 
   return (
     <>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
       <div className="Login">
         <form className="form">
           <h1>Inicio Sesion</h1>

@@ -1,36 +1,26 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { apiProducto } from "../../axios/axiosHelper";
+import { useEffect, useState } from "react";
+import { apiDetalleInventario, apiHandleInventario } from "../../axios/axiosHelper";
 
 export const DropDownProducto = (props) => {
-  const { setNombreProducto } = props;
+  const { setNombreProducto, readOnly } = props;
 
   const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    apiHandleInventario
+      .get("/")
+      .then((res) => {
+        setProductos(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const nombreProducto = e.target.value;
     setNombreProducto(() => nombreProducto);
   };
-
-  useEffect(() => {
-    let isSuscribed = true;
-    setInterval(() => {
-      apiProducto
-      .get("/")
-      .then((res) => {
-        if (isSuscribed) {
-          setProductos(res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }, 1000);
-  
-    return () => {
-      isSuscribed = false;
-    };
-  }, [productos]);
 
   return (
     <div>
@@ -38,6 +28,7 @@ export const DropDownProducto = (props) => {
         onChange={handleChange}
         name="productos"
         className="drop-down-bodegas"
+        disabled={readOnly}
       >
         <option value="default" name="default ">
           Seleccionar

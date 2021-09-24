@@ -1,5 +1,4 @@
 export function formatCurrency(value) {
-
   let forrmatter = new Intl.NumberFormat("es-CL", {
     style: "currency",
     currency: "CLP",
@@ -23,6 +22,8 @@ export function formatDate(date) {
 }
 
 export function formatQuantity(number) {
- 
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+export const blockNegatives = (e) =>
+  ["+", "-"].includes(e.key) && e.preventDefault();

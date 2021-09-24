@@ -13,7 +13,7 @@ export const CardEquiposInventario = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Equipos conectados</Card.Header>
+        <Card.Header style={{fontWeight:'bolder'}} >Equipos conectados</Card.Header>
         <Row>
           <Col style={{ margin: "1%" }}>
             <Card.Body>

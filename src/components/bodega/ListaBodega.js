@@ -16,19 +16,17 @@ export const ListaBodega = (props) => {
 
   useEffect(() => {
     let isSuscribed = true;
-    setInterval(() => {
-      apiBodega
-        .get("/")
-        .then((res) => {
-          if (isSuscribed) {
-            setBodegas(res.data.data);
-            idBodega(() => idState);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, 1000);
+    apiBodega
+      .get("/")
+      .then((res) => {
+        if (isSuscribed) {
+          setBodegas(res.data.data);
+          idBodega(() => idState);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     return () => {
       isSuscribed = false;
@@ -63,7 +61,25 @@ export const ListaBodega = (props) => {
 
   return (
     <>
-      <Nav className="container-tabs" variant="tabs" defaultActiveKey="/home">
+      <Nav
+        className="container-tabs"
+        variant="tabs"
+        defaultActiveKey="/home"
+        key={-1}
+        >
+        <Nav.Item className="nav-item">
+          <Nav.Link
+            className="nav-link-lb"
+            eventKey="default"
+            key={-1}
+            id="default"
+            onClick={() => {
+              setIdState("");
+            }}
+          >
+            Todas
+          </Nav.Link>
+        </Nav.Item>
         {bodegas != null && bodegas.length > 0 ? (
           bodegas.map((bodega, i) => (
             <Nav.Item className="nav-item" key={i}>

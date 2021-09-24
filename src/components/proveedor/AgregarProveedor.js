@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { apiProveedor } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 import { ProveedorNavBar } from "./ProveedorNavBar";
 
 export const AgregarProveedor = ({ history }) => {
   const [nombreState, setNombreState] = useState("");
   const [rutState, setRutState] = useState("");
   const [contactoState, setContactoState] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const handleNameChange = (e) => {
     setNombreState(e.target.value);
@@ -29,19 +36,43 @@ export const AgregarProveedor = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    apiProveedor
-      .post("/", proveedor)
-      .then((res) => {
-        console.log(res.data);
-        history.push("/proveedor");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (nombreState === "" || rutState === "" || contactoState === "") {
+      setModalShow(true);
+      setAlertHeader("Agregar Proveedor");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
+    } else {
+      apiProveedor
+        .post("/", proveedor)
+        .then((res) => {
+          console.log(res);
+          if (res.data === "Error numero mal ingrasdo") {
+            setModalShow(true);
+            setAlertHeader("Modificar Proveedor");
+            setAlertTitle("Datos Erroneos");
+            setAlertBody("Ingrese contacto formato (56)-xxxx-xx");
+            setAlertButton("Volver a intentarlo");
+          } else {
+            history.push("/proveedor");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
       <div className="container-content">
         <ProveedorNavBar />
         <SideBarImexa />
@@ -78,7 +109,7 @@ export const AgregarProveedor = ({ history }) => {
                 type="button"
                 onClick={handleSubmit}
               >
-                Agregar Proveedor
+              <span>Agregar Proveedor</span>
               </button>
             </div>
           </div>

@@ -1,32 +1,23 @@
 import React, { useEffect } from "react";
 import { Card, Col, Row, Table } from "react-bootstrap";
 import { useState } from "react";
-import { apiGastos } from "../../axios/axiosHelper";
+import { apiBodega } from "../../axios/axiosHelper";
 import { formatCurrency } from "../helpers/Formatter";
-// import { ListaBodega } from "../bodega/ListaBodega";
 
 export const CardGastos = () => {
   const [gastos, setGastos] = useState([]);
 
   useEffect(() => {
-    let isSuscribed = true;
 
-    // setInterval( async () => {
-    apiGastos
+    apiBodega
       .get("/")
       .then((res) => {
-        if (isSuscribed) {
           setGastos(res.data.data);
-        }
+
       })
       .catch((err) => {
         console.log(err);
       });
-    // }, 500);
-
-    //   return () => {
-    //     isSuscribed = false;
-    //   };
   }, []);
 
   return (
@@ -39,7 +30,7 @@ export const CardGastos = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Gastos</Card.Header>
+        <Card.Header style={{fontWeight:'bolder'}} >Gastos</Card.Header>
         <Row>
           <Col>
             <Card.Body>
@@ -51,12 +42,11 @@ export const CardGastos = () => {
                   overflowY: "auto",
                 }}
               >
-                {/* <ListaBodega/> */}
                 <Table striped bordered hover="true" variant="light" responsive>
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Gasto</th>
+                      <th>Bodega</th>
                       <th>Valor</th>
                     </tr>
                   </thead>
@@ -69,8 +59,8 @@ export const CardGastos = () => {
                           key={i}
                         >
                           <td>{i + 1}</td>
-                          <td>{gasto.descripcion_gastos}</td>
-                          <td>{formatCurrency(gasto.valor_gastos)}</td>
+                          <td>{gasto.nombre_bodega}</td>
+                          <td>{formatCurrency(gasto.total_gasto)}</td>
                         </tr>
                       ))
                     ) : (

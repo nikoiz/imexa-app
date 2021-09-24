@@ -52,6 +52,12 @@ export const apiInasistencia = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/asistencia.php",
 });
 
+// Utilizar para manejar todas las interacciones con el inventario ---> Cambiar DropDownProducto ---> Agregar valor unitario para crear detalle
+export const apiHandleInventario = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/mostrar_producto_inv.php",
+});
+
+
 
 
 

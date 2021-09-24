@@ -24,6 +24,7 @@ import { AgregarInasistencia } from "../components/trabajador/AgregarInasistenci
 import { AgregarTrabajador } from "../components/trabajador/AgregarTrabajador";
 import { ModifcarTrabajador } from "../components/trabajador/ModifcarTrabajador";
 import { TrabajadorDashBoard } from "../components/trabajador/TrabajadorDashBoard";
+import { TrabajadorPrincipalView } from "../components/trabajador/TrabajadorPrincipalView";
 
 export const DashboardRoutes = () => {
   return (
@@ -54,9 +55,10 @@ export const DashboardRoutes = () => {
           <Route exact path="/agregarCliente" component={AgregarCliente} />     
           <Route exact path="/modificarCliente" component={ModificarCliente} />     
           <Route exact path="/agregarInasistencia" component={AgregarInasistencia} />     
+          <Route exact path="/trabajador" component={TrabajadorPrincipalView} />     
           
 
-          <Redirect to="/login" />
+          <Redirect strict to="/login" />
         </Switch>
       </div>
     </>

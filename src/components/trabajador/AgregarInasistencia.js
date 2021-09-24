@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { apiInasistencia, apiTrabajador } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 
-export const AgregarInasistencia = ({history}) => {
+export const AgregarInasistencia = ({ history }) => {
   const [trabajadores, setTrabajadores] = useState([]);
   const [fechaInasistencia, setFechaInasistencia] = useState("");
   const [rutTrabajador, setRutTrabajador] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   useEffect(() => {
     let isSuscribed = true;
@@ -47,18 +54,30 @@ export const AgregarInasistencia = ({history}) => {
         .post("/", inasistencia)
         .then((res) => {
           console.log(res);
-          history.push('/trabajadorDashboard')
+          history.push("/trabajador");
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      alert("Por favor, ingrese todos los campos");
+      setModalShow(true);
+      setAlertHeader("Generar inasistencia");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
     }
   };
 
   return (
     <>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
       <SideBarImexa />
       <div className="container">
         <div className="row">

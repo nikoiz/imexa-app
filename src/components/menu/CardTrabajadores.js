@@ -1,17 +1,24 @@
 import { Col, Row, Table } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { apiTrabajador } from "../../axios/axiosHelper";
+import { apiInasistencia, apiTrabajador } from "../../axios/axiosHelper";
 import { formatCurrency } from "../helpers/Formatter";
 
 export const CardTrabajadores = () => {
   const [trabajadores, setTrabajadores] = useState([]);
 
+  var date = new Date(),
+    y = date.getFullYear(),
+    m = date.getMonth();
+  var firstDay = new Date(y, m, 1);
+  var lastDay = new Date(y, m + 1, 0);
+
   useEffect(() => {
     let isSuscribed = true;
     // setInterval(async () => {
-    apiTrabajador
-      .get("/")
+    apiInasistencia
+      .get("/?fecha_incio=2021-07-01&fecha_termino=2021-07-31")
+      // .get(`/?fecha_incio=${firstDay}&fecha_termino=${lastDay}`)
       .then((res) => {
         if (isSuscribed) {
           setTrabajadores(res.data.data);
@@ -36,7 +43,9 @@ export const CardTrabajadores = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Trabajadores activos</Card.Header>
+        <Card.Header style={{ fontWeight: "bolder" }}>
+          Trabajadores activos
+        </Card.Header>
         <Row>
           <Col>
             <Card.Body>

@@ -36,7 +36,7 @@ export const CardClientes = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Clientes</Card.Header>
+        <Card.Header style={{fontWeight:'bolder'}} >Clientes</Card.Header>
         <Row>
           <Col>
             <Card.Body>

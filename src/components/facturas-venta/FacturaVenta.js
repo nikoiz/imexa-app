@@ -4,8 +4,10 @@ import { Col, Form, InputGroup, Row, Button } from "react-bootstrap";
 import { apiDetalleVenta, apiFacturaVenta } from "../../axios/axiosHelper";
 import { formatQuantity } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 import { DropDownCliente } from "./DropDownCliente";
 import { FacturaVentaDetalle } from "./FacturaVentaDetalle";
+import { blockNegatives} from "../helpers/Formatter"
 
 export const FacturaVenta = ({ history }) => {
   const [tipoFactura, setTipoFactura] = useState("");
@@ -19,6 +21,14 @@ export const FacturaVenta = ({ history }) => {
   const [showComponent, setShowComponent] = useState([0]);
   const [thisArrayState, setThisArrayState] = useState([]);
   const [detalleVentaJSON, setDetalleVentaJSON] = useState([]);
+
+  const [hasFolio, setHasFolio] = useState(true);
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const inputValor = useRef(valorFactura);
 
@@ -47,11 +57,24 @@ export const FacturaVenta = ({ history }) => {
   };
 
   useEffect(() => {
+    if (folioVenta === "") {
+      setHasFolio(true);
+      showComponent.splice(0, showComponent.length);
+      detalleVentaJSON.splice(0, detalleVentaJSON.length);
+      setValorFactura("0");
+      inputValor.current.value = "0";
+      setThisArrayState({});
+    } else {
+      setHasFolio(false);
+    }
+  }, [folioVenta]);
+
+  useEffect(() => {
     if (Object.entries(thisArrayState).length > 0 && folioVenta !== "") {
       thisArrayState.id_venta = folioVenta;
       setDetalleVentaJSON([...detalleVentaJSON, thisArrayState]);
     }
-  }, [thisArrayState, detalleVentaJSON, folioVenta]);
+  }, [thisArrayState]);
 
   useEffect(() => {
     if (Object.entries(detalleVentaJSON).length > 0) {
@@ -91,33 +114,57 @@ export const FacturaVenta = ({ history }) => {
   const handleAddSubmitAddFactura = (e) => {
     e.preventDefault();
 
-    apiFacturaVenta
-      .post("/", factura)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      tipoFactura === "" ||
+      folioVenta === "" ||
+      fechaVenta === "" ||
+      estado === "" ||
+      cliente === "" ||
+      metodoPago === "" ||
+      valorFactura === ""
+    ) {
+      setModalShow(true);
+      setAlertHeader("Agregar Factura");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
+    } else {
+      apiFacturaVenta
+        .post("/", factura)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-    detalleVentaJSON.forEach((element) => {
-      setTimeout(() => {
-        apiDetalleVenta
-          .post("/", element)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }, 2000);
-    });
-    history.push("/facturaVentaDashBoard");
+      detalleVentaJSON.forEach((element) => {
+        setTimeout(() => {
+          apiDetalleVenta
+            .post("/", element)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }, 2000);
+        history.push("/facturaVentaDashBoard");
+      });
+    }
   };
 
   return (
     <>
-    <SideBarImexa/>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
+      <SideBarImexa />
       <div className="container-content">
         <div className="container factura-detalle">
           <Row>
@@ -159,7 +206,9 @@ export const FacturaVenta = ({ history }) => {
                   onChange={handleChangeFolio}
                   className="input-facturas"
                   placeholder="Folio de venta"
-                  type="text"
+                  type="number"
+                  min="0"
+                  onKeyDown={blockNegatives}
                 ></Form.Control>
               </InputGroup>
               <Col></Col>
@@ -252,6 +301,7 @@ export const FacturaVenta = ({ history }) => {
               <Button
                 className="btn btn-primary--addLine"
                 onClick={handleAddDetail}
+                disabled={hasFolio}
               >
                 <span>+</span>
               </Button>

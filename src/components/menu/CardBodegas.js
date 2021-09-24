@@ -9,7 +9,6 @@ export const CardBodegas = ({ history }) => {
 
   useEffect(() => {
     let isSucribed = true;
-    //  setInterval(async () => {
     apiBodega
       .get("/")
       .then((res) => {
@@ -20,12 +19,10 @@ export const CardBodegas = ({ history }) => {
       .catch((err) => {
         console.log(err);
       });
-    // }, 500);
-
-    //   return () => {
-    //     isSucribed = false;
-    //   };
   }, []);
+
+
+  
 
   return (
     <>
@@ -37,7 +34,7 @@ export const CardBodegas = ({ history }) => {
           marginTop: "2%",
         }}
       >
-        <Card.Header>Bodegas activas</Card.Header>
+        <Card.Header style={{fontWeight:'bolder'}}>Bodegas activas</Card.Header>
         <Row>
           <Col>
             <Card.Body>
@@ -72,7 +69,7 @@ export const CardBodegas = ({ history }) => {
                             {bodega.nombre_bodega}
                           </td>
                           <td>
-                            <Link to='/inventario'>
+                            <Link to="/inventario">
                               <Button style={{ width: "100%" }} variant="info">
                                 Detalles
                               </Button>

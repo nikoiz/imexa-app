@@ -89,9 +89,9 @@ input[type=checkbox] {
 }
 
 .btn-primary--addLine:hover {
-  background-color: green;
+  background-color: #ef6c57;
 }
 
 .btn-primary--addLine:focus {
-  background-color: green;
+  background-color: #ef6c57;
 }

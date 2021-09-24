@@ -38,7 +38,7 @@ export const ProveedorDashBoard = () => {
   return (
     <>
       <div className="container-content">
-        <h1 className="title">Proveedor DashBoard</h1>
+        <h1 className="title">Resumen de Proveedores</h1>
         <hr />
         <ProveedorNavBar />
         <SideBarImexa />
@@ -56,7 +56,7 @@ export const ProveedorDashBoard = () => {
               <th>Nombre</th>
               <th>RUT</th>
               <th>Contacto</th>
-              <th className="accion-del">Accion</th>
+              {/* <th className="accion-del">Accion</th> */}
             </tr>
           </thead>
 
@@ -72,14 +72,14 @@ export const ProveedorDashBoard = () => {
                   <td>{proveedor.nombre_proveedor}</td>
                   <td>{proveedor.rut_proveedor}</td>
                   <td>{proveedor.contacto}</td>
-                  <td className="accion-del">
+                  {/* <td className="accion-del">
                     <Button
                       className="btn-eliminar--item"
                       onClick={() => handleEliminar(proveedor.rut_proveedor)}
                     >
                       Eliminar Proveedor
                     </Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))
             ) : (
@@ -88,7 +88,7 @@ export const ProveedorDashBoard = () => {
                 <td>--</td>
                 <td>--</td>
                 <td>--</td>
-                <td className="accion-del">--</td>
+                {/* <td className="accion-del">--</td> */}
               </tr>
             )}
           </tbody>

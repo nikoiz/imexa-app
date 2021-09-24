@@ -11,7 +11,6 @@ export const ClientesDashBoard = () => {
 
   useEffect(() => {
     let isSuscribed = true;
-    setInterval(() => {
       apiCliente
         .get("/")
         .then((res) => {
@@ -22,7 +21,6 @@ export const ClientesDashBoard = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, 1000);
     return () => {
       isSuscribed = false;
     };
@@ -43,7 +41,7 @@ export const ClientesDashBoard = () => {
   return (
     <>
       <div className="container-content">
-        <h1 className="title">Cliente DashBoard</h1>
+        <h1 className="title">Resumen de Clientes</h1>
         <hr />
         <ClienteNavBar />
         <SideBarImexa />
@@ -60,7 +58,7 @@ export const ClientesDashBoard = () => {
               <th>#</th>
               <th>Nombre Cliente</th>
               <th>RUT Cliente</th>
-              <th className="accion-del">Accion</th>
+              {/* <th className="accion-del">Accion</th> */}
             </tr>
           </thead>
 
@@ -75,14 +73,14 @@ export const ClientesDashBoard = () => {
                   <td>{i + 1}</td>
                   <td>{cliente.nombre_cliente}</td>
                   <td>{cliente.rut_cliente}</td>
-                  <td className="accion-del">
+                  {/* <td className="accion-del">
                     <Button
                       onClick={() => handleEliminarCliente(cliente.rut_cliente)}
                       className="btn-eliminar--item"
                     >
                       Eliminar Cliente
                     </Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))
             ) : (
@@ -90,7 +88,7 @@ export const ClientesDashBoard = () => {
                 <td>--</td>
                 <td>--</td>
                 <td>--</td>
-                <td className="accion-del">--</td>
+                {/* <td className="accion-del">--</td>   */}
               </tr>
             )}
           </tbody>

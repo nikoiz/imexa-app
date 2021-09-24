@@ -40,55 +40,55 @@ export const SideBarImexa = () => {
         </div>
         <div className="SideBar-items">
           <div className="item" title="Inicio">
-            <Link exact to="/menuPrincipal">
+            <Link to="/menuPrincipal">
               <HomeIcon className="SideBar-icon" />
               <span className="SideBar-text">Inicio</span>
             </Link>
           </div>
           <div className="item" title="Inventario">
-            <Link exact to="/inventario">
+            <Link to="/inventario">
               <ListAltIcon className="SideBar-icon" />
               <span className="SideBar-text">Inventario</span>
             </Link>
           </div>
           <div className="item" title="Facturas compra">
-            <Link exact to="/facturaCompraDashBoard">
+            <Link to="/facturaCompraDashBoard">
               <DescriptionIcon className="SideBar-icon" />
               <span className="SideBar-text">Factura compra</span>
             </Link>
           </div>
           <div className="item" title="Facturas Venta">
-            <Link exact to="/facturaVentaDashBoard">
+            <Link to="/facturaVentaDashBoard">
               <AttachMoneyIcon className="SideBar-icon" />
               <span className="SideBar-text">Factura Venta</span>
             </Link>
           </div>
           <div className="item" title="Gastos">
-            <Link exact to="/gastos">
+            <Link to="/gastos">
               <AccountBalanceIcon className="SideBar-icon" />
               <span className="SideBar-text">Gastos</span>
             </Link>
           </div>
           <div className="item" title="Productos">
-            <Link exact to="/producto">
+            <Link to="/producto">
               <FaAppleAlt className="SideBar-icon" />
               <span className="SideBar-text">Producto</span>
             </Link>
           </div>
           <div className="item" title="Trabajadores">
-            <Link exact to="/trabajadorDashBoard">
+            <Link to="/trabajador">
               <WorkIcon className="SideBar-icon" />
               <span className="SideBar-text">Trabajadores</span>
             </Link>
           </div>
           <div className="item" title="Proveedores">
-            <Link exact to="/proveedor">
+            <Link to="/proveedor">
               <ContactsIcon className="SideBar-icon" />
               <span className="SideBar-text">Proveedores</span>
             </Link>
           </div>
           <div className="item" title="Clientes">
-            <Link exact to="/clienteDashBoard">
+            <Link to="/clienteDashBoard">
               <PeopleAltIcon className="SideBar-icon" />
               <span className="SideBar-text">Clientes</span>
             </Link>
@@ -96,8 +96,8 @@ export const SideBarImexa = () => {
         </div>
 
         <div className="SideBar-footer" title="Salir">
-          <Link exact to="/login">
-            <ExitToAppIcon onClick={handleSubmit} className="SideBar-icon" />
+          <Link to="/login">
+            <ExitToAppIcon onClick={(handleSubmit)} className="SideBar-icon" />
             <span className="SideBar-text">Salir</span>
           </Link>
         </div>

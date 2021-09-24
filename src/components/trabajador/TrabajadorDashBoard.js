@@ -37,6 +37,7 @@ export const TrabajadorDashBoard = () => {
         <Row>
           <Col xs={9}>
             <Header value={value} setValue={setValue} />
+
             <Table
               striped
               responsive
@@ -76,10 +77,12 @@ export const TrabajadorDashBoard = () => {
             </Table>
           </Col>
           <Col>
+          <SideBarImexa />
+
             <ListaTrabajador />
           </Col>
         </Row>
-        <SideBarImexa />
+
       </div>
     </>
   );

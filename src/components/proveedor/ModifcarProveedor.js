@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { apiProveedor } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
+import { AlertDialog } from "../ui/AlertDialog";
 import { DropDownProveedor } from "./DropDownProveedor";
 import { ProveedorNavBar } from "./ProveedorNavBar";
 
@@ -9,6 +10,12 @@ export const ModifcarProveedor = ({ history }) => {
   const [nameState, setNameState] = useState("");
   const [rutState, setRutState] = useState("");
   const [contactoState, setContactoState] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
+  const [alertHeader, setAlertHeader] = useState("");
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [alertButton, setAlertButton] = useState("");
 
   const handleChangeName = (e) => {
     setNameState(e.target.value);
@@ -27,27 +34,49 @@ export const ModifcarProveedor = ({ history }) => {
   };
 
   const handleSubmit = (e) => {
-    apiProveedor
-      .put(
-        `/?nombre_proveedor=${nameState}&rut_proveedor=${rutState}&contacto=${contactoState}`,
-        proveedor
-      )
-      .then((res) => {
-        console.log(res.data);
+    e.preventDefault();
 
-        if (res.data === "Error numero mal ingrasdo") {
-          alert("Ingrese contacto formato 9 xxxx xxxx");
-        } else {
-          history.push("/proveedor");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (nameState === "" || idState === "" || contactoState === "") {
+      setModalShow(true);
+      setAlertHeader("Modificar Proveedor");
+      setAlertTitle("Datos Erroneos");
+      setAlertBody("Por favor, completar todos los datos del formulario.");
+      setAlertButton("Volver a intentarlo");
+    } else {
+      apiProveedor
+        .put(
+          `/?nombre_proveedor=${nameState}&rut_proveedor=${rutState}&contacto=${contactoState}`,
+          proveedor
+        )
+        .then((res) => {
+          console.log(res.data);
+
+          if (res.data === "Error numero mal ingrasdo") {
+            setModalShow(true);
+            setAlertHeader("Modificar Proveedor");
+            setAlertTitle("Datos Erroneos");
+            setAlertBody("Ingrese contacto formato (56)-xxxx-xx");
+            setAlertButton("Volver a intentarlo");
+          } else {
+            history.push("/proveedor");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <>
+      <AlertDialog
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        header={alertHeader}
+        title={alertTitle}
+        body={alertBody}
+        button={alertButton}
+      />
       <div className="container-content">
         <ProveedorNavBar />
         <SideBarImexa />

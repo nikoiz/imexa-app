@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../css/bodega.css";
-import { apiBodega } from "../../axios/axiosHelper";
+import { apiBodega, apiHandleInventario } from "../../axios/axiosHelper";
 
-export const DropDownBodegas = ({ setIdBodega }) => {
+export const DropDownBodegas = ({
+  setIdBodega,
+  ventaDropDown,
+  idVentaProducto,
+}) => {
   const [bodegas, setBodegas] = useState([]);
 
   const handleChange = (e) => {
@@ -13,6 +17,19 @@ export const DropDownBodegas = ({ setIdBodega }) => {
   useEffect(() => {
     let isSuscribed = true;
     setInterval(() => {
+
+      // if (idVentaProducto !== "default" || idVentaProducto !== "") {
+      //   apiHandleInventario
+      //   .get("/")
+      //   .then((res) => {
+      //     if (isSuscribed) {
+      //       setBodegas(res.data.data);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
       apiBodega
         .get("/")
         .then((res) => {

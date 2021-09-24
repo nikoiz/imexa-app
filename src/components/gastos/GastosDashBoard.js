@@ -29,7 +29,7 @@ export const GastosDashBoard = () => {
 
   const handlePagarGasto = (id) => {
     apiGastos
-      .put(`?id_gastos=${id}`, {estado:'1'})
+      .put(`?id_gastos=${id}`, { estado: "1" })
       .then((res) => {
         console.log(res.data);
       })
@@ -40,12 +40,12 @@ export const GastosDashBoard = () => {
 
   return (
     <>
-      <h1 style={{ paddingTop: "15px" }} className="title">
-        Gastos DashBoard
-      </h1>
-      <hr />
-
       <div className="container-content">
+        <h1 style={{ paddingTop: "15px" }} className="title">
+          Resumen de Gastos
+        </h1>
+        <hr />
+
         <GastosNavBar />
         <SideBarImexa />
 
