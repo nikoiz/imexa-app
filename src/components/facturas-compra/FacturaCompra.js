@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import "../../css/factura.css";
-import { FacturaCompraNavBar } from "./FacturaCompraNavBar";
 import { FacturaCompraDetalle } from "./FacturaCompraDetalle";
 import { ProveedorFactura } from "./ProveedorFactura";
-import { apiFacturaCompra, apiDetalleCompra } from "../../axios/axiosHelper";
+import {
+  apiFacturaCompra,
+  apiDetalleCompra,
+  apiGetMaxID,
+} from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { blockNegatives, formatQuantity } from "../helpers/Formatter";
 import { AlertDialog } from "../ui/AlertDialog";
@@ -31,6 +34,7 @@ export const FacturaCompra = ({ history }) => {
   const [alertBody, setAlertBody] = useState("");
   const [alertButton, setAlertButton] = useState("");
 
+  const [maxID, setMaxID] = useState("");
   const inputValor = useRef(valorFactura);
 
   const handleTipoFactura = (e) => {
@@ -111,8 +115,20 @@ export const FacturaCompra = ({ history }) => {
     id_tipo_f_compra: tipoFactura,
   };
 
+  useEffect(() => {
+    apiGetMaxID
+      .get("/")
+      .then((res) => {
+        setMaxID(res.data.data[0].id_producto);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [maxID]);
+
   const handleSubmitAddFactura = (e) => {
     e.preventDefault();
+
     if (
       tipoFactura === "" ||
       folioCompra === "" ||
@@ -128,6 +144,8 @@ export const FacturaCompra = ({ history }) => {
       setAlertBody("Por favor, completar todos los datos del formulario.");
       setAlertButton("Volver a intentarlo");
     } else {
+      let lastID = maxID;
+
       apiFacturaCompra
         .post("/", factura)
         .then((res) => {
@@ -138,17 +156,20 @@ export const FacturaCompra = ({ history }) => {
         });
 
       detalleCompraJSON.forEach((element) => {
-        setTimeout(() => {
-          apiDetalleCompra
-            .post("/", element)
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      }, 2000);
+        let sumID = lastID++;
+        element.id_producto = sumID.toString();
+        console.log(element);
+
+        apiDetalleCompra
+          .post("/", element)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+
       history.push("/facturaCompraDashBoard");
     }
   };

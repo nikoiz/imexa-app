@@ -56,8 +56,29 @@ export const apiInasistencia = axios.create({
 export const apiHandleInventario = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/mostrar_producto_inv.php",
 });
+export const apiGetMaxID = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/obtener_ultimo_id_producto.php",
+});
 
+export const apiAbono = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/abono.php",
+});
 
+export const apiProveedoresDeudores = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/facturas_compras_npagadas.php",
+});
+
+export const apiClientesDeuda = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/facturas_ventas_npagadas.php",
+});
+
+export const apiBusquedaProductosBodega = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/mostrar_prod_bodega.php",
+});
+
+export const apiBusquedaBodegaNombreProducto = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/buscar_bodegas_nombre_producto.php",
+});
 
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { apiProveedor } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { ProveedorNavBar } from "./ProveedorNavBar";
@@ -24,16 +24,16 @@ export const ProveedorDashBoard = () => {
     };
   }, [proveedores]);
 
-  const handleEliminar = (id) => {
-    apiProveedor
-      .delete(`?rut_proveedor=${id}`)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleEliminar = (id) => {
+  //   apiProveedor
+  //     .delete(`?rut_proveedor=${id}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <>

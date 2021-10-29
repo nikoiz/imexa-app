@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import { apiInasistencia, apiTrabajador } from "../../axios/axiosHelper";
-import { formatCurrency, formatDate } from "../helpers/Formatter";
+import { formatCurrency, formatDateUS } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { FechaInterval } from "./FechaInterval";
 import { TrabajadorNavBar } from "./TrabajadorNavBar";
@@ -87,7 +87,7 @@ export const TrabajadorPrincipalView = () => {
                 >
                   <td>{trabajador.rut_trabajador}</td>
                   <td>{trabajador.nombre_trabajador}</td>
-                  <td>{trabajador.fecha_contratacion}</td>
+                  <td>{formatDateUS(trabajador.fecha_contratacion)}</td>
                   <td>{formatCurrency(trabajador.valor_dia)}</td>
                   <td>{trabajador.cant_dias_fallados}</td>
                   <td>{formatCurrency(trabajador.sueldo)}</td>

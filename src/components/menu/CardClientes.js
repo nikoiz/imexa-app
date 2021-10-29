@@ -2,29 +2,44 @@ import { Col, Row, Table } from "react-bootstrap";
 import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useState } from "react";
-import { apiCliente } from "../../axios/axiosHelper";
+import { apiCliente, apiClientesDeuda } from "../../axios/axiosHelper";
+import { formatCurrency } from "../helpers/Formatter";
 
 export const CardClientes = () => {
   const [clientes, setClientes] = useState([]);
+  const [clientesDeudores, setClientesDeudores] = useState([]);
+  const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
-    let isSuscribed = true;
-    // setInterval(async () => {
     apiCliente
       .get("/")
       .then((res) => {
-        if (isSuscribed) {
-          setClientes(res.data.data);
-        }
+        setClientes(res.data.data);
+        setFetch(true);
       })
       .catch((err) => {
         console.log(err);
       });
-    // }, 500);
-    //   return () => {
-    //     isSuscribed = false;
-    //   };
-  }, []);
+  }, [fetch]);
+
+  useEffect(() => {
+    if (fetch) {
+      clientes.forEach((element) => {
+        apiClientesDeuda
+          .get(`/?rut_cliente=${element.rut_cliente}`)
+          .then((res) => {
+            console.log(res);
+            if (res.data.Total !== undefined) {
+              element.total_deuda = res.data.Total[0];
+              element.facturas_no_pagadas = res.data.Facturas[0].data;
+              setClientesDeudores([...clientesDeudores, clientes]);
+            }
+          })
+          .catch((err) => console.log(err));
+      });
+    }
+  }, [clientes]);
+
 
   return (
     <>
@@ -36,7 +51,7 @@ export const CardClientes = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header style={{fontWeight:'bolder'}} >Clientes</Card.Header>
+        <Card.Header style={{ fontWeight: "bolder" }}>Clientes</Card.Header>
         <Row>
           <Col>
             <Card.Body>
@@ -54,30 +69,24 @@ export const CardClientes = () => {
                   hover="true"
                   variant="light"
                   responsive
-                  // style={{
-                  //   height: "300px",
-                  //   overflowX: "hidden",
-                  //   overflowY: "auto",
-                  // }}
                 >
                   <thead>
                     <tr>
                       {/* <th>#</th> */}
-                      <th>RUT</th>
-                      <th>Nombre Cliente</th>
+                      <th>Nombre</th>
+                      <th>Deuda</th>
                     </tr>
                   </thead>
                   <tbody>
                     {clientes != null && clientes.length > 0 ? (
                       clientes.map((cliente, i) => (
                         <tr
-                          id={cliente.rut_trabajador}
-                          value={cliente.rut_trabajador}
                           key={i}
                         >
-                          {/* <td>{i + 1}</td> */}
-                          <td>{cliente.rut_cliente}</td>
                           <td>{cliente.nombre_cliente}</td>
+                          <td>{cliente.hasOwnProperty("total_deuda")
+                              ? formatCurrency(cliente.total_deuda)
+                              : formatCurrency(0)}</td>
                         </tr>
                       ))
                     ) : (

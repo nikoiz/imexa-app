@@ -1,17 +1,11 @@
 import { Col, Row, Table } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { apiInasistencia, apiTrabajador } from "../../axios/axiosHelper";
+import { apiInasistencia } from "../../axios/axiosHelper";
 import { formatCurrency } from "../helpers/Formatter";
 
 export const CardTrabajadores = () => {
   const [trabajadores, setTrabajadores] = useState([]);
-
-  var date = new Date(),
-    y = date.getFullYear(),
-    m = date.getMonth();
-  var firstDay = new Date(y, m, 1);
-  var lastDay = new Date(y, m + 1, 0);
 
   useEffect(() => {
     let isSuscribed = true;

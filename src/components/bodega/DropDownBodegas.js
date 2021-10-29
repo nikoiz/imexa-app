@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../../css/bodega.css";
-import { apiBodega, apiHandleInventario } from "../../axios/axiosHelper";
+import {
+  apiBodega,
+  apiBusquedaBodegaNombreProducto,
+} from "../../axios/axiosHelper";
 
 export const DropDownBodegas = ({
   setIdBodega,
   ventaDropDown,
   idVentaProducto,
+  tipoFactura,
 }) => {
   const [bodegas, setBodegas] = useState([]);
 
@@ -15,37 +19,28 @@ export const DropDownBodegas = ({
   };
 
   useEffect(() => {
-    let isSuscribed = true;
-    setInterval(() => {
-
-      // if (idVentaProducto !== "default" || idVentaProducto !== "") {
-      //   apiHandleInventario
-      //   .get("/")
-      //   .then((res) => {
-      //     if (isSuscribed) {
-      //       setBodegas(res.data.data);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-
+    if (tipoFactura === "compra") {
       apiBodega
-        .get("/")
+        .get(`/?nombre_producto=${idVentaProducto}`)
         .then((res) => {
-          if (isSuscribed) {
-            setBodegas(res.data.data);
-          }
+          console.log(res);
+          setBodegas(res.data.data);
         })
         .catch((err) => {
           console.log(err);
         });
-    }, 1000);
-
-    return () => {
-      isSuscribed = false;
-    };
-  }, [bodegas]);
+    } else {
+      apiBusquedaBodegaNombreProducto
+        .get(`/?nombre_producto=${idVentaProducto}`)
+        .then((res) => {
+          console.log(res);
+          setBodegas(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [idVentaProducto]);
 
   return (
     <div>

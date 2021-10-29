@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiDetalleInventario, apiHandleInventario } from "../../axios/axiosHelper";
+import { apiHandleInventario } from "../../axios/axiosHelper";
 
 export const DropDownProducto = (props) => {
   const { setNombreProducto, readOnly } = props;
@@ -10,6 +10,7 @@ export const DropDownProducto = (props) => {
     apiHandleInventario
       .get("/")
       .then((res) => {
+        console.log(res);
         setProductos(res.data.data);
       })
       .catch((err) => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import { apiDetalleInventario } from "../../axios/axiosHelper";
+import { apiBusquedaProductosBodega } from "../../axios/axiosHelper";
 import { ListaBodega } from "../bodega/ListaBodega";
 import { formatCurrency, formatQuantity } from "../helpers/Formatter";
 import { SideBarImexa } from "../menu/SideBarImexa";
@@ -14,7 +14,7 @@ export const InventarioDashBoard = () => {
     let isSuscribed = true;
 
     if (idBodegaState === "") {
-      apiDetalleInventario
+      apiBusquedaProductosBodega
         .get("/")
         .then((res) => {
           if (isSuscribed) {
@@ -24,8 +24,12 @@ export const InventarioDashBoard = () => {
         .catch((err) => {
           console.log(err);
         });
+
     } else {
-      apiDetalleInventario
+
+      setDetalleInventarioState([]);
+
+      apiBusquedaProductosBodega
         .get(`/?id_bodega=${idBodegaState}`)
         .then((res) => {
           if (isSuscribed) {
@@ -37,10 +41,7 @@ export const InventarioDashBoard = () => {
         });
     }
 
-    return () => {
-      isSuscribed = false;
-    };
-  }, [detalleInventarioState, idBodegaState]);
+  }, [idBodegaState]);
 
   return (
     <>

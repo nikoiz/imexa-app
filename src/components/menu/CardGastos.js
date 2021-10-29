@@ -1,24 +1,32 @@
 import React, { useEffect } from "react";
 import { Card, Col, Row, Table } from "react-bootstrap";
 import { useState } from "react";
-import { apiBodega } from "../../axios/axiosHelper";
+import { apiBodega, apiGastos } from "../../axios/axiosHelper";
 import { formatCurrency } from "../helpers/Formatter";
 
 export const CardGastos = () => {
   const [gastos, setGastos] = useState([]);
+  const [gastosNoPagados, setGastosNoPagados] = useState([]);
 
   useEffect(() => {
-
-    apiBodega
+    apiGastos
       .get("/")
       .then((res) => {
-          setGastos(res.data.data);
-
+        setGastos(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    gastos.forEach((element) => {
+      if (element.estado === "0") {
+        setGastosNoPagados([...gastosNoPagados, element]);
+      }
+    });
+  }, [gastos]);
+
 
   return (
     <>
@@ -30,7 +38,7 @@ export const CardGastos = () => {
           marginTop: "2%",
         }}
       >
-        <Card.Header style={{fontWeight:'bolder'}} >Gastos</Card.Header>
+        <Card.Header style={{ fontWeight: "bolder" }}>Gastos</Card.Header>
         <Row>
           <Col>
             <Card.Body>
@@ -46,21 +54,21 @@ export const CardGastos = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Bodega</th>
+                      <th>Gasto</th>
                       <th>Valor</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {gastos != null && gastos.length > 0 ? (
-                      gastos.map((gasto, i) => (
+                    {gastosNoPagados != null && gastosNoPagados.length > 0 ? (
+                      gastosNoPagados.map((gasto, i) => (
                         <tr
                           id={gasto.id_gastos}
                           value={gasto.id_gastos}
                           key={i}
                         >
                           <td>{i + 1}</td>
-                          <td>{gasto.nombre_bodega}</td>
-                          <td>{formatCurrency(gasto.total_gasto)}</td>
+                          <td>{gasto.descripcion_gastos}</td>
+                          <td>{formatCurrency(gasto.valor_gastos)}</td>
                         </tr>
                       ))
                     ) : (

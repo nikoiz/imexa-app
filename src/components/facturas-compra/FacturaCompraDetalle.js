@@ -4,7 +4,7 @@ import { apiHandleInventario } from "../../axios/axiosHelper";
 import "../../css/factura.css";
 import { DropDownBodegas } from "../bodega/DropDownBodegas";
 import { DropDownProducto } from "../facturas-venta/DropDownProducto";
-import { blockNegatives, formatCurrency, formatQuantity } from "../helpers/Formatter";
+import { blockNegatives, formatCurrency } from "../helpers/Formatter";
 
 export const FacturaCompraDetalle = (props) => {
   const { detalleCompra, id, readOnlyCheckBox } = props;
@@ -138,7 +138,7 @@ export const FacturaCompraDetalle = (props) => {
           <FormControl
             onChange={handleChangeValorUni}
             placeholder="Valor unitario"
-            readOnly={readOnlyCheckBox}
+            // readOnly={readOnlyCheckBox}
             onKeyDown={blockNegatives}
             ref={inputValor}
             type="number"
@@ -166,7 +166,7 @@ export const FacturaCompraDetalle = (props) => {
           ></FormControl>
         </Col>
         <Col>
-          <DropDownBodegas setIdBodega={setIdBodega} />
+          <DropDownBodegas setIdBodega={setIdBodega} tipoFactura="compra" />
         </Col>
         <Col>
           <input

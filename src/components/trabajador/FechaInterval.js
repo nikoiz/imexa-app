@@ -19,7 +19,7 @@ export const FechaInterval = (props) => {
       fechaInicial(() => fechaInicio);
       fechaTermino(() => fechaFinal);
     }
-  }, [fechaFinal, fechaInicio]);
+  }, [fechaFinal, fechaInicio, fechaTermino, fechaInicial]);
 
   return (
     <>

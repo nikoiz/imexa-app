@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { apiCliente } from "../../axios/axiosHelper";
 import { SideBarImexa } from "../menu/SideBarImexa";
 import { ClienteNavBar } from "./ClienteNavBar";
@@ -26,17 +26,17 @@ export const ClientesDashBoard = () => {
     };
   }, [clientes]);
 
-  const handleEliminarCliente = (id) => {
-    apiCliente
-      .delete(`?rut_cliente=${id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert('No se puede Eliminar cliente')
-      });
-  };
+  // const handleEliminarCliente = (id) => {
+  //   apiCliente
+  //     .delete(`?rut_cliente=${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert('No se puede Eliminar cliente')
+  //     });
+  // };
 
   return (
     <>
