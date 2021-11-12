@@ -13,6 +13,7 @@ import { AgregarGastos } from "../components/gastos/AgregarGastos";
 import { GastosDashBoard } from "../components/gastos/GastosDashBoard";
 import { ModificarGastos } from "../components/gastos/ModificarGastos";
 import { InventarioDashBoard } from "../components/inventario/InventarioDashBoard";
+import { FormSimulacion } from "../components/login/FormSimulacion";
 import { MenuPrincipal } from "../components/menu/MenuPrincipal";
 import { AgregarProducto } from "../components/producto/AgregarProducto";
 import { ModficarProducto } from "../components/producto/ModificarProducto";
@@ -20,6 +21,7 @@ import { ProductoDashBoard } from "../components/producto/ProductoDashBoard";
 import { AgregarProveedor } from "../components/proveedor/AgregarProveedor";
 import { ModifcarProveedor } from "../components/proveedor/ModifcarProveedor";
 import { ProveedorDashBoard } from "../components/proveedor/ProveedorDashBoard";
+import { HomeSimulacion } from "../components/simulacion/HomeSimulacion";
 import { AgregarInasistencia } from "../components/trabajador/AgregarInasistencia";
 import { AgregarTrabajador } from "../components/trabajador/AgregarTrabajador";
 import { ModifcarTrabajador } from "../components/trabajador/ModifcarTrabajador";
@@ -56,7 +58,8 @@ export const DashboardRoutes = () => {
           <Route exact path="/modificarCliente" component={ModificarCliente} />     
           <Route exact path="/agregarInasistencia" component={AgregarInasistencia} />     
           <Route exact path="/trabajador" component={TrabajadorPrincipalView} />     
-          
+          <Route exact path="/homeSimulacion" component={HomeSimulacion} />     
+         
 
           <Redirect strict to="/login" />
         </Switch>

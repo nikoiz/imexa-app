@@ -2,6 +2,7 @@ import "../../css/login.css";
 import React, { useState } from "react";
 import { apiLogin } from "../../axios/axiosHelper";
 import { AlertDialog } from "../ui/AlertDialog";
+import { FormSimulacion } from "./FormSimulacion";
 
 export const Login = ({ history }) => {
   const [user, setUser] = useState("");
@@ -99,6 +100,8 @@ export const Login = ({ history }) => {
             Ingresar
           </button>
         </form>
+        <FormSimulacion/>
+
       </div>
     </>
   );

@@ -36,7 +36,7 @@ export function formatDateUS(date) {
 }
 
 export function formatQuantity(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export const blockNegatives = (e) =>
@@ -48,5 +48,14 @@ export function getCurrentDateUS() {
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
 
-  return today = yyyy + "-" + mm + "-" + dd;
+  return (today = yyyy + "-" + mm + "-" + dd);
+}
+
+export function isNumber(evt) {
+  evt = evt ? evt : window.event;
+  var charCode = evt.which ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
 }
