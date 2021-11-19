@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { apiLogin } from "../../axios/axiosHelper";
 import { AlertDialog } from "../ui/AlertDialog";
 import { FormSimulacion } from "./FormSimulacion";
+import mainLogo from "../../assets/IMEXA-APP-logos/IMEXA-APP-logos.jpeg";
 
 export const Login = ({ history }) => {
   const [user, setUser] = useState("");
@@ -53,7 +54,6 @@ export const Login = ({ history }) => {
             "Por favor, verificar si los datos ingresados son correctos."
           );
           setAlertButton("Volver a intentarlo");
-          
         }
       })
       .catch(function (error) {
@@ -73,6 +73,12 @@ export const Login = ({ history }) => {
       />
       <div className="Login">
         <form className="form">
+          {/* <img
+            src={mainLogo}
+            class="w3-round"
+            alt="Norway"
+            className="container-img-main"
+          /> */}
           <h1>Inicio Sesion</h1>
           <input
             className="input-text"
@@ -100,8 +106,7 @@ export const Login = ({ history }) => {
             Ingresar
           </button>
         </form>
-        <FormSimulacion/>
-
+        <FormSimulacion />
       </div>
     </>
   );

@@ -7,22 +7,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-image: '../../assets/pexels-pineapple-supply-co-139259.jpg'; */
-  /* background: #55244d;
+  background-image: '../../assets/pexels-pineapple-supply-co-139259.jpg'; 
+  background: #55244d;
   background: -webkit-linear-gradient(to right, #55244d, #141e30);
-  background: linear-gradient(to right, #243b55, #141e30); */
+  background: linear-gradient(to right, #243b55, #141e30);
 
-  background: #000428; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #004e92,
-    #000428
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #004e92,
-    #000428
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: #93B5C6;  /* fallback for old browsers */
+ 
 }
 ::-webkit-scrollbar {
   width: 5px;

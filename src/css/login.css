@@ -1,8 +1,13 @@
 .Login {
   text-align: center;
-  margin-top: 5%;
+  margin-top: 1%;
   width: 100%;
 }
+.container-img-main{
+ width: 30%;
+ height: 30%;
+}
+
 
 .button-iniciar {
   background: rgb(81, 97, 247);

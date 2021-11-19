@@ -50,15 +50,12 @@ export const DetalleConversion = ({ detalleDispositivo }) => {
         id_bodega: dispositivo.id_bodega,
       };
 
-      if (cantidadActual !== cantidadDataBase) {
+      // if (cantidadActual !== cantidadDataBase) {
         apiDetalleInventario
           .put("/", detalleInventario)
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
-      } else {
-        console.log(restaCantidades);
-        console.log("Se restaron");
-      }
+      // }
     }
   }, [pesoUnitario, dispositivo]);
 
