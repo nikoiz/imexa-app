@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DropDownProductoSimulacion } from "./DropDownProductoSimulacion";
 
 export const ProductoSimulacion = ({
-  IdProducto,
+  idDetalle,
   valorProducto,
   nombreProducto,
   cantidadProducto,
@@ -11,7 +11,7 @@ export const ProductoSimulacion = ({
   return (
     <>
       <DropDownProductoSimulacion
-        // productoID={IdProducto}
+        detalleID={idDetalle}
         productoValor={valorProducto}
         productoNombre={nombreProducto}
         productoCantidad={cantidadProducto}

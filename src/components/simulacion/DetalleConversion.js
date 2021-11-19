@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, InputGroup } from "react-bootstrap";
-import { apiDetalleCompra } from "../../axios/axiosHelper";
+import {
+  apiDetalleCompra,
+  apiDetalleInventario,
+} from "../../axios/axiosHelper";
 import { formatCurrency, formatQuantity } from "../helpers/Formatter";
 
 export const DetalleConversion = ({ detalleDispositivo }) => {
@@ -40,14 +43,16 @@ export const DetalleConversion = ({ detalleDispositivo }) => {
       const restaCantidades = cantidadActual - cantidadDataBase;
 
       const detalleInventario = {
-        descripcion_compra_producto: dispositivo.nombre_producto,
-        cantidad_compra_producto: Math.abs(restaCantidades),
-        valor: dispositivo.valor * Math.abs(restaCantidades),
+        nombre_producto: dispositivo.nombre_producto,
+        cantidad_producto: dispositivo.cantidad_actual,
+        id_detalle_inventario: dispositivo.id_detalle_inventario,
+        valor: dispositivo.valor,
+        id_bodega: dispositivo.id_bodega,
       };
 
-      if (restaCantidades > 0) {
-        apiDetalleCompra
-          .post("/", detalleInventario)
+      if (cantidadActual !== cantidadDataBase) {
+        apiDetalleInventario
+          .put("/", detalleInventario)
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
       } else {

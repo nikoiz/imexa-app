@@ -7,7 +7,7 @@ import {
 import { formatCurrency, formatQuantity } from "../helpers/Formatter";
 
 export const DropDownProductoSimulacion = ({
-  productoID,
+  detalleID,
   productoValor,
   productoNombre,
   productoCantidad,
@@ -19,13 +19,13 @@ export const DropDownProductoSimulacion = ({
   const handleChange = (e) => {
     const myObj = JSON.parse(e.target.value);
 
-    // const idProducto = myObj.id_producto;
     const valorProducto = myObj.valor;
     const nombreProducto = myObj.nombre_producto;
     const cantidadProducto = myObj.cantidad_producto;
+    const idDetalleInventario = myObj.id_detalle_inventario;
 
     productoValor(() => valorProducto);
-    // productoID(() => idProducto);
+    detalleID(() => idDetalleInventario);
     productoNombre(() => nombreProducto);
     productoCantidad(() => cantidadProducto);
     inputValue.current.value = formatCurrency(valorProducto);
