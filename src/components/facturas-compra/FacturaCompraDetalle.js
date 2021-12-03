@@ -13,11 +13,13 @@ export const FacturaCompraDetalle = (props) => {
   const [readOnly, setReadOnly] = useState(false);
   const [readOnlyDropDown, setReadOnlyDropDown] = useState(true);
   const [readOnlyValorUnitario, setReadOnlyValorUnitario] = useState(false);
+  const [readOnlyPesoUnitario, setReadOnlyPesoUnitario] = useState(false);
   const [productoNuevo, setProductoNuevo] = useState("default");
 
   const [idBodega, setIdBodega] = useState("default");
   const [valorUnitarioState, setValorUnitarioState] = useState("");
   const [cantidadState, setCantidadState] = useState("");
+  const [pesoUnitario, setPesoUnitario] = useState("")
   const [valorTotalState, setValorTotalState] = useState("");
   const [checkState, setCheckState] = useState(false);
   const [productoState, setProductoState] = useState("");
@@ -93,6 +95,10 @@ export const FacturaCompraDetalle = (props) => {
     setCantidadState(e.target.value);
   };
 
+  const handlePesoUnitario = (e) => {
+    setPesoUnitario(e.target.value);
+  }
+
   const handleToggleCheckBox = (e) => {
     if (checkState === false) {
       setCheckState(true);
@@ -110,6 +116,7 @@ export const FacturaCompraDetalle = (props) => {
     id_bodega: idBodega,
     cantidad_total: cantidadState,
     valor: valorTotalState,
+    peso_unitario: pesoUnitario
   };
 
   useEffect(() => {
@@ -143,6 +150,15 @@ export const FacturaCompraDetalle = (props) => {
             ref={inputValor}
             type="number"
             min="0"
+            readOnly={readOnlyValorUnitario}
+          ></FormControl>
+        </Col>
+        <Col>
+          <FormControl
+            placeholder="Gramos"
+            type="number"
+            min="0"
+            onChange={handlePesoUnitario}
             readOnly={readOnlyValorUnitario}
           ></FormControl>
         </Col>

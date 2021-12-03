@@ -20,13 +20,14 @@ export const CardGastos = () => {
   }, []);
 
   useEffect(() => {
-    gastos.forEach((element) => {
-      if (element.estado === "0") {
-        setGastosNoPagados([...gastosNoPagados, element]);
-      }
-    });
+    if (gastos != null && gastos.length > 0) {
+      gastos.forEach((element) => {
+        if (element.estado === "0") {
+          setGastosNoPagados([...gastosNoPagados, element]);
+        }
+      });
+    }
   }, [gastos]);
-
 
   return (
     <>

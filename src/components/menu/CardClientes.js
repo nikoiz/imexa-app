@@ -23,7 +23,7 @@ export const CardClientes = () => {
   }, [fetch]);
 
   useEffect(() => {
-    if (fetch) {
+    if (fetch && clientes != null && clientes.length > 0) {
       clientes.forEach((element) => {
         apiClientesDeuda
           .get(`/?rut_cliente=${element.rut_cliente}`)
@@ -39,7 +39,6 @@ export const CardClientes = () => {
       });
     }
   }, [clientes]);
-
 
   return (
     <>
@@ -63,16 +62,10 @@ export const CardClientes = () => {
                   overflowY: "auto",
                 }}
               >
-                <Table
-                  striped
-                  bordered
-                  hover="true"
-                  variant="light"
-                  responsive
-                >
+                <Table striped bordered hover="true" variant="light" responsive>
                   <thead>
                     <tr>
-                      {/* <th>#</th> */}
+                      <th>#</th>
                       <th>Nombre</th>
                       <th>Deuda</th>
                     </tr>
@@ -80,13 +73,14 @@ export const CardClientes = () => {
                   <tbody>
                     {clientes != null && clientes.length > 0 ? (
                       clientes.map((cliente, i) => (
-                        <tr
-                          key={i}
-                        >
+                        <tr key={i}>
+                          <td>{i + 1}</td>
                           <td>{cliente.nombre_cliente}</td>
-                          <td>{cliente.hasOwnProperty("total_deuda")
+                          <td>
+                            {cliente.hasOwnProperty("total_deuda")
                               ? formatCurrency(cliente.total_deuda)
-                              : formatCurrency(0)}</td>
+                              : formatCurrency(0)}
+                          </td>
                         </tr>
                       ))
                     ) : (

@@ -11,6 +11,7 @@ export const DropDownProductoSimulacion = ({
   productoValor,
   productoNombre,
   productoCantidad,
+  productoPesoUnitario,
   bodegaID,
 }) => {
   const [productos, setProductos] = useState([]);
@@ -23,11 +24,13 @@ export const DropDownProductoSimulacion = ({
     const nombreProducto = myObj.nombre_producto;
     const cantidadProducto = myObj.cantidad_producto;
     const idDetalleInventario = myObj.id_detalle_inventario;
+    const pesoUnitario = myObj.peso_unitario;
 
     productoValor(() => valorProducto);
     detalleID(() => idDetalleInventario);
     productoNombre(() => nombreProducto);
     productoCantidad(() => cantidadProducto);
+    productoPesoUnitario(() => pesoUnitario)
     inputValue.current.value = formatCurrency(valorProducto);
   };
 

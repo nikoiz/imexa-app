@@ -80,6 +80,9 @@ export const apiBusquedaBodegaNombreProducto = axios.create({
   baseURL: "http://localhost/backend-php/imexa-api/api/post/buscar_bodegas_nombre_producto.php",
 });
 
+export const apiDispositivoPeso = axios.create({
+  baseURL: "http://localhost/backend-php/imexa-api/api/post/dispositivo_peso.php",
+});
 
 
 

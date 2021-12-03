@@ -9,6 +9,7 @@ import { formatCurrency, formatQuantity } from "../helpers/Formatter";
 export const DetalleConversion = ({ detalleDispositivo }) => {
   const inputCantidad = useRef(0);
   const inputValorTotal = useRef(0);
+  const inputPesoUnitario = useRef(0);
 
   const [dispositivo, setDispositivo] = useState({});
   const [pesoUnitario, setPesoUntirario] = useState("");
@@ -17,12 +18,15 @@ export const DetalleConversion = ({ detalleDispositivo }) => {
     setDispositivo(detalleDispositivo);
   }, [detalleDispositivo]);
 
-  const handleChangePesoUnitario = (e) => {
-    setPesoUntirario(e.target.value);
-  };
+  // const handleChangePesoUnitario = (e) => {
+  //   setPesoUntirario(e.target.value);
+  // };
 
   useEffect(() => {
     if (Object.entries(dispositivo).length > 0) {
+      setPesoUntirario(detalleDispositivo.peso_unitario);
+      inputPesoUnitario.current.value = pesoUnitario;
+
       if (pesoUnitario !== "") {
         const cantidad = detalleDispositivo.peso_entrada / pesoUnitario;
 
@@ -51,10 +55,10 @@ export const DetalleConversion = ({ detalleDispositivo }) => {
       };
 
       // if (cantidadActual !== cantidadDataBase) {
-        apiDetalleInventario
-          .put("/", detalleInventario)
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
+      apiDetalleInventario
+        .put("/", detalleInventario)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
       // }
     }
   }, [pesoUnitario, dispositivo]);
@@ -82,9 +86,11 @@ export const DetalleConversion = ({ detalleDispositivo }) => {
             fontSize: "20px",
           }}
           placeholder="Peso en gramos"
-          min="0"
-          type="number"
-          onChange={handleChangePesoUnitario}
+          readOnly
+          // min="0"
+          // type="number"
+          ref={inputPesoUnitario}
+          // onChange={handleChangePesoUnitario}
         ></input>
         <Form.Label
           style={{

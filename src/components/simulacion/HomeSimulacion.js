@@ -5,28 +5,51 @@ import { ConversionSimulacion } from "./ConversionSimulacion";
 import { InfoProducto } from "./InfoProducto";
 import { ProductoSimulacion } from "./ProductoSimulacion";
 
-export const HomeSimulacion = ({ pesoChange, bodega }) => {
+export const HomeSimulacion = () => {
   const [bodegaID, setBodegaID] = useState("");
+
   const [pesoEntrada, setPesoEntrada] = useState("");
+  const [pesoDispositivoInicial, setPesoDispositivoInicial] = useState("");
 
   const [nombreProducto, setNombreProducto] = useState("");
   const [valorProducto, setValorProducto] = useState("");
   const [idDetalleInventario, setIdDetalleInventario] = useState("");
   const [cantidadProducto, setCantidadProducto] = useState("");
+  const [pesoUnitarioProducto, setPesoUnitarioProducto] = useState("");
+  const [idDispositivo, setIdDispositivo] = useState("");
   const infoDispositivo = {};
 
   useEffect(() => {
-    if ((bodegaID, pesoEntrada, nombreProducto, valorProducto !== "")) {
+    if (pesoDispositivoInicial != null) {
+      console.log("Peso de entrada: " + pesoEntrada);
+      if (parseInt(pesoDispositivoInicial) === 0) {
+        setPesoEntrada(pesoUnitarioProducto * cantidadProducto);
+      }
+
+      if (pesoDispositivoInicial > 0) {
+        setPesoEntrada(pesoDispositivoInicial);
+      }
+    }
+  }, [pesoDispositivoInicial]);
+
+  useEffect(() => {
+    if ((bodegaID, pesoEntrada, nombreProducto, valorProducto) != "") {
       infoDispositivo.id_bodega = bodegaID;
       infoDispositivo.peso_entrada = pesoEntrada;
       infoDispositivo.nombre_producto = nombreProducto;
       infoDispositivo.valor = valorProducto;
       infoDispositivo.id_detalle_inventario = idDetalleInventario;
       infoDispositivo.cantidad_producto = cantidadProducto;
+      infoDispositivo.peso_unitario = pesoUnitarioProducto;
     }
-  }, [bodegaID, pesoEntrada, nombreProducto, valorProducto, cantidadProducto]);
-
-
+  }, [
+    bodegaID,
+    pesoEntrada,
+    nombreProducto,
+    valorProducto,
+    cantidadProducto,
+    pesoUnitarioProducto,
+  ]);
 
   return (
     <>
@@ -45,18 +68,21 @@ export const HomeSimulacion = ({ pesoChange, bodega }) => {
             >
               Balanza Digital
             </h1>
-            <BalanzaDigital pesoEntrada={setPesoEntrada} bodega={setBodegaID} />
+            <BalanzaDigital
+              pesoManual={setPesoEntrada}
+              bodega={setBodegaID}
+              pesoObtenido={() => pesoEntrada}
+              dispositivoID={() => idDispositivo}
+            />
           </Row>
-
           <hr style={{ backgroundColor: "#FFFFFF", height: "1px" }} />
-
           <Row>
             <h1
               style={{ width: "100%", textAlign: "center", color: "#FFFFFF" }}
             >
               Info Producto
             </h1>
-            <InfoProducto peso={pesoEntrada} bodegaID={bodegaID}  />
+            <InfoProducto peso={pesoEntrada} bodegaID={bodegaID} />
           </Row>
         </Col>
 
@@ -82,6 +108,9 @@ export const HomeSimulacion = ({ pesoChange, bodega }) => {
               nombreProducto={setNombreProducto}
               bodega={bodegaID}
               cantidadProducto={setCantidadProducto}
+              pesoUnitario={setPesoUnitarioProducto}
+              pesoInicial={setPesoDispositivoInicial}
+              dispositivoID={setIdDispositivo}
             />
           </Row>
           <hr style={{ backgroundColor: "#FFFFFF", height: "1px" }} />

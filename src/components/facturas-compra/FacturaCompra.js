@@ -301,27 +301,30 @@ export const FacturaCompra = ({ history }) => {
               <hr />
               <h1 className="title-facturas">Detalle Factura:</h1>
               <Row>
-                <Col className="table-title vl" style={{ fontSize: "15px" }}>
+                <Col className="table-title vl" style={{ fontSize: "13px" }}>
                   Selec. Producto
                 </Col>
-                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
                   Producto
                 </Col>
-                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
                   Valor unitario
                 </Col>
-                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
+                  Peso
+                </Col>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
                   Cantidad
                 </Col>
-                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
                   Valor total
                 </Col>
-                <Col className="table-title vl" style={{ fontSize: "17px" }}>
+                <Col className="table-title vl" style={{ fontSize: "14,5px" }}>
                   Bodega
                 </Col>
                 <Col
                   className="table-title vl-last"
-                  style={{ fontSize: "17px" }}
+                  style={{ fontSize: "14,5px" }}
                 >
                   Agregar
                 </Col>

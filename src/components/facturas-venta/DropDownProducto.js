@@ -11,7 +11,9 @@ export const DropDownProducto = (props) => {
       .get("/")
       .then((res) => {
         console.log(res);
-        setProductos(res.data.data);
+        if (productos.length > 0 && productos != null) {
+          setProductos(res.data.data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -31,10 +33,7 @@ export const DropDownProducto = (props) => {
         className="drop-down-bodegas"
         disabled={readOnly}
       >
-        <option value="default" name="default ">
-          Seleccionar
-        </option>
-        {productos.length > 0 && productos != null ? (
+        {Object.entries(productos).length > 0 && productos != null ? (
           productos.map((producto, i) => (
             <option value={producto.nombre_producto} key={i}>
               {producto.nombre_producto}
